@@ -1,0 +1,116 @@
+<?php return array(
+    'root' => array(
+        'name' => 'ibew/drupal-project',
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
+        'reference' => null,
+        'type' => 'project',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
+    ),
+    'versions' => array(
+        'composer/installers' => array(
+            'pretty_version' => 'v2.3.0',
+            'version' => '2.3.0.0',
+            'reference' => '12fb2dfe5e16183de69e784a7b84046c43d97e8e',
+            'type' => 'composer-plugin',
+            'install_path' => __DIR__ . '/./installers',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'composer/semver' => array(
+            'pretty_version' => '3.4.4',
+            'version' => '3.4.4.0',
+            'reference' => '198166618906cb2de69b95d7d47e5fa8aa1b2b95',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/./semver',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'drupal/core-composer-scaffold' => array(
+            'pretty_version' => '11.2.8',
+            'version' => '11.2.8.0',
+            'reference' => '891b4615c479e17245c81571c9be0156be4b03f8',
+            'type' => 'composer-plugin',
+            'install_path' => __DIR__ . '/../drupal/core-composer-scaffold',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'drupal/core-project-message' => array(
+            'pretty_version' => '11.2.8',
+            'version' => '11.2.8.0',
+            'reference' => '656efa00f296415ed6be2ff366ef67ae2725d7d6',
+            'type' => 'composer-plugin',
+            'install_path' => __DIR__ . '/../drupal/core-project-message',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'ibew/drupal-project' => array(
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
+            'reference' => null,
+            'type' => 'project',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'php-http/async-client-implementation' => array(
+            'dev_requirement' => true,
+            'provided' => array(
+                0 => '*',
+            ),
+        ),
+        'php-http/client-implementation' => array(
+            'dev_requirement' => true,
+            'provided' => array(
+                0 => '*',
+            ),
+        ),
+        'php-http/discovery' => array(
+            'pretty_version' => '1.20.0',
+            'version' => '1.20.0.0',
+            'reference' => '82fe4c73ef3363caed49ff8dd1539ba06044910d',
+            'type' => 'composer-plugin',
+            'install_path' => __DIR__ . '/../php-http/discovery',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'phpstan/extension-installer' => array(
+            'pretty_version' => '1.4.3',
+            'version' => '1.4.3.0',
+            'reference' => '85e90b3942d06b2326fba0403ec24fe912372936',
+            'type' => 'composer-plugin',
+            'install_path' => __DIR__ . '/../phpstan/extension-installer',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'phpstan/phpstan' => array(
+            'pretty_version' => '2.1.32',
+            'version' => '2.1.32.0',
+            'reference' => 'e126cad1e30a99b137b8ed75a85a676450ebb227',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpstan/phpstan',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'psr/http-client-implementation' => array(
+            'dev_requirement' => true,
+            'provided' => array(
+                0 => '*',
+            ),
+        ),
+        'psr/http-factory-implementation' => array(
+            'dev_requirement' => true,
+            'provided' => array(
+                0 => '*',
+            ),
+        ),
+        'psr/http-message-implementation' => array(
+            'dev_requirement' => true,
+            'provided' => array(
+                0 => '*',
+            ),
+        ),
+    ),
+);

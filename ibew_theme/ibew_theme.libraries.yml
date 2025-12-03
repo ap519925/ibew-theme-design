@@ -1,0 +1,6 @@
+global-styling:
+  css:
+    theme:
+      build/css/main.css: {}
+  js:
+    build/js/main.script.js: {}

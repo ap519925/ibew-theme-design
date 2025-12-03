@@ -1,0 +1,19 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/modules/sdc/src/metadata.schema.json
+name: IBEW Header
+status: stable
+description: 'Header component for IBEW theme with logo and navigation.'
+props:
+  type: object
+  properties:
+    site_name:
+      type: string
+      title: Site Name
+      default: 'IBEW Local'
+    logo_url:
+      type: string
+      title: Logo URL
+      default: '/themes/custom/ibew_theme/logo.svg'
+slots:
+  navigation:
+    title: Navigation
+    description: 'Main navigation menu'
