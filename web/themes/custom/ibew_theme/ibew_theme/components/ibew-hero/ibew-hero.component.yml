@@ -1,0 +1,23 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/modules/sdc/src/metadata.schema.json
+name: IBEW Hero
+status: stable
+description: 'Hero component with background image and call to action.'
+props:
+  type: object
+  properties:
+    title:
+      type: string
+      title: Title
+      default: 'Ready to Build Your Future?'
+    description:
+      type: string
+      title: Description
+      default: 'Join the premier electrical union.'
+    image_url:
+      type: string
+      title: Background Image URL
+      default: 'https://images.unsplash.com/photo-1581094794329-cd282c208a68?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'
+slots:
+  cta_buttons:
+    title: Call to Action Buttons
+    description: 'Buttons for the hero section'

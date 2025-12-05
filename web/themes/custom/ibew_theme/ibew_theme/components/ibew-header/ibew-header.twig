@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * IBEW Header Component
+ */
+#}
+<header class="ibew-header">
+  <div class="ibew-header__container">
+    <div class="ibew-header__branding">
+      {% if logo_url %}
+        <img src="{{ logo_url }}" alt="{{ site_name }} Logo" class="ibew-header__logo">
+      {% endif %}
+      <h1 class="ibew-header__site-name">{{ site_name }}</h1>
+    </div>
+    
+    {% if slots.navigation %}
+      <nav class="ibew-header__navigation">
+        {{ slots.navigation }}
+      </nav>
+    {% endif %}
+
+    <div class="ibew-header__actions">
+      <a href="#" class="btn btn-outline-primary">Member Sign-In</a>
+      <a href="#" class="btn btn-primary">Pay Dues</a>
+    </div>
+  </div>
+</header>

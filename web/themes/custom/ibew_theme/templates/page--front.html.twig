@@ -1,0 +1,521 @@
+{#
+/**
+ * @file
+ * Front page layout styled to mirror the provided reference design and populated
+ * with content pulled from ibewlocal90.org.
+ */
+#}
+<a id="main-content" tabindex="-1"></a>
+
+<div class="ibew-page">
+  <header class="ibew-hero">
+    <div class="ibew-hero__glow"></div>
+
+    <div class="ibew-nav">
+      <div class="ibew-shell ibew-nav__inner">
+        <div class="ibew-brand">
+          <div class="ibew-brand__mark">90</div>
+          <div class="ibew-brand__text">
+            <span class="ibew-eyebrow">{{ 'The New Haven Electricians'|t }}</span>
+            <span class="ibew-brand__title">{{ site_name|default('IBEW Local 90') }}</span>
+          </div>
+        </div>
+
+        <button class="ibew-nav__toggle js-ibew-nav-toggle" aria-expanded="false">
+          {{ 'Menu'|t }}
+        </button>
+
+        <nav class="ibew-nav__links">
+          <a href="#about">{{ 'About'|t }}</a>
+          <a href="#services">{{ 'Training'|t }}</a>
+          <a href="#news">{{ 'News'|t }}</a>
+          <a href="#events">{{ 'Events'|t }}</a>
+          <a href="#members">{{ 'Members'|t }}</a>
+          <a href="#contact">{{ 'Contact'|t }}</a>
+        </nav>
+
+        <div class="ibew-nav__cta">
+          <a class="ibew-cta ibew-cta--ghost" href="/civicrm/user">{{ 'My IBEW 90'|t }}</a>
+          <a class="ibew-cta ibew-cta--primary" href="/content/book-1-re-sign-procedure">{{ 'Member Re-Sign'|t }}</a>
+        </div>
+      </div>
+    </div>
+
+    {% if page.header %}
+      <div class="ibew-shell ibew-section">
+        <div class="ibew-card ibew-ghost-border">
+          {{ page.header }}
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="ibew-shell ibew-hero__grid">
+      <div class="ibew-hero__lead">
+        <span class="ibew-pill">{{ 'The New Haven Electricians'|t }}</span>
+        <h1>{{ 'IBEW Local 90'|t }}</h1>
+        <p>
+          {{ 'Serving electricians across Greater New Haven from our Wallingford office. Business Manager: Sean W. Daly.'|t }}
+        </p>
+
+        <div class="ibew-hero__actions">
+          <a class="ibew-cta ibew-cta--primary" href="/content/book-1-re-sign-procedure">{{ 'Member Re-Sign'|t }}</a>
+          <a class="ibew-cta ibew-cta--ghost" href="https://www.necact.org/joinibewct/" target="_blank" rel="noreferrer noopener">{{ 'JoinIBEWCT.org'|t }}</a>
+          <a class="ibew-cta ibew-cta--ghost" href="mailto:info@ibewlocal90.org">{{ 'Email Local 90'|t }}</a>
+        </div>
+
+        <div class="ibew-hero__stats">
+          <div class="ibew-stat">
+            <div class="ibew-stat__label">{{ 'Call'|t }}</div>
+            <div class="ibew-stat__value">1-800-562-2590</div>
+            <small>{{ '2 N Plains Industrial Rd, Wallingford, CT 06492'|t }}</small>
+          </div>
+          <div class="ibew-stat">
+            <div class="ibew-stat__label">{{ 'Email'|t }}</div>
+            <div class="ibew-stat__value">info@ibewlocal90.org</div>
+            <small>{{ 'Business Manager: Sean W. Daly'|t }}</small>
+          </div>
+          <div class="ibew-stat">
+            <div class="ibew-stat__label">{{ 'Member Access'|t }}</div>
+            <div class="ibew-stat__value">{{ 'My IBEW 90'|t }}</div>
+            <small>{{ 'Member portal & CivicRM'|t }}</small>
+          </div>
+          <div class="ibew-stat">
+            <div class="ibew-stat__label">{{ 'Community'|t }}</div>
+            <div class="ibew-stat__value">{{ 'The New Haven Electricians'|t }}</div>
+            <small>{{ 'Proudly union, AFL-CIO'|t }}</small>
+          </div>
+        </div>
+
+        <div class="ibew-hero__tags">
+          <span class="ibew-chip ibew-chip--blue">{{ 'Our Work Shows Up Real Well At Night'|t }}</span>
+          <span class="ibew-chip ibew-chip--green">{{ 'Done Right, the First Time'|t }}</span>
+          <span class="ibew-chip ibew-chip--gold">{{ 'Smilow Cancer Center with Turner Construction'|t }}</span>
+          <span class="ibew-chip ibew-chip--blue">{{ 'Smilow Cancer Center'|t }}</span>
+        </div>
+      </div>
+
+      <div class="ibew-hero__panel ibew-frost">
+        <div class="ibew-panel__header">
+          <div>
+            <div class="ibew-pill ibew-pill--subtle">{{ 'Member services'|t }}</div>
+            <div class="ibew-card__title">{{ 'Everything from ibewlocal90.org, restyled'|t }}</div>
+          </div>
+          <span class="ibew-mobile-note">{{ 'Mobile-friendly view'|t }}</span>
+        </div>
+
+        <div class="ibew-panel__body ibew-panel__body--stack">
+          <div class="ibew-card ibew-ghost-border">
+            <div class="ibew-card__header">
+              <div>
+                <div class="ibew-card__title">{{ 'Quick Actions'|t }}</div>
+                <div class="ibew-tagline">{{ 'Member tools & forms'|t }}</div>
+              </div>
+              <span class="ibew-chip ibew-chip--blue">{{ 'Members'|t }}</span>
+            </div>
+            <ul class="ibew-list">
+              <li><a href="/civicrm/user">{{ 'My IBEW 90 (member login)'|t }}</a></li>
+              <li><a href="/content/book-1-re-sign-procedure">{{ 'Book 1 Re-Sign Procedure'|t }}</a></li>
+              <li><a href="/content/ibew-local-90-book-1-referral-procedure">{{ 'Book 1 Referral Procedure'|t }}</a></li>
+              <li><a href="https://c1acr186.caspio.com/dp/c9e2700053f951bc860f49f69278">{{ 'Wage Calculator'|t }}</a></li>
+            </ul>
+            <div class="ibew-hero__actions">
+              <a class="ibew-cta ibew-cta--primary" href="/content/book-1-re-sign-procedure">{{ 'Member Re-Sign'|t }}</a>
+              <a class="ibew-cta ibew-cta--ghost" href="https://www.necact.org/joinibewct/" target="_blank" rel="noreferrer noopener">{{ 'Join IBEW CT'|t }}</a>
+            </div>
+          </div>
+
+          <div class="ibew-card ibew-ghost-border">
+            <div class="ibew-card__header">
+              <div class="ibew-card__title">{{ 'Office & Contact'|t }}</div>
+              <span class="ibew-chip ibew-chip--green">{{ 'Wallingford, CT'|t }}</span>
+            </div>
+            <div class="ibew-badges">
+              <span class="ibew-badge">{{ '2 N Plains Industrial Rd'|t }}</span>
+              <span class="ibew-badge">{{ 'Wallingford, CT 06492'|t }}</span>
+              <span class="ibew-badge">{{ 'p: 1-800-562-2590'|t }}</span>
+              <span class="ibew-badge">{{ 'info@ibewlocal90.org'|t }}</span>
+            </div>
+            <div class="ibew-list ibew-list--compact">
+              <span>{{ 'Business Manager: Sean W. Daly'|t }}</span>
+              <span>{{ 'Join link: JoinIBEWCT.org'|t }}</span>
+              <span>{{ 'Member Re-Sign available online'|t }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="about" class="ibew-section">
+      <div class="ibew-shell">
+        <div class="ibew-section__header">
+          <div>
+            <div class="ibew-pill">{{ 'About Local 90'|t }}</div>
+            <h2 class="ibew-section__title">{{ 'The New Haven Electricians'|t }}</h2>
+          </div>
+          <p class="ibew-section__lede">
+            {{ 'Local 90 represents and organizes electrical workers across Greater New Haven, delivering safe, professional construction and maintenance work for our communities.'|t }}
+          </p>
+        </div>
+
+        <div class="ibew-grid ibew-grid--feature">
+          <div class="ibew-card">
+            <div class="ibew-card__header">
+              <div class="ibew-card__title">{{ 'About & History'|t }}</div>
+              <span class="ibew-chip ibew-chip--blue">{{ 'Local 90'|t }}</span>
+            </div>
+            <ul class="ibew-list">
+              <li><a href="/content/about-ibew-90">{{ 'About IBEW 90'|t }}</a></li>
+              <li><a href="/content/our-history-0">{{ 'IBEW History'|t }}</a></li>
+              <li><a href="/content/ibew-90-presidents">{{ 'IBEW 90 Presidents'|t }}</a></li>
+              <li><a href="/content/new-haven-electricians-21st-century">{{ 'Electricians in the 21st Century'|t }}</a></li>
+              <li><a href="/content/4-myths-about-affiliated-electricians">{{ '4 Myths about Affiliated Electricians'|t }}</a></li>
+              <li><a href="/content/green-building-and-renewable-energy-new-haven-ct">{{ 'Green Buildings & Climate Resilience'|t }}</a></li>
+            </ul>
+          </div>
+
+          <div class="ibew-card">
+            <div class="ibew-card__header">
+              <div class="ibew-card__title">{{ 'Training & Apprenticeship'|t }}</div>
+              <span class="ibew-chip ibew-chip--gold">{{ 'Skill Building'|t }}</span>
+            </div>
+            <p>{{ 'IBEW 90 supports members with training, safety education, and pathways into the trade.'|t }}</p>
+            <ul class="ibew-list">
+              <li><a href="/content/training-0">{{ 'Training'|t }}</a></li>
+              <li><a href="/content/interested-apprenticeship">{{ 'Interested in Apprenticeship'|t }}</a></li>
+              <li><a href="/training-events">{{ 'Training Events'|t }}</a></li>
+            </ul>
+          </div>
+
+          <div class="ibew-card">
+            <div class="ibew-card__header">
+              <div class="ibew-card__title">{{ 'Contractors & Projects'|t }}</div>
+              <span class="ibew-chip ibew-chip--green">{{ 'Community'|t }}</span>
+            </div>
+            <p>{{ 'Responsible contractors and skilled electricians build thriving Connecticut communities.'|t }}</p>
+            <ul class="ibew-list">
+              <li><a href="/content/responsible-contractors-help-build-thriving-communities">{{ 'Responsible Contracting'|t }}</a></li>
+              <li><a href="/content/so-called-right-work-legislation-connecticut">{{ 'A Word on "Right to Work"'|t }}</a></li>
+              <li><a href="/content/letter-open-shop-contractors">{{ 'A Letter to Open Shop Contractors'|t }}</a></li>
+              <li><a href="/content/project-information" class="restricted">{{ 'Tell Us About A Project'|t }}</a></li>
+              <li><a href="/success-stories">{{ 'Success Stories'|t }}</a></li>
+            </ul>
+          </div>
+
+          <div class="ibew-card">
+            <div class="ibew-card__header">
+              <div class="ibew-card__title">{{ 'Member Support'|t }}</div>
+              <span class="ibew-chip ibew-chip--blue">{{ 'Benefits'|t }}</span>
+            </div>
+            <p>{{ 'Everything members rely on: benefits, health and welfare funds, pension, referrals, and news.'|t }}</p>
+            <ul class="ibew-list">
+              <li><a href="/content/member-info" class="restricted">{{ 'Member Info'|t }}</a></li>
+              <li><a href="/content/benefits" class="restricted">{{ 'Benefits'|t }}</a></li>
+              <li><a href="/content/health-and-welfarepension-funds">{{ 'Health and Welfare / Pension Funds'|t }}</a></li>
+              <li><a href="/content/pension">{{ 'Pension'|t }}</a></li>
+              <li><a href="/content/book-1-re-sign-procedure" class="restricted">{{ 'Book 1 Re-Sign'|t }}</a></li>
+              <li><a href="/node/7269/feed-items">{{ 'IBEW News'|t }}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="news" class="ibew-section">
+      <div class="ibew-shell">
+        <div class="ibew-section__header">
+          <div>
+            <div class="ibew-pill">{{ 'News & Announcements'|t }}</div>
+            <h2 class="ibew-section__title">{{ 'Latest from IBEW 90'|t }}</h2>
+          </div>
+          <a class="ibew-cta ibew-cta--ghost" href="/frontpage">{{ 'View News & Announcements'|t }}</a>
+        </div>
+
+        <div class="ibew-grid">
+          <div class="ibew-card ibew-card--stacked">
+            <div class="ibew-card__header">
+              <div class="ibew-card__title">{{ 'IBEW 90 News'|t }}</div>
+              <span class="ibew-chip ibew-chip--blue">{{ 'Latest'|t }}</span>
+            </div>
+            <ul class="ibew-list">
+              <li><a href="/content/2025-inaugural-ct-sporting-clays-shoot">{{ '2025 Inaugural CT Sporting Clays Shoot'|t }}</a></li>
+              <li><a href="/content/2025-local-90-membership-outing">{{ '2025 Local 90 Membership Outing'|t }}</a></li>
+              <li><a href="/content/frank-halloran-memoral-golf-tournament">{{ 'Frank Halloran Memoral Golf Tournament'|t }}</a></li>
+              <li><a href="/content/toys-tots-hosted-local-90-riding-club">{{ 'Toys for Tots - Hosted by Local 90 Riding Club'|t }}</a></li>
+              <li><a href="/content/fantasy-lights">{{ 'Fantasy of Lights'|t }}</a></li>
+              <li><a href="/content/dues-2026">{{ 'Dues 2026'|t }}</a></li>
+            </ul>
+          </div>
+
+          <div class="ibew-card ibew-card--stacked">
+            <div class="ibew-card__header">
+              <div class="ibew-card__title">{{ 'Topics'|t }}</div>
+              <span class="ibew-chip ibew-chip--gold">{{ 'Tags'|t }}</span>
+            </div>
+            <div class="ibew-badges">
+              <span class="ibew-badge"><a href="/tags/build-back-better">{{ 'Build Back Better'|t }}</a></span>
+              <span class="ibew-badge"><a href="/tags/business-manager-report">{{ 'Business Manager Report'|t }}</a></span>
+              <span class="ibew-badge"><a href="/tags/connecticut-labor-and-building-news">{{ 'Connecticut Labor News'|t }}</a></span>
+              <span class="ibew-badge"><a href="/tags/elections-matter">{{ 'Elections Matter'|t }}</a></span>
+              <span class="ibew-badge"><a href="/tags/ibew-hour-power">{{ 'IBEW Hour Power'|t }}</a></span>
+              <span class="ibew-badge"><a href="/tags/sympathy">{{ 'In Sympathy'|t }}</a></span>
+              <span class="ibew-badge"><a href="/taxonomy/term/96">{{ 'New Haven Building Trades'|t }}</a></span>
+            </div>
+            <div class="ibew-card__header mt-3">
+              <div class="ibew-card__title">{{ 'Social'|t }}</div>
+              <span class="ibew-chip ibew-chip--green">{{ 'Stay Connected'|t }}</span>
+            </div>
+            <div class="ibew-hero__actions">
+              <a class="ibew-cta ibew-cta--ghost" href="https://www.facebook.com/NecaIbewLocal90Jatc/">{{ 'Facebook'|t }}</a>
+              <a class="ibew-cta ibew-cta--ghost" href="https://twitter.com/https://twitter.com/IBEW">{{ 'Twitter'|t }}</a>
+              <a class="ibew-cta ibew-cta--primary" href="https://www.ctaflcio.org" target="_blank" rel="noreferrer noopener">{{ 'CT AFL-CIO'|t }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="events" class="ibew-section">
+      <div class="ibew-shell">
+        <div class="ibew-section__header">
+          <div>
+            <div class="ibew-pill">{{ 'Events & Calendar'|t }}</div>
+            <h2 class="ibew-section__title">{{ 'Meetings, trainings, and Local 90 gatherings'|t }}</h2>
+          </div>
+          <a class="ibew-cta ibew-cta--ghost" href="https://ibewlocal90.org/civicrm/showevents">{{ 'IBEW 90 Calendar'|t }}</a>
+        </div>
+
+        <div class="ibew-grid">
+          <div class="ibew-card">
+            <div class="ibew-card__header">
+              <div class="ibew-card__title">{{ 'Where to go'|t }}</div>
+              <span class="ibew-chip ibew-chip--blue">{{ 'Calendar'|t }}</span>
+            </div>
+            <ul class="ibew-list">
+              <li><a href="/events-meetings">{{ 'Meetings'|t }}</a></li>
+              <li><a href="/training-events">{{ 'Trainings'|t }}</a></li>
+              <li><a href="https://ibewlocal90.org/civicrm/showevents" class="restricted">{{ 'IBEW 90 Calendar'|t }}</a></li>
+            </ul>
+            <div class="ibew-meter" style="--value: 72%;"><span></span></div>
+            <small class="text-muted">{{ 'December calendar live on site; navigate for January and beyond.'|t }}</small>
+          </div>
+
+          <div class="ibew-card">
+            <div class="ibew-card__header">
+              <div class="ibew-card__title">{{ 'Galleries & Community'|t }}</div>
+              <span class="ibew-chip ibew-chip--gold">{{ 'Photos'|t }}</span>
+            </div>
+            <p>{{ 'Relive Local 90 moments and community events.'|t }}</p>
+            <ul class="ibew-list">
+              <li><a href="/content/retirement-dinner-2021">{{ 'Retirement Dinner 2021'|t }}</a></li>
+              <li><a href="/content/membership-outing-2021">{{ 'IBEW Local 90 Membership Outing 2021'|t }}</a></li>
+              <li><a href="/content/2019-retirement-dinner-and-25-year-honorees">{{ '2019 Retirement Dinner and 25 Year Honorees'|t }}</a></li>
+              <li><a href="/image-gallery-menu/retirement-ceremonies">{{ 'Retirement Ceremonies'|t }}</a></li>
+            </ul>
+          </div>
+
+          <div class="ibew-card">
+            <div class="ibew-card__header">
+              <div class="ibew-card__title">{{ 'Featured visuals'|t }}</div>
+              <span class="ibew-chip ibew-chip--green">{{ 'Showcase'|t }}</span>
+            </div>
+            <div class="ibew-hero__tags">
+              <span class="ibew-chip ibew-chip--blue">{{ 'Our Work Shows Up Real Well At Night'|t }}</span>
+              <span class="ibew-chip ibew-chip--gold">{{ 'Done Right, the First Time'|t }}</span>
+              <span class="ibew-chip ibew-chip--blue">{{ 'Smilow Cancer Center with Turner Construction'|t }}</span>
+              <span class="ibew-chip ibew-chip--green">{{ 'Smilow Cancer Center'|t }}</span>
+            </div>
+            <p>{{ 'These are the flagship slider highlights from ibewlocal90.org.'|t }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="members" class="ibew-section">
+      <div class="ibew-shell">
+        <div class="ibew-section__header">
+          <div>
+            <div class="ibew-pill">{{ 'Members'|t }}</div>
+            <h2 class="ibew-section__title">{{ 'Stay current on dues, benefits, and resources'|t }}</h2>
+          </div>
+          <div class="ibew-badges">
+            <span class="ibew-chip ibew-chip--blue">{{ 'Pay dues'|t }}</span>
+            <span class="ibew-chip ibew-chip--green">{{ 'Benefits'|t }}</span>
+          </div>
+        </div>
+
+        <div class="ibew-grid">
+          <div class="ibew-card">
+            <div class="ibew-card__header">
+              <div class="ibew-card__title">{{ 'Member links'|t }}</div>
+              <span class="ibew-chip ibew-chip--blue">{{ 'Access'|t }}</span>
+            </div>
+            <ul class="ibew-list">
+              <li><a href="/civicrm/user">{{ 'My IBEW 90'|t }}</a></li>
+              <li><a href="/content/member-resources" class="restricted">{{ 'Resources'|t }}</a></li>
+              <li><a href="/content/benefits" class="restricted">{{ 'Benefits'|t }}</a></li>
+              <li><a href="/content/health-and-welfarepension-funds">{{ 'Health and Welfare/Pension Funds'|t }}</a></li>
+              <li><a href="/content/pension">{{ 'Pension'|t }}</a></li>
+              <li><a href="/content/obituaries/" class="restricted">{{ 'In Sympathy'|t }}</a></li>
+            </ul>
+          </div>
+
+          <div class="ibew-card">
+            <div class="ibew-card__header">
+              <div class="ibew-card__title">{{ 'Build Back Better'|t }}</div>
+              <span class="ibew-chip ibew-chip--gold">{{ 'Newsletter'|t }}</span>
+            </div>
+            <p>{{ 'Catch up on Local 90 advocacy and government affairs updates.'|t }}</p>
+            <ul class="ibew-list">
+              <li><a href="/newsletter-build-back-better/august-2023-government-affairs-newsletter" class="restricted">{{ 'August 2023 Government Affairs Newsletter'|t }}</a></li>
+              <li><a href="/newsletter-build-back-better/october-2022" class="restricted">{{ 'Oct 2022'|t }}</a></li>
+              <li><a href="/newsletter-build-back-better/july-2022" class="restricted">{{ 'July 2022'|t }}</a></li>
+            </ul>
+          </div>
+
+          <div class="ibew-card">
+            <div class="ibew-card__header">
+              <div class="ibew-card__title">{{ 'Support & safety'|t }}</div>
+              <span class="ibew-chip ibew-chip--green">{{ 'Stay informed'|t }}</span>
+            </div>
+            <p>{{ 'Highlights featured on ibewlocal90.org to keep members protected and informed.'|t }}</p>
+            <ul class="ibew-list">
+              <li>{{ 'Project 2025 Will Weaken Union Members'|t }}</li>
+              <li>{{ 'Conquer Pain with Hinge Health'|t }}</li>
+              <li>{{ 'Dues 2026 schedule posted for members'|t }}</li>
+            </ul>
+            <div class="ibew-hero__actions">
+              <a class="ibew-cta ibew-cta--ghost" href="/node/7269/feed-items">{{ 'More IBEW News'|t }}</a>
+              <a class="ibew-cta ibew-cta--primary" href="/content/benefits">{{ 'View Benefits'|t }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="ibew-section">
+      <div class="ibew-shell">
+        <div class="ibew-section__header">
+          <div>
+            <div class="ibew-pill">{{ 'Contact'|t }}</div>
+            <h2 class="ibew-section__title">{{ 'Connect with IBEW Local 90'|t }}</h2>
+          </div>
+          <p class="ibew-section__lede">{{ 'Call, email, or stop by the office. Join IBEW CT or submit member paperwork online.'|t }}</p>
+        </div>
+
+        <div class="ibew-row">
+          <div class="ibew-card ibew-ghost-border">
+            <div class="ibew-card__header">
+              <div class="ibew-card__title">{{ 'Office'|t }}</div>
+              <span class="ibew-chip ibew-chip--blue">{{ 'Wallingford'|t }}</span>
+            </div>
+            <ul class="ibew-list">
+              <li>{{ '2 N Plains Industrial Rd'|t }}</li>
+              <li>{{ 'Wallingford, CT 06492'|t }}</li>
+              <li><a href="tel:18005622590">1-800-562-2590</a></li>
+              <li><a href="mailto:info@ibewlocal90.org">info@ibewlocal90.org</a></li>
+            </ul>
+            <div class="ibew-hero__actions">
+              <a class="ibew-cta ibew-cta--primary" href="https://www.necact.org/joinibewct/" target="_blank" rel="noreferrer noopener">{{ 'JoinIBEWCT.org'|t }}</a>
+              <a class="ibew-cta ibew-cta--ghost" href="/contact">{{ 'Contact Us'|t }}</a>
+            </div>
+          </div>
+
+          <div class="ibew-card ibew-ghost-border">
+            <div class="ibew-card__header">
+              <div class="ibew-card__title">{{ 'Member Re-Sign & Portal'|t }}</div>
+              <span class="ibew-chip ibew-chip--green">{{ 'Online'|t }}</span>
+            </div>
+            <p>{{ 'Submit Book 1 re-signs, check benefits, and access Local 90 member resources directly online.'|t }}</p>
+            <div class="ibew-hero__actions">
+              <a class="ibew-cta ibew-cta--primary" href="/content/book-1-re-sign-procedure">{{ 'Book 1 Re-Sign Procedure'|t }}</a>
+              <a class="ibew-cta ibew-cta--ghost" href="/civicrm/user">{{ 'My IBEW 90 Portal'|t }}</a>
+            </div>
+            <div class="ibew-badges">
+              <span class="ibew-badge">{{ 'Member Info & Resources'|t }}</span>
+              <span class="ibew-badge">{{ 'Benefits and Pensions'|t }}</span>
+              <span class="ibew-badge">{{ 'Health & Welfare Funds'|t }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {% if page.content %}
+      <section class="ibew-section">
+        <div class="ibew-shell">
+          {% if page.sidebar_first or page.sidebar_second %}
+            <div class="ibew-row">
+              {% if page.sidebar_first %}
+                <aside class="ibew-card ibew-ghost-border">
+                  {{ page.sidebar_first }}
+                </aside>
+              {% endif %}
+
+              <div class="ibew-card ibew-ghost-border">
+                {{ page.content }}
+              </div>
+
+              {% if page.sidebar_second %}
+                <aside class="ibew-card ibew-ghost-border">
+                  {{ page.sidebar_second }}
+                </aside>
+              {% endif %}
+            </div>
+          {% else %}
+            <div class="ibew-card ibew-ghost-border">
+              {{ page.content }}
+            </div>
+          {% endif %}
+        </div>
+      </section>
+    {% endif %}
+  </main>
+
+  <footer class="ibew-footer">
+    <div class="ibew-shell">
+      <div class="ibew-footer__grid">
+        <div>
+          <div class="ibew-footer__brand">{{ 'IBEW Local 90'|t }}</div>
+          <p>{{ 'The New Haven Electricians. Serving Connecticut with safe, skilled, union electrical work.'|t }}</p>
+        </div>
+        <div>
+          <h4>{{ 'Quick Links'|t }}</h4>
+          <ul class="ibew-list">
+            <li><a href="#about">{{ 'About'|t }}</a></li>
+            <li><a href="#services">{{ 'Training'|t }}</a></li>
+            <li><a href="#news">{{ 'News'|t }}</a></li>
+            <li><a href="/civicrm/user">{{ 'My IBEW 90'|t }}</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>{{ 'Members'|t }}</h4>
+          <ul class="ibew-list">
+            <li><a href="/content/book-1-re-sign-procedure">{{ 'Book 1 Re-Sign'|t }}</a></li>
+            <li><a href="/content/ibew-local-90-book-1-referral-procedure">{{ 'Book 1 Referral Procedure'|t }}</a></li>
+            <li><a href="/content/benefits">{{ 'Benefits'|t }}</a></li>
+            <li><a href="/content/health-and-welfarepension-funds">{{ 'Health & Welfare Funds'|t }}</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>{{ 'Contact'|t }}</h4>
+          <ul class="ibew-list">
+            <li><a href="tel:18005622590">1-800-562-2590</a></li>
+            <li><a href="mailto:info@ibewlocal90.org">info@ibewlocal90.org</a></li>
+            <li>{{ '2 N Plains Industrial Rd, Wallingford, CT 06492'|t }}</li>
+            <li><a href="https://www.necact.org/joinibewct/" target="_blank" rel="noreferrer noopener">{{ 'JoinIBEWCT.org'|t }}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-3">
+        <small>&copy; {{ "now"|date("Y") }} {{ 'IBEW Local 90. All rights reserved.'|t }}</small>
+        {% if page.footer %}
+          <div class="mt-2">
+            {{ page.footer }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </footer>
+</div>

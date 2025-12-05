@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * IBEW Hero Component
+ */
+#}
+<section class="ibew-hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ image_url }}');">
+  <div class="ibew-hero__content">
+    <h1 class="ibew-hero__title">{{ title }}</h1>
+    <p class="ibew-hero__description">{{ description }}</p>
+    {% if slots.cta_buttons %}
+      <div class="ibew-hero__actions">
+        {{ slots.cta_buttons }}
+      </div>
+    {% endif %}
+    
+    <div class="ibew-hero__cards">
+       <div class="ibew-hero__card">
+          <h3>Prospective Members</h3>
+          <p>Start your career with the best training and benefits.</p>
+          <a href="#" class="btn btn-primary">Become a Member</a>
+       </div>
+       <div class="ibew-hero__card">
+          <h3>Contractors</h3>
+          <p>Partner with the most skilled workforce in the industry.</p>
+          <a href="#" class="btn btn-outline-white">Find Contractors</a>
+       </div>
+       <div class="ibew-hero__card">
+          <h3>Training</h3>
+          <p>World-class apprenticeship and continuing education.</p>
+          <a href="#" class="btn btn-outline-white">Learn More</a>
+       </div>
+    </div>
+  </div>
+</section>
