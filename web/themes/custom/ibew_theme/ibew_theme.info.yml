@@ -7,6 +7,12 @@ libraries:
   - ibew_theme/global-styling
 regions:
   header: Header
+  homepage_hero: 'Homepage Hero'
+  homepage_about: 'Homepage About'
+  homepage_news: 'Homepage News'
+  homepage_events: 'Homepage Events'
+  homepage_members: 'Homepage Members'
+  homepage_contact: 'Homepage Contact'
   content: Content
   sidebar_first: 'Sidebar First'
   sidebar_second: 'Sidebar Second'
@@ -14,3 +20,4 @@ regions:
 components:
   namespaces:
     ibew_theme: components
+    radix: components

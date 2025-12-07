@@ -1,0 +1,8 @@
+name: IBEW Homepage Blocks
+type: module
+description: 'Provides prebuilt editable homepage blocks matching the IBEW 90 front-page design.'
+core_version_requirement: ^10 || ^11
+package: Custom
+dependencies:
+  - block
+  - block_content

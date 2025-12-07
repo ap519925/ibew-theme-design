@@ -4,40 +4,42 @@
  * Theme override to display a single page.
  */
 #}
-<div class="layout-container">
-  <header role="banner" class="header">
-    <div class="container">
+<div class="layout-container min-h-screen bg-gray-100 text-gray-900">
+  <header role="banner" class="bg-white shadow-md border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
       {{ page.header }}
     </div>
   </header>
 
-  <main role="main" class="main-content">
+  <main role="main" class="main-content py-10">
     <a id="main-content" tabindex="-1"></a>
 
-    <div class="container">
-      <div class="row">
-        {% if page.sidebar_first %}
-          <aside class="col-md-3 sidebar-first" role="complementary">
-            {{ page.sidebar_first }}
-          </aside>
-        {% endif %}
+    {% set has_sidebar_first = page.sidebar_first is not empty %}
+    {% set has_sidebar_second = page.sidebar_second is not empty %}
+    {% set grid_classes = (has_sidebar_first or has_sidebar_second) ? 'grid grid-cols-3 gap-6' : 'grid gap-6' %}
 
-        <div class="{{ page.sidebar_first and page.sidebar_second ? 'col-md-6' : page.sidebar_first or page.sidebar_second ? 'col-md-9' : 'col-md-12' }}">
-          {{ page.content }}
-        </div>
+    <div class="max-w-7xl mx-auto px-6 {{ grid_classes }}">
+      {% if has_sidebar_first %}
+        <aside class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+          {{ page.sidebar_first }}
+        </aside>
+      {% endif %}
 
-        {% if page.sidebar_second %}
-          <aside class="col-md-3 sidebar-second" role="complementary">
-            {{ page.sidebar_second }}
-          </aside>
-        {% endif %}
+      <div class="{{ has_sidebar_first or has_sidebar_second ? 'col-span-2' : '' }} bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+        {{ page.content }}
       </div>
+
+      {% if has_sidebar_second %}
+        <aside class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
+          {{ page.sidebar_second }}
+        </aside>
+      {% endif %}
     </div>
   </main>
 
   {% if page.footer %}
-    <footer role="contentinfo" class="footer">
-      <div class="container">
+    <footer role="contentinfo" class="bg-gray-900 text-gray-200 border-t border-gray-800 py-8">
+      <div class="max-w-7xl mx-auto px-6">
         {{ page.footer }}
       </div>
     </footer>

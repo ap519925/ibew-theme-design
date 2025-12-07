@@ -620,6 +620,27 @@ h1, h2, h3, h4, .ibew-section__title, .ibew-brand__title, .ibew-card__title {
   border-radius: 1.1rem;
 }
 
+// Ensure blocks dropped into homepage regions inherit the card styling even
+// without custom Twig wrappers.
+$ibew-homepage-regions: (
+  '.region-homepage-hero',
+  '.region-homepage-about',
+  '.region-homepage-news',
+  '.region-homepage-events',
+  '.region-homepage-members',
+  '.region-homepage-contact'
+);
+
+#{$ibew-homepage-regions} {
+  display: grid;
+  gap: 1.25rem;
+}
+
+#{$ibew-homepage-regions} .block {
+  @extend .ibew-card;
+  @extend .ibew-ghost-border;
+}
+
 .ibew-tagline {
   color: #bfdbfe;
   font-weight: 700;

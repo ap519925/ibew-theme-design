@@ -1,0 +1,151 @@
+{#
+/**
+ * @file
+ * Front page layout that renders homepage regions with IBEW styling.
+ */
+#}
+<a id="main-content" tabindex="-1"></a>
+
+<div class="ibew-page bg-gray-100 text-gray-900 min-h-screen">
+  <header class="ibew-hero bg-gradient-to-br from-blue-900 via-slate-800 to-indigo-900 text-white">
+    <div class="ibew-hero__glow"></div>
+
+    <div class="ibew-nav sticky top-0 z-50 bg-white/50 dark:bg-gray-800 backdrop-blur-sm border-b border-gray-200">
+      <div class="ibew-shell ibew-nav__inner max-w-7xl mx-auto px-6">
+        {# Allow site builders to replace the nav/header via the "Header" region. #}
+        {% if page.header %}
+          {{ page.header }}
+        {% else %}
+          <div class="ibew-brand">
+            <div class="ibew-brand__mark">90</div>
+            <div class="ibew-brand__text">
+              <span class="ibew-eyebrow">{{ 'The New Haven Electricians'|t }}</span>
+              <span class="ibew-brand__title">{{ site_name|default('IBEW Local 90') }}</span>
+            </div>
+          </div>
+
+          <button class="ibew-nav__toggle js-ibew-nav-toggle" aria-expanded="false">
+            {{ 'Menu'|t }}
+          </button>
+
+          <nav class="ibew-nav__links">
+            <a href="#about">{{ 'About'|t }}</a>
+            <a href="#services">{{ 'Training'|t }}</a>
+            <a href="#news">{{ 'News'|t }}</a>
+            <a href="#events">{{ 'Events'|t }}</a>
+            <a href="#members">{{ 'Members'|t }}</a>
+            <a href="#contact">{{ 'Contact'|t }}</a>
+          </nav>
+
+          <div class="ibew-nav__cta">
+            <a class="ibew-cta ibew-cta--ghost" href="/civicrm/user">{{ 'My IBEW 90'|t }}</a>
+            <a class="ibew-cta ibew-cta--primary" href="/content/book-1-re-sign-procedure">{{ 'Member Re-Sign'|t }}</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="ibew-shell ibew-hero__grid max-w-7xl mx-auto px-6 py-16">
+      {% if page.homepage_hero %}
+        <div class="ibew-region ibew-region--hero">
+          {{ page.homepage_hero }}
+        </div>
+      {% endif %}
+    </div>
+  </header>
+
+  <main>
+    {% if page.homepage_about %}
+      <section id="about" class="ibew-section py-16">
+        <div class="ibew-shell max-w-7xl mx-auto px-6">
+          <div class="ibew-region ibew-region--about">
+            {{ page.homepage_about }}
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+    {% if page.homepage_news %}
+      <section id="news" class="ibew-section py-16">
+        <div class="ibew-shell max-w-7xl mx-auto px-6">
+          <div class="ibew-region ibew-region--news">
+            {{ page.homepage_news }}
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+    {% if page.homepage_events %}
+      <section id="events" class="ibew-section py-16">
+        <div class="ibew-shell max-w-7xl mx-auto px-6">
+          <div class="ibew-region ibew-region--events">
+            {{ page.homepage_events }}
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+    {% if page.homepage_members %}
+      <section id="members" class="ibew-section py-16">
+        <div class="ibew-shell max-w-7xl mx-auto px-6">
+          <div class="ibew-region ibew-region--members">
+            {{ page.homepage_members }}
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+    {% if page.homepage_contact %}
+      <section id="contact" class="ibew-section py-16">
+        <div class="ibew-shell max-w-7xl mx-auto px-6">
+          <div class="ibew-region ibew-region--contact">
+            {{ page.homepage_contact }}
+          </div>
+        </div>
+      </section>
+    {% endif %}
+
+    {% if page.content %}
+      <section class="ibew-section py-16">
+        <div class="ibew-shell max-w-7xl mx-auto px-6">
+          {% if page.sidebar_first or page.sidebar_second %}
+            <div class="ibew-row">
+              {% if page.sidebar_first %}
+                <aside class="ibew-card ibew-ghost-border">
+                  {{ page.sidebar_first }}
+                </aside>
+              {% endif %}
+
+              <div class="ibew-card ibew-ghost-border">
+                {{ page.content }}
+              </div>
+
+              {% if page.sidebar_second %}
+                <aside class="ibew-card ibew-ghost-border">
+                  {{ page.sidebar_second }}
+                </aside>
+              {% endif %}
+            </div>
+          {% else %}
+            <div class="ibew-card ibew-ghost-border">
+              {{ page.content }}
+            </div>
+          {% endif %}
+        </div>
+      </section>
+    {% endif %}
+  </main>
+
+  <footer class="ibew-footer bg-gray-900 text-gray-200 border-t border-gray-800">
+    <div class="ibew-shell max-w-7xl mx-auto px-6 py-10">
+      {% if page.footer %}
+        <div class="ibew-footer__grid">
+          {{ page.footer }}
+        </div>
+      {% endif %}
+      <div class="mt-3">
+        <small>&copy; {{ "now"|date("Y") }} {{ 'IBEW Local 90. All rights reserved.'|t }}</small>
+      </div>
+    </div>
+  </footer>
+</div>
