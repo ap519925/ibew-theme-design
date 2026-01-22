@@ -1,261 +1,187 @@
 :root {
-  --ibew-primary: #1d4ed8;
-  --ibew-primary-strong: #0b5ed7;
-  --ibew-accent: #f59e0b;
-  --ibew-surface: #0f172a;
-  --ibew-surface-soft: #111827;
-  --ibew-surface-alt: #0b1530;
-  --ibew-border: #1f2937;
-  --ibew-text: #e5e7eb;
+  --ibew-primary: #{$ibew-navy};
+  --ibew-secondary: #{$ibew-blue};
+  --ibew-accent: #{$ibew-gold};
+  --ibew-accent-hover: #{$ibew-gold-metallic};
+
+  // Backgrounds
+  --ibew-bg-light: #{$light};
+  --ibew-bg-dark: #{$dark};
+
+  // Text
+  --ibew-text-dark: #{$dark};
+  --ibew-text-light: #{$info};
   --ibew-muted: #9ca3af;
-  --ibew-burgundy: #7f1d1d;
-  --ibew-glow: rgba(37, 99, 235, 0.25);
+}
+
+html.dark {
+  --ibew-bg-light: #{$dark};
+  --ibew-text-dark: #f3f4f6;
+
+  body {
+    background-color: var(--ibew-bg-light);
+    color: var(--ibew-text-dark);
+  }
+
+  .bg-white {
+    background-color: #1f2937 !important; // Gray 800
+    color: #fff !important;
+  }
+
+  .bg-gray-50 {
+    background-color: #111827 !important; // Gray 900
+  }
+
+  .ibew-card {
+    background: rgba(31, 41, 55, 0.7); // Gray 800 + opacity
+    border-color: rgba(255, 255, 255, 0.1);
+  }
 }
 
 .ibew-page {
-  color: var(--ibew-text);
-  font-family: 'Open Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  background:
-    radial-gradient(circle at 12% 18%, rgba(59, 130, 246, 0.14), transparent 32%),
-    radial-gradient(circle at 78% 6%, rgba(245, 158, 11, 0.12), transparent 32%),
-    radial-gradient(circle at 30% 82%, rgba(14, 165, 233, 0.12), transparent 32%),
-    linear-gradient(135deg, #0b0f1d, #0b162c 50%, #0f172a);
+  font-family: 'Open Sans', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
-  position: relative;
 }
 
-.ibew-page > * {
-  position: relative;
-  z-index: 1;
-}
-
-h1, h2, h3, h4, .ibew-section__title, .ibew-brand__title, .ibew-card__title {
-  font-family: 'Oswald', 'Open Sans', Arial, sans-serif;
-  letter-spacing: 0.01em;
-}
-
+/* --- Bootstrap Bridge --- */
 .ibew-shell {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+  @extend .container;
+  /* Bootstrap container handles max-width steps */
+  max-width: 1280px;
+  /* Custom Override for wider screens */
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
-.ibew-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.9rem;
-  border-radius: 999px;
-  font-weight: 600;
-  font-size: 0.875rem;
-  color: #fff;
-  background: linear-gradient(120deg, rgba(59, 130, 246, 0.9), rgba(14, 165, 233, 0.8));
-  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.22);
-}
-
-.ibew-pill--subtle {
-  background: rgba(255, 255, 255, 0.08);
-  color: #dbeafe;
-  box-shadow: none;
-}
-
-.ibew-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.9rem 1.2rem;
-  border-radius: 0.9rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-}
-
-.ibew-cta--primary {
-  background: linear-gradient(135deg, var(--ibew-primary), #0ea5e9);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.ibew-cta--ghost {
-  background: rgba(255, 255, 255, 0.06);
-  color: #e0e7ff;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(4px);
-}
-
-.ibew-cta:hover {
-  transform: translateY(-3px) scale(1.01);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-}
-
-.ibew-card {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-  border-radius: 1.25rem;
-  padding: 1.5rem;
+.ibew-section {
+  padding: 5rem 0;
+  /* py-20 approx */
   position: relative;
-  overflow: hidden;
 }
 
-.ibew-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.08), transparent 40%),
-    radial-gradient(circle at 80% 0%, rgba(245, 158, 11, 0.08), transparent 36%);
-  pointer-events: none;
-}
 
-.ibew-card__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.75rem;
-}
 
-.ibew-card__title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #fff;
-}
-
-.ibew-card--stacked {
-  display: grid;
-  gap: 0.9rem;
-}
-
-.ibew-nav {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  background: rgba(10, 15, 31, 0.95);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-}
-
-.ibew-nav__inner {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  min-height: 74px;
-}
-
-.ibew-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-}
-
-.ibew-brand__mark {
-  width: 54px;
-  height: 54px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.9), rgba(14, 165, 233, 0.85));
-  display: grid;
-  place-items: center;
-  font-weight: 800;
-  letter-spacing: 0.03em;
-  box-shadow: 0 15px 40px rgba(59, 130, 246, 0.35);
-}
-
-.ibew-brand__text {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-}
-
-.ibew-eyebrow {
-  color: var(--ibew-muted);
+/* Typography Overrides */
+h1,
+h2,
+h3,
+h4,
+.font-oswald {
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
-  font-weight: 700;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
 }
 
-.ibew-brand__title {
-  color: #fff;
-  font-weight: 800;
-  font-size: 1.3rem;
-  letter-spacing: -0.02em;
-}
-
-.ibew-nav__links {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  margin-left: auto;
-}
-
-.ibew-nav__links a {
-  color: var(--ibew-text);
-  text-decoration: none;
-  font-weight: 600;
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.7rem;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.ibew-nav__links a:hover {
-  background: rgba(255, 255, 255, 0.06);
-  color: #fff;
-}
-
-.ibew-nav__cta {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-left: 1rem;
-}
-
-.ibew-nav__toggle {
-  display: none;
-  margin-left: auto;
-  background: none;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  color: #fff;
-  padding: 0.6rem 0.9rem;
-  border-radius: 0.8rem;
-}
-
+/* --- Hero Section --- */
 .ibew-hero {
   position: relative;
-  overflow: hidden;
-  padding: 4rem 0 2.5rem;
-  background: linear-gradient(140deg, var(--ibew-surface-alt), #0a1a31 55%, #0b2548);
+  height: 65vh;
+  min-height: 500px;
+  background-color: $ibew-navy; // Fallback
+  padding: 0;
 }
 
-.ibew-hero__glow {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.22), transparent 35%),
-    radial-gradient(circle at 85% 15%, rgba(245, 158, 11, 0.18), transparent 36%),
-    radial-gradient(circle at 40% 70%, rgba(8, 47, 73, 0.5), transparent 55%);
-  filter: blur(0px);
-  opacity: 0.9;
-  z-index: 0;
+/* --- Buttons --- */
+.ibew-btn-lg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.75rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  letter-spacing: 0.05em;
+  font-family: 'Oswald', sans-serif;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
 }
 
-.ibew-hero__grid {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.75rem;
-  align-items: stretch;
+.ibew-btn--gold {
+  background-color: var(--ibew-accent);
+  color: #000;
+  border: 2px solid var(--ibew-accent);
+
+  &:hover {
+    background-color: #d97706;
+    border-color: #d97706;
+    color: #fff;
+  }
 }
 
-.ibew-hero__lead h1 {
-  font-size: clamp(2.4rem, 3vw + 1rem, 3.8rem);
-  font-weight: 800;
-  line-height: 1.1;
+.ibew-btn--blue {
+  background-color: var(--ibew-primary);
   color: #fff;
-  margin: 0.75rem 0;
+  border: 2px solid var(--ibew-primary);
+
+  &:hover {
+    background-color: var(--ibew-secondary);
+    border-color: var(--ibew-secondary);
+    color: #fff;
+  }
 }
+
+.ibew-btn--red {
+  background-color: #dc2626;
+  color: white;
+  border: 2px solid #dc2626;
+
+  &:hover {
+    background-color: #b91c1c;
+    border-color: #b91c1c;
+    color: white;
+  }
+}
+
+/* --- Cards (News / CTA) --- */
+.ibew-cta-section {
+  background-color: var(--ibew-primary);
+  background: linear-gradient(135deg, var(--ibew-primary) 0%, #1e40af 100%);
+  color: white;
+  padding: 5rem 0;
+  text-align: center;
+}
+
+.ibew-cta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.ibew-cta-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 2.5rem;
+  border-radius: 1rem;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+}
+
+
 
 .ibew-hero__lead p {
   color: #cbd5e1;
@@ -284,32 +210,34 @@ h1, h2, h3, h4, .ibew-section__title, .ibew-brand__title, .ibew-card__title {
   margin-top: 1rem;
 }
 
-.ibew-stat {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 1rem;
-  padding: 1rem 1.1rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+
+/* --- Stats Bar Component --- */
+.ibew-stats-container {
+  width: 100%;
 }
 
-.ibew-stat__value {
-  font-weight: 800;
-  font-size: 1.6rem;
-  color: #fff;
+.ibew-stat-item {
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
 }
 
-.ibew-stat__label {
-  color: var(--ibew-muted);
-  margin-top: 0.2rem;
-  font-weight: 600;
+/* Ensure stats are visible in Light Mode if placed on white background, 
+   though usually stats are on dark. */
+html:not(.dark) .ibew-stat-item {
+  .text-light {
+    color: #374151 !important;
+    /* gray-700 */
+  }
+
+  .border-white {
+    border-color: #e5e7eb !important;
+    /* gray-200 */
+  }
 }
 
-.ibew-stat small {
-  display: block;
-  margin-top: 0.35rem;
-  color: var(--ibew-muted);
-  font-weight: 600;
-}
 
 .ibew-hero__panel {
   background: rgba(255, 255, 255, 0.03);
@@ -620,8 +548,17 @@ h1, h2, h3, h4, .ibew-section__title, .ibew-brand__title, .ibew-card__title {
   border-radius: 1.1rem;
 }
 
-// Ensure blocks dropped into homepage regions inherit the card styling even
-// without custom Twig wrappers.
+.ibew-footer .block {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+
+  &::after {
+    display: none !important;
+  }
+}
+
 $ibew-homepage-regions: (
   '.region-homepage-hero',
   '.region-homepage-about',
@@ -655,6 +592,7 @@ $ibew-homepage-regions: (
 }
 
 @media (max-width: 1024px) {
+
   .ibew-nav__links,
   .ibew-nav__cta {
     display: none;
@@ -696,9 +634,11 @@ $ibew-homepage-regions: (
   0% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-6px);
   }
+
   100% {
     transform: translateY(0);
   }
@@ -706,4 +646,524 @@ $ibew-homepage-regions: (
 
 .ibew-float {
   animation: ibewFloat 8s ease-in-out infinite;
+}
+
+// Navigation Redesign
+.ibew-header-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+}
+
+.ibew-top-bar {
+  background: #1f2937;
+  color: #fff;
+  font-size: 0.85rem;
+  padding: 0.5rem 0;
+  position: relative;
+  z-index: 51;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.ibew-nav {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  position: relative;
+  z-index: 50;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.ibew-nav__inner {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  height: 90px;
+  // transition: height 0.3s;
+}
+
+.ibew-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-right: auto;
+  text-decoration: none;
+}
+
+.ibew-brand__logo {
+  height: 60px;
+  width: auto;
+}
+
+.ibew-brand__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.ibew-brand__title {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #1f2937; // Dark slate
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.ibew-eyebrow {
+  font-size: 0.75rem;
+  color: #6b7280; // Gray 500
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.ibew-nav__links {
+  display: flex;
+  gap: 1.5rem;
+
+  a {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #374151; // Gray 700
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    position: relative;
+    transition: color 0.2s;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      display: block;
+      border: 0 solid transparent;
+      width: 0%;
+      height: 0%;
+      transition: all 0.5s ease;
+    }
+
+    &::after {
+      top: 0;
+      left: 0;
+      border-top: 2px solid transparent;
+      border-left: 2px solid transparent;
+    }
+
+    &::before {
+      right: 0;
+      bottom: 0;
+      border-bottom: 2px solid transparent;
+      border-right: 2px solid transparent;
+    }
+
+    &:hover {
+      color: #2563eb; // Blue 600
+
+      &::before,
+      &::after {
+        width: 100%;
+        height: 100%;
+        border-color: #A6A6A6;
+      }
+    }
+  }
+}
+
+.ibew-cta--nav {
+  background: #2563eb;
+  color: #fff;
+  padding: 0.6rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif;
+  transition: background 0.2s;
+  text-decoration: none;
+
+  &:hover {
+    background: #1d4ed8; // Blue 700
+    color: #fff;
+  }
+}
+
+.ibew-mobile-toggle {
+  background: none;
+  border: none;
+  color: #374151;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+// --- New CTA Section --- 
+.ibew-cta-section {
+  position: relative;
+  padding: 6rem 0;
+  background-color: $ibew-navy;
+  /* Fallback */
+  background-image: linear-gradient(rgba(0, 40, 85, 0.85), rgba(0, 40, 85, 0.9)), url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  color: $white;
+  text-align: center;
+}
+
+.ibew-cta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.ibew-cta-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ibew-cta-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+.ibew-cta-card p {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  max-width: 300px;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.ibew-btn-lg {
+  width: 100%;
+  max-width: 320px;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: capitalize;
+  /* design uses Title Case for "Become a Member" */
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.ibew-btn--gold {
+  background-color: $ibew-gold;
+  color: $ibew-navy;
+  border: 1px solid $ibew-gold;
+
+  &:hover {
+    background-color: darken($ibew-gold, 10%);
+    color: $ibew-navy;
+    border-color: darken($ibew-gold, 10%);
+  }
+}
+
+.ibew-btn--blue {
+  background-color: $ibew-blue;
+  color: $white;
+  border: 1px solid $ibew-blue;
+
+  &:hover {
+    background-color: darken($ibew-blue, 10%);
+    color: $white;
+    border-color: darken($ibew-blue, 10%);
+  }
+}
+
+.ibew-btn--red {
+  background-color: $danger;
+  color: $white;
+  border: 1px solid $danger;
+
+  &:hover {
+    background-color: darken($danger, 10%);
+    color: $white;
+    border-color: darken($danger, 10%);
+  }
+}
+
+// --- Footer Redesign ---
+.ibew-footer {
+  background-color: $ibew-navy;
+  color: #d1d5db;
+  padding: 4rem 2rem;
+  width: 100%;
+  font-family: 'Open Sans', system-ui, -apple-system, sans-serif;
+  border-top: none;
+  text-align: left;
+  line-height: 1.5;
+}
+
+.ibew-footer__container {
+  max-width: 80rem;
+  /* max-w-7xl (1280px) */
+  margin: 0 auto;
+  /* mx-auto */
+  display: grid;
+  gap: 2.5rem;
+  /* gap-10 (40px) */
+  margin-bottom: 3rem;
+  /* mb-12 */
+  grid-template-columns: repeat(4, 1fr);
+  /* grid-cols-4 */
+  align-items: start;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ibew-footer__brand-col {
+  /* div around brand */
+  display: flex;
+  flex-direction: column;
+
+  p {
+    /* text-sm leading-relaxed */
+    font-size: 0.875rem;
+    /* 14px */
+    line-height: 1.625;
+    /* leading-relaxed */
+    color: #d1d5db;
+    /* text-gray-300 */
+    margin-bottom: 0;
+    max-width: none;
+  }
+}
+
+.ibew-footer__brand-logo {
+  /* flex items-center gap-3 mb-4 */
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  /* gap-3 */
+  margin-bottom: 1rem;
+  /* mb-4 */
+  text-decoration: none;
+
+  .ibew-brand-icon {
+    /* w-14 h-14 relative group cursor-pointer */
+    width: 3.5rem;
+    /* 56px */
+    height: 3.5rem;
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+
+    svg {
+      /* w-full h-full transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 */
+      width: 100%;
+      height: 100%;
+      transition: all 0.3s ease-in-out;
+    }
+
+    &:hover svg {
+      transform: scale(1.1) rotate(3deg);
+    }
+  }
+
+  h3 {
+    /* text-white font-bold text-lg */
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.125rem;
+    /* text-lg (18px) */
+    margin: 0;
+    font-family: inherit;
+    /* Use Inter/Sans */
+    line-height: 1.25;
+  }
+}
+
+.ibew-footer h4 {
+  /* text-white font-semibold mb-4 */
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  /* mb-4 */
+  text-transform: none;
+  font-size: 1rem;
+  /* usually headers are base or lg, user snippet had h4 as font-semibold (base likely) */
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.ibew-footer__links {
+  /* space-y-2 text-sm */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  /* space-y-2 */
+  font-size: 0.875rem;
+  /* text-sm */
+
+  li a {
+    /* hover:text-white transition */
+    color: #d1d5db;
+    /* text-gray-300 */
+    text-decoration: none;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  /* Member Portal Highlight */
+  li a[href*="member-portal"] {
+    color: rgb(152, 58, 84);
+
+    &:hover {
+      color: lighten(rgb(152, 58, 84), 10%);
+    }
+  }
+}
+
+.ibew-footer__contact-item {
+  /* flex items-center gap-2 / flex items-start gap-2 */
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  /* text-sm */
+  margin-bottom: 0.75rem;
+  /* space-y-3 approx */
+  line-height: 1.5;
+  color: #d1d5db;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #d1d5db;
+    text-decoration: none;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    /* visual alignment */
+    stroke-width: 2px;
+  }
+}
+
+.ibew-footer__bottom {
+  /* border-t border-gray-800 pt-8 text-center text-sm */
+  border-top: 1px solid #1f2937;
+  /* border-gray-800 */
+  padding-top: 2rem;
+  /* pt-8 */
+  text-align: center;
+  font-size: 0.875rem;
+  /* text-sm */
+  color: #9ca3af;
+  /* text-gray-400 */
+
+  p {
+    margin: 0;
+  }
+}
+
+// --- Dark Mode Styles ---
+html.dark {
+
+  // Top Bar Dark Mode
+  .ibew-top-bar {
+    background: $ibew-navy !important;
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+  }
+
+  // Navigation Dark Mode
+  .ibew-nav {
+    background: rgba($ibew-navy, 0.95) !important;
+    backdrop-filter: blur(8px);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .ibew-brand__title {
+    color: #f3f4f6;
+  }
+
+  .ibew-eyebrow {
+    color: #9ca3af;
+  }
+
+  .ibew-nav__links a {
+    color: #d1d5db;
+
+    &:hover {
+      color: #60a5fa;
+
+      &::before,
+      &::after {
+        border-color: #60a5fa;
+      }
+    }
+  }
+
+  .ibew-mobile-toggle {
+    color: #d1d5db;
+  }
+
+  // Footer Dark Mode
+  .ibew-footer {
+    background-color: $ibew-navy;
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .ibew-footer__bottom {
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+
+  // Theme toggle button styling
+  .js-theme-toggle {
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
 }

@@ -1,6 +1,9 @@
 global-styling:
+  version: 2025-12-12-1
   css:
     theme:
       build/css/main.css: {}
   js:
-    build/js/main.script.js: {}
+    build/js/main.js: {}
+  dependencies:
+    - core/drupal

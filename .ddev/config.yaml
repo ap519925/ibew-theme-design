@@ -156,7 +156,7 @@ default_container_timeout: "240"
 # database container will be unusable. In the global configuration it is also
 # possible to omit ddev-router, but not here.
 
-# performance_mode: "global"
+performance_mode: "mutagen"
 # DDEV offers performance optimization strategies to improve the filesystem
 # performance depending on your host system. Should be configured globally.
 #

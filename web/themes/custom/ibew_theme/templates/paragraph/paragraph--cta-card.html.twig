@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * Template for 'CTA Card' paragraph.
+ */
+#}
+{% set style = content.field_cta_style[0]['#markup']|default('blue')|lower %}
+{% set btn_class = 'ibew-btn-lg ibew-btn--blue' %}
+
+{% if style == 'gold' %}
+  {% set btn_class = 'ibew-btn-lg ibew-btn--gold' %}
+{% elseif style == 'red' %}
+  {% set btn_class = 'ibew-btn-lg ibew-btn--red' %}
+{% endif %}
+
+<div class="ibew-cta-card">
+  <h3>{{ content.field_cta_title }}</h3>
+  <div class="text-gray-300 text-center mb-2">
+     {{ content.field_cta_text }}
+  </div>
+  
+  {% if content.field_cta_link[0] %}
+    <a href="{{ content.field_cta_link[0]['#url'] }}" class="{{ btn_class }}">
+      {{ content.field_cta_link[0]['#title'] }}
+    </a>
+  {% endif %}
+</div>

@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Theme override to display a 'Footer Brand' block.
+ */
+#}
+<a href="/" class="ibew-footer__brand-logo">
+    {% if content.field_footer_logo[0] %}
+      {# Use Drupal default image rendering or custom markup if needed #}
+       {{ content.field_footer_logo }}
+    {% else %}
+       <img src="/themes/custom/ibew_theme/logo.png" alt="Local 90">
+    {% endif %}
+    <span>Local 90</span>
+</a>
+{% if content.field_footer_desc %}
+   <p>{{ content.field_footer_desc[0]['#context'].value }}</p>
+{% endif %}

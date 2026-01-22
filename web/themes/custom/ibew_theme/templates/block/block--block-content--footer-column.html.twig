@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Theme override to display a custom Footer Link Column block.
+ */
+#}
+{% if content.field_footer_column_title %}
+  <h4>{{ content.field_footer_column_title }}</h4>
+{% endif %}
+
+{% if content.field_footer_links %}
+  <ul class="ibew-footer__links">
+    {% for key, item in content.field_footer_links %}
+      {% if key|first != '#' %}
+        <li>
+          <a href="{{ item['#url'] }}" 
+             {% if item['#title'] == 'Member Portal' %}class="highlight"{% endif %}>
+            {{ item['#title'] }}
+          </a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endif %}

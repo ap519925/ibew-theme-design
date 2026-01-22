@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
-  <rect width="200" height="200" fill="#003366"/>
-  <text x="100" y="100" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#ffd700" text-anchor="middle" dominant-baseline="middle">IBEW</text>
-  <circle cx="100" cy="140" r="30" fill="none" stroke="#ffd700" stroke-width="3"/>
-  <path d="M 85 140 L 100 125 L 115 140" fill="none" stroke="#ffd700" stroke-width="3"/>
-</svg>

@@ -1,0 +1,12 @@
+<div class="ibew-stats-container">
+  <div class="row text-center g-4">
+    {% for stat in stats %}
+        <div class="col-md-4">
+          <div class="ibew-stat-item p-4 {{ not loop.first and not loop.last ? 'border-start border-end border-white border-opacity-10' : '' }}">
+            <div class="display-3 fw-bold text-warning mb-2 font-oswald">{{ stat.value }}</div>
+            <div class="text-uppercase tracking-wider fw-semibold text-light small">{{ stat.label }}</div>
+          </div>
+        </div>
+    {% endfor %}
+  </div>
+</div>

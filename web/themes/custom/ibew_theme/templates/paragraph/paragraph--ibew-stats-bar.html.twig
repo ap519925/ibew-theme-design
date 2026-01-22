@@ -1,0 +1,45 @@
+{#
+/**
+ * @file
+ * Template for IBEW Stats Bar Paragraph.
+ */
+#}
+<div class="ibew-stats-container">
+  <div class="row text-center g-4">
+    {# Stat 1 #}
+    <div class="col-md-4">
+      <div class="ibew-stat-item p-4">
+        <div class="display-3 fw-bold text-warning mb-2 font-oswald">
+           {{ content.field_stat_1_num }}
+        </div>
+        <div class="text-uppercase tracking-wider fw-semibold text-light small">
+           {{ content.field_stat_1_label }}
+        </div>
+      </div>
+    </div>
+
+    {# Stat 2 #}
+    <div class="col-md-4">
+      <div class="ibew-stat-item p-4 border-start border-end border-white border-opacity-10">
+        <div class="display-3 fw-bold text-warning mb-2 font-oswald">
+           {{ content.field_stat_2_num }}
+        </div>
+        <div class="text-uppercase tracking-wider fw-semibold text-light small">
+           {{ content.field_stat_2_label }}
+        </div>
+      </div>
+    </div>
+
+    {# Stat 3 #}
+    <div class="col-md-4">
+      <div class="ibew-stat-item p-4">
+        <div class="display-3 fw-bold text-warning mb-2 font-oswald">
+           {{ content.field_stat_3_num }}
+        </div>
+        <div class="text-uppercase tracking-wider fw-semibold text-light small">
+           {{ content.field_stat_3_label }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+{#
+/**
+ * @file
+ * Template for IBEW News Section Block.
+ *
+ * Available variables:
+ * - chip_text: The chip label text.
+ * - chip_color: The chip color variant (blue, gold, green).
+ * - main_title: The main section title.
+ * - show_view_all_link: Whether to show the view all link.
+ * - view_all_url: URL for the view all link.
+ * - news_items: Array of news items with chip, title, and description.
+ */
+#}
+<section id="news" class="ibew-section">
+  <div class="ibew-shell">
+    <div class="ibew-section__header reveal-on-scroll">
+      <div>
+        <span class="ibew-chip ibew-chip--{{ chip_color }}">{{ chip_text }}</span>
+        <h2 class="ibew-section__title">{{ main_title }}</h2>
+      </div>
+      {% if show_view_all_link %}
+        <a href="{{ view_all_url }}" class="ibew-cta ibew-cta--ghost">{{ 'View All News'|t }}</a>
+      {% endif %}
+    </div>
+    <div class="ibew-grid reveal-on-scroll reveal-stagger">
+      {% for item in news_items %}
+        {% if item.title %}
+          <article class="ibew-card">
+            {% if item.chip %}
+              <div class="ibew-card__header">
+                <span class="ibew-chip">{{ item.chip }}</span>
+              </div>
+            {% endif %}
+            <h3 class="ibew-card__title">{{ item.title }}</h3>
+            {% if item.description %}
+              <p>{{ item.description }}</p>
+            {% endif %}
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

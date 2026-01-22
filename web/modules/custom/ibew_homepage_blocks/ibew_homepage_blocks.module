@@ -1,0 +1,86 @@
+<?php
+
+/**
+ * @file
+ * Implementation of hooks for the IBEW Homepage Blocks module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_page_attachments_alter().
+ *
+ * Prevents the frontend theme's global styling from leaking into component previews
+ * or admin pages if it was accidentally attached.
+ */
+function ibew_homepage_blocks_page_attachments_alter(array &$attachments) {
+  $active_theme = \Drupal::theme()->getActiveTheme()->getName();
+  $admin_theme = \Drupal::config('system.theme')->get('admin');
+
+  // If we are using the admin theme (likely Gin/Claro), verify no IBEW frontend CSS is leaking.
+  // This covers cases where modules or Layout Builder might pull in frontend libraries.
+  if ($active_theme === $admin_theme || in_array($active_theme, ['gin', 'claro', 'seven'])) {
+    if (isset($attachments['#attached']['library'])) {
+      $frontend_lib = 'ibew_theme/global-styling';
+      $search = array_search($frontend_lib, $attachments['#attached']['library']);
+      if ($search !== FALSE) {
+        unset($attachments['#attached']['library'][$search]);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function ibew_homepage_blocks_theme() {
+  return [
+    'ibew_hero_slider' => [
+      'variables' => [
+        'slides' => [],
+      ],
+    ],
+    'ibew_hero_content' => [
+      'variables' => [
+        'eyebrow' => NULL,
+        'title' => NULL,
+        'description' => NULL,
+        'links' => [],
+      ],
+    ],
+    'ibew_about_section' => [
+      'variables' => [
+        'chip_text' => NULL,
+        'chip_color' => NULL,
+        'main_title' => NULL,
+        'lede_text' => NULL,
+        'cards' => [],
+      ],
+    ],
+    'ibew_stats_section' => [
+      'variables' => [
+        'stats' => [],
+      ],
+    ],
+    'ibew_news_section' => [
+      'variables' => [
+        'chip_text' => NULL,
+        'chip_color' => NULL,
+        'main_title' => NULL,
+        'show_view_all_link' => FALSE,
+        'view_all_url' => NULL,
+        'news_items' => [],
+      ],
+    ],
+    'ibew_events_section' => [
+      'variables' => [
+        'chip_text' => NULL,
+        'chip_color' => NULL,
+        'main_title' => NULL,
+        'show_view_all_link' => FALSE,
+        'view_all_url' => NULL,
+        'events' => [],
+      ],
+    ],
+  ];
+}

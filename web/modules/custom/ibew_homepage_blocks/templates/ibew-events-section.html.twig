@@ -1,0 +1,71 @@
+{#
+/**
+ * @file
+ * Template for IBEW Events Section Block.
+ *
+ * Available variables:
+ * - chip_text: The chip label text.
+ * - chip_color: The chip color variant (blue, gold, green).
+ * - main_title: The main section title.
+ * - show_view_all_link: Whether to show the view all link.
+ * - view_all_url: URL for the view all link.
+ * - events: Array of event items.
+ */
+#}
+<section id="events" class="ibew-section ibew-section--alt">
+  <div class="ibew-shell">
+    <div class="ibew-section__header reveal-on-scroll">
+      <div>
+        <span class="ibew-chip ibew-chip--{{ chip_color }}">{{ chip_text }}</span>
+        <h2 class="ibew-section__title">{{ main_title }}</h2>
+      </div>
+      {% if show_view_all_link %}
+        <a href="{{ view_all_url }}" class="ibew-cta ibew-cta--ghost">{{ 'Full Calendar'|t }}</a>
+      {% endif %}
+    </div>
+    <div class="ibew-grid reveal-on-scroll reveal-stagger ibew-events-grid">
+      {% for event in events %}
+        {% if event.title %}
+          <article class="ibew-event-card ibew-event-card--{{ event.color_variant }}">
+            <div class="ibew-event-card__date">
+              <span class="day">{{ event.day }}</span>
+              <span class="month">{{ event.month }}</span>
+            </div>
+            <div class="ibew-event-card__body">
+              <h3 class="ibew-event-card__title">{{ event.title }}</h3>
+              {% if event.time or event.location %}
+                <div class="ibew-event-card__meta">
+                  {% if event.time %}
+                    <div>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+                      <span>{{ event.time }}</span>
+                    </div>
+                  {% endif %}
+                  {% if event.location %}
+                    <div>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                      <span>{{ event.location }}</span>
+                    </div>
+                  {% endif %}
+                </div>
+              {% endif %}
+              {% if event.description %}
+                <p class="ibew-event-card__desc">{{ event.description }}</p>
+              {% endif %}
+              {% if event.registration_count or event.link_url %}
+                <div class="ibew-event-card__footer">
+                  {% if event.registration_count %}
+                    <span class="text-muted small">{{ event.registration_count }}</span>
+                  {% endif %}
+                  {% if event.link_url %}
+                    <a href="{{ event.link_url }}" class="ibew-event-card__link">{{ event.link_text|default('Register') }} &rarr;</a>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

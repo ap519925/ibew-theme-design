@@ -3,20 +3,27 @@ type: theme
 description: 'A custom theme for IBEW based on Radix.'
 core_version_requirement: ^10 || ^11
 base theme: radix
-libraries:
-  - ibew_theme/global-styling
+
 regions:
+  top_bar: 'Top Bar'
   header: Header
-  homepage_hero: 'Homepage Hero'
+  homepage_hero: 'Homepage Hero (Background)'
+  homepage_hero_content: 'Homepage Hero Content (Text)'
   homepage_about: 'Homepage About'
+  homepage_stats: 'Homepage Stats'
   homepage_news: 'Homepage News'
   homepage_events: 'Homepage Events'
+  homepage_contractors: 'Homepage Contractors'
   homepage_members: 'Homepage Members'
   homepage_contact: 'Homepage Contact'
   content: Content
   sidebar_first: 'Sidebar First'
   sidebar_second: 'Sidebar Second'
-  footer: Footer
+  footer_col_1: 'Footer Col 1 (Brand)'
+  footer_col_2: 'Footer Col 2 (Quick Links)'
+  footer_col_3: 'Footer Col 3 (Members)'
+  footer_col_4: 'Footer Col 4 (Contact)'
+  footer: 'Footer Bottom Bar'
 components:
   namespaces:
     ibew_theme: components

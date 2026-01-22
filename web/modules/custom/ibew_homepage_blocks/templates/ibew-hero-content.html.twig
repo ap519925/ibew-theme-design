@@ -1,0 +1,21 @@
+<div class="ibew-hero__lead">
+  {% if eyebrow %}
+    <span class="ibew-pill">{{ eyebrow }}</span>
+  {% endif %}
+  
+  {% if title %}
+    <h1>{{ title }}</h1>
+  {% endif %}
+  
+  {% if description %}
+    <p>{{ description }}</p>
+  {% endif %}
+  
+  <div class="d-flex gap-3 flex-wrap">
+    {% for link in links %}
+      {% if link.title and link.url %}
+        <a class="ibew-cta ibew-cta--{{ link.style }}" href="{{ link.url }}">{{ link.title }}</a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>

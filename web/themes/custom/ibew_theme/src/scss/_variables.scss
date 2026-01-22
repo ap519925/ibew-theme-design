@@ -1,5 +1,20 @@
-// Override Bootstrap variables here
-$primary: #1d4ed8; // IBEW blue
-$secondary: #f59e0b; // IBEW gold
-$font-family-sans-serif: 'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+// IBEW Brand Colors
+$ibew-navy: #002855; // Deep Official Navy
+$ibew-blue: #005696; // Brighter Primary Blue
+$ibew-gold: #FFB81C; // Standard Union Gold (High Vis)
+$ibew-gold-metallic: #CFA655; // Premium accent
+
+// Bootstrap Overrides
+$primary: $ibew-navy;
+$secondary: $ibew-gold;
+$danger: #D6001C;
+$info: #FFFFFF;
+$light: #F3F4F6;
+$dark: #111827;
+
+// Typography
+$font-family-sans-serif: 'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 $ibew-heading-font: 'Oswald', 'Open Sans', Arial, sans-serif;
+
+// Layout
+$container-max-width: 1280px;

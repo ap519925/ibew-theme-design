@@ -1,0 +1,13 @@
+name: 'IBEW Section Header'
+status: stable
+props:
+    type: object
+    properties:
+        title:
+            type: string
+            title: Title
+        alignment:
+            type: string
+            enum:
+                - left
+                - center

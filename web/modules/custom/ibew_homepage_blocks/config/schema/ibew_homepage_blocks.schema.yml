@@ -1,0 +1,130 @@
+block.settings.ibew_top_bar:
+  type: block_settings
+  label: 'IBEW Top Bar Configuration'
+  mapping:
+    address:
+      type: string
+      label: 'Address'
+    phone:
+      type: string
+      label: 'Phone'
+    email:
+      type: email
+      label: 'Email'
+    join_link:
+      type: string
+      label: 'Join Link URL'
+    join_text:
+      type: string
+      label: 'Join Link Text'
+    twitter_url:
+      type: string
+      label: 'Twitter URL'
+    facebook_url:
+      type: string
+      label: 'Facebook URL'
+
+block.settings.ibew_hero_slider:
+  type: block_settings
+  label: 'IBEW Hero Slider Configuration'
+  mapping:
+    slide_1_image:
+      type: sequence
+      label: 'Slide 1 Image'
+      sequence:
+        type: integer
+        label: 'File ID'
+    slide_2_image:
+      type: sequence
+      label: 'Slide 2 Image'
+      sequence:
+        type: integer
+        label: 'File ID'
+    slide_3_image:
+      type: sequence
+      label: 'Slide 3 Image'
+      sequence:
+        type: integer
+        label: 'File ID'
+
+block.settings.ibew_hero_content:
+  type: block_settings
+  label: 'IBEW Hero Content Configuration'
+  mapping:
+    eyebrow:
+      type: string
+      label: 'Eyebrow Text'
+    title:
+      type: string
+      label: 'Main Title'
+    description:
+      type: text
+      label: 'Description'
+    link_1_title:
+      type: string
+      label: 'Link 1 Title'
+    link_1_url:
+      type: string
+      label: 'Link 1 URL'
+    link_2_title:
+      type: string
+      label: 'Link 2 Title'
+    link_2_url:
+      type: string
+      label: 'Link 2 URL'
+    link_3_title:
+      type: string
+      label: 'Link 3 Title'
+    link_3_url:
+      type: string
+      label: 'Link 3 URL'
+
+block.settings.ibew_about_section:
+  type: block_settings
+  label: 'IBEW About Section Configuration'
+  mapping:
+    chip_text:
+      type: string
+      label: 'Chip Text'
+    chip_color:
+      type: string
+      label: 'Chip Color Class'
+    main_title:
+      type: string
+      label: 'Main Title'
+    lede_text:
+      type: text
+      label: 'Lede Text'
+    card_1_title:
+      type: string
+    card_1_items:
+      type: text
+    card_2_title:
+      type: string
+    card_2_items:
+      type: text
+    card_3_title:
+      type: string
+    card_3_items:
+      type: text
+
+block.settings.ibew_stats_section:
+  type: block_settings
+  label: 'IBEW Stats Configuration'
+  mapping:
+    stat_1_value:
+      type: string
+    stat_1_label:
+      type: string
+    stat_2_value:
+      type: string
+    stat_2_label:
+      type: string
+    stat_3_value:
+      type: string
+    stat_3_label:
+      type: string
+    stat_4_value:
+      type: string
+    stat_4_label:
+      type: string

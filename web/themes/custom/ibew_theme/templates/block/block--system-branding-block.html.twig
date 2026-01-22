@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * Theme override for a branding block.
+ */
+#}
+<div class="ibew-brand">
+  <div class="ibew-brand__mark">
+    {% if site_logo %}
+      <img src="{{ site_logo }}" alt="{{ 'Home'|t }}" />
+    {% else %}
+      90
+    {% endif %}
+  </div>
+  <div class="ibew-brand__text">
+    {% if site_slogan %}
+      <span class="ibew-eyebrow">{{ site_slogan }}</span>
+    {% else %}
+      <span class="ibew-eyebrow">{{ 'The New Haven Electricians'|t }}</span>
+    {% endif %}
+    
+    {% if site_name %}
+      <span class="ibew-brand__title">{{ site_name }}</span>
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,10 @@
+{#
+/**
+ * @file
+ * Theme override to strip wrappers from the Main Navigation block in the header.
+ */
+#}
+{% if label %}
+  <h4>{{ label }}</h4>
+{% endif %}
+{{ content }}

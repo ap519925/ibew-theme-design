@@ -1,0 +1,17 @@
+{#
+/**
+ * @file
+ * Template for 'CTA Section' paragraph. Wraps cards in the CTA grid.
+ */
+#}
+<section class="ibew-cta-section">
+  <div class="ibew-shell ibew-cta-container max-w-7xl mx-auto px-6">
+    <h2 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 0.5rem; line-height: 1.1;">
+      {{ content.field_cta_sec_title }}
+    </h2>
+    
+    <div class="ibew-cta-grid">
+      {{ content.field_cta_items }}
+    </div>
+  </div>
+</section>

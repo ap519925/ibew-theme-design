@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * Template for the IBEW Hero Slider block.
+ *
+ * Available variables:
+ * - slides: Array of slide items, each having a 'url'.
+ */
+#}
+<div id="ibewHeroSplide" class="ibew-hero__slider splide w-100" style="height: 100vh;" aria-label="{{ 'Hero Background Slider'|t }}">
+  <div class="splide__track w-100" style="height: 100vh;">
+    <ul class="splide__list w-100" style="height: 100vh;">
+      {% for slide in slides %}
+        <li class="splide__slide w-100" style="height: 100vh;">
+           <div class="ibew-slide-bg" style="height: 100%; width: 100%; background: linear-gradient(rgba(11, 18, 34, 0.4), rgba(11, 18, 34, 0.6)), url('{{ slide.url }}') center/cover no-repeat;"></div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="ibew-hero__overlay"></div>
+</div>

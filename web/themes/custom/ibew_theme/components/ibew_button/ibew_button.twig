@@ -1,0 +1,11 @@
+<a href="{{ url }}" class="ibew-btn-lg ibew-btn--{{ style|default('gold') }} gap-2 inline-flex items-center justify-center">
+    {% if icon %}
+        {# Simple icon mapping or usage #}
+        {% if icon == "user" %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg> 
+        {% elseif icon == "contractor" %}
+             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5z"/></svg>
+        {% endif %}
+    {% endif %}
+    {{ text }}
+</a>

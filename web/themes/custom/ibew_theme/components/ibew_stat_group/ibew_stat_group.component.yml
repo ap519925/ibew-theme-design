@@ -1,0 +1,17 @@
+name: 'IBEW Stats Group'
+status: stable
+props:
+    type: object
+    properties:
+        stats:
+            type: array
+            title: Statistics
+            items:
+                type: object
+                properties:
+                    value:
+                        type: string
+                        title: 'Value (e.g. 100+)'
+                    label:
+                        type: string
+                        title: Label

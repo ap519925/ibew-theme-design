@@ -1,0 +1,8 @@
+name: 'IBEW Canvas Helper'
+type: module
+description: 'Integrates Drupal Canvas visual editor with IBEW pages.'
+core_version_requirement: ^10 || ^11
+package: Custom
+dependencies:
+  - canvas
+  - node

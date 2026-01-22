@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Template for IBEW About Section Paragraph.
+ */
+#}
+<div class="row align-items-center gy-5">
+  <div class="col-lg-6">
+    <div class="ibew-about-content pe-lg-5">
+      <h2 class="display-5 fw-bold mb-4 font-oswald text-uppercase">
+        {{ content.field_about_title }}
+      </h2>
+      <div class="lead text-muted mb-4">
+        {{ content.field_about_body }}
+      </div>
+      
+      {# Optional: Add a 'Read More' link if we had a dedicated field, or hardcode generic #}
+      <a href="/about" class="ibew-btn-lg ibew-btn--blue mt-2">
+        Learn More About Us
+      </a>
+    </div>
+  </div>
+  
+  <div class="col-lg-6">
+    <div class="ibew-image-wrapper position-relative rounded-4 overflow-hidden shadow-lg">
+       {{ content.field_about_image }}
+       <div class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-10 mix-blend-overlay"></div>
+    </div>
+  </div>
+</div>

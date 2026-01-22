@@ -1,0 +1,42 @@
+{#
+/**
+ * @file
+ * Teaser template for News Articles in Card Format.
+ */
+#}
+<article class="ibew-card h-100 p-0 overflow-hidden d-flex flex-column border-0 shadow-sm">
+  {# Image Top #}
+  {% if content.field_news_image %}
+    <div class="position-relative" style="height: 240px; overflow: hidden;">
+       {{ content.field_news_image }}
+       <div class="position-absolute top-0 start-0 m-3 px-3 py-1 bg-primary text-white text-uppercase fw-bold rounded-pill small shadow">
+          News
+       </div>
+    </div>
+  {% else %}
+    <div class="bg-secondary" style="height: 240px;"></div>
+  {% endif %}
+
+  <div class="p-4 d-flex flex-column flex-grow-1 bg-white dark:bg-slate-800">
+    {# Date Badge embedded in text or separate #}
+    <div class="text-muted small mb-2 fw-semibold d-flex align-items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/></svg> 
+      {{ content.field_news_date }}
+    </div>
+
+    <h3 class="h5 fw-bold mb-3 font-oswald text-dark">
+      <a href="{{ url }}" class="text-decoration-none text-reset stretched-link">
+        {{ label }}
+      </a>
+    </h3>
+
+    <div class="card-text text-muted mb-4 flex-grow-1">
+      {{ content.body|render|striptags|slice(0, 120) ~ '...' }}
+    </div>
+
+    <div class="mt-auto d-flex align-items-center text-primary fw-bold">
+      Read More 
+      <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
+    </div>
+  </div>
+</article>

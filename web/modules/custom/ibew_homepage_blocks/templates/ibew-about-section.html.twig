@@ -1,0 +1,31 @@
+<section id="about" class="ibew-section">
+  <div class="ibew-shell">
+    <div class="ibew-section__header">
+      <div>
+        {% if chip_text %}
+          <span class="ibew-chip {{ chip_color }}">{{ chip_text }}</span>
+        {% endif %}
+        {% if main_title %}
+          <h2 class="ibew-section__title">{{ main_title }}</h2>
+        {% endif %}
+        {% if lede_text %}
+          <p class="ibew-section__lede">{{ lede_text }}</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="ibew-grid ibew-grid--feature">
+      {% for card in cards %}
+        <div class="ibew-card">
+          <h3 class="ibew-card__title">{{ card.title }}</h3>
+          {% if card.items %}
+            <ul class="ibew-list">
+              {% for item in card.items %}
+                <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

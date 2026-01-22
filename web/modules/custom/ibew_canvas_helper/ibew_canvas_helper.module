@@ -1,0 +1,59 @@
+<?php
+
+use Drupal\Core\Url;
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_entity_operation().
+ */
+function ibew_canvas_helper_entity_operation(EntityInterface $entity) {
+  $operations = [];
+
+  // Check if it's a node and has the canvas field
+  if ($entity->getEntityTypeId() === 'node' && $entity->hasField('field_content_canvas')) {
+    
+    // Check permissions (basic check, rely on route access for enforcement)
+    // Only show if the user can update the entity
+    if ($entity->access('update')) {
+      $operations['canvas_editor'] = [
+        'title' => t('Visual Editor'),
+        'weight' => 50,
+        'url' => Url::fromRoute('canvas.boot.entity', [
+          'entity_type' => 'node',
+          'entity' => $entity->id(),
+        ]),
+      ];
+    }
+  }
+
+  return $operations;
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function ibew_canvas_helper_menu_local_tasks_alter(&$data, $route_name, $refinable_cacheability) {
+  // Add a "Visual Editor" tab to node view/edit pages
+  if (in_array($route_name, ['entity.node.canonical', 'entity.node.edit_form'])) {
+    
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if ($node && $node instanceof \Drupal\node\NodeInterface && $node->hasField('field_content_canvas')) {
+      
+      $data['tabs'][0]['ibew_canvas_helper.visual_editor'] = [
+        '#theme' => 'menu_local_task',
+        '#link' => [
+          'title' => t('Visual Editor'),
+          'url' => Url::fromRoute('canvas.boot.entity', [
+            'entity_type' => 'node',
+            'entity' => $node->id(),
+          ]),
+          'localized_options' => [],
+        ],
+        '#access' => $node->access('update'),
+        '#weight' => 20,
+      ];
+      
+      $refinable_cacheability->addCacheableDependency($node);
+    }
+  }
+}

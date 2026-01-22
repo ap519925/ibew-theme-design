@@ -1,0 +1,23 @@
+name: 'IBEW Card'
+status: stable
+props:
+    type: object
+    properties:
+        title:
+            type: string
+            title: Title
+        description:
+            type: string
+            title: Description
+        link_text:
+            type: string
+            title: 'Link Text'
+        link_url:
+            type: string
+            title: 'Link URL'
+        style:
+            type: string
+            title: Style
+            enum:
+                - default
+                - cta

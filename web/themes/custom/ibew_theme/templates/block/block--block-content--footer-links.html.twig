@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * Theme override to display a 'Footer Links' block.
+ *
+ * Available variables:
+ * - content: The content of this block.
+ * - label: The block label (if visible).
+ */
+#}
+{% if label %}
+  <h4>{{ label }}</h4>
+{% endif %}
+
+<ul class="ibew-footer__links">
+  {% for item in content.field_footer_links %}
+    {% if item['#url'] %}
+      <li><a href="{{ item['#url'] }}">{{ item['#title'] }}</a></li>
+    {% endif %}
+  {% endfor %}
+</ul>

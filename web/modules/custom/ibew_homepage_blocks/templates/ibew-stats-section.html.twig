@@ -1,0 +1,12 @@
+<section class="ibew-section ibew-section--dark">
+  <div class="ibew-shell">
+    <div class="ibew-stats-grid">
+      {% for stat in stats %}
+        <div class="ibew-stat">
+          <span class="ibew-stat__value">{{ stat.value }}</span>
+          <span class="ibew-stat__label">{{ stat.label }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

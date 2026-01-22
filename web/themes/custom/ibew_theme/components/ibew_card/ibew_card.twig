@@ -1,0 +1,7 @@
+<div class="ibew-cta-card">
+  <h3 class="font-oswald text-2xl font-bold mb-2">{{ title }}</h3>
+  <p class="mb-6 opacity-90">{{ description }}</p>
+  {% if link_url %}
+      <a href="{{ link_url }}" class="ibew-btn-lg ibew-btn--{{ style == 'cta' ? 'gold' : 'blue' }}">{{ link_text|default('Read More') }}</a>
+  {% endif %}
+</div>

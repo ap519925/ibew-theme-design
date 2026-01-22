@@ -1,0 +1,25 @@
+name: 'IBEW Button'
+status: stable
+props:
+    type: object
+    properties:
+        text:
+            type: string
+            title: 'Button Text'
+        url:
+            type: string
+            title: 'Link URL'
+        style:
+            type: string
+            title: Style
+            enum:
+                - gold
+                - blue
+                - red
+                - outline
+        icon:
+            type: string
+            title: 'Icon Name (e.g. user, arrow)'
+    required:
+        - text
+        - url

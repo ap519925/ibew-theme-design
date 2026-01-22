@@ -1,0 +1,28 @@
+name: 'IBEW Hero'
+status: stable
+props:
+    type: object
+    properties:
+        slides:
+            type: array
+            title: Slides
+            items:
+                type: object
+                properties:
+                    image_url:
+                        type: string
+                        title: 'Image URL'
+                    title:
+                        type: string
+                        title: Title
+        overlay_title:
+            type: string
+            title: 'Overlay Title'
+        overlay_text:
+            type: string
+            title: 'Overlay Text'
+        actions:
+            type: array
+            title: Buttons
+            items:
+                type: string

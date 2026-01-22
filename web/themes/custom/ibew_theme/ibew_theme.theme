@@ -12,7 +12,13 @@ use Drupal\Core\Form\FormStateInterface;
  */
 function ibew_theme_preprocess_page(&$variables) {
   // Add custom variables or logic here
+  // Only attach global styling if we are NOT on an admin route.
+  if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
+    $variables['#attached']['library'][] = 'ibew_theme/global-styling';
+  }
 }
+
+
 
 /**
  * Implements hook_form_alter().
@@ -35,25 +41,41 @@ function ibew_theme_theme_suggestions_page_alter(array &$suggestions, array $var
  * they inherit the card styling from the theme's CSS.
  */
 function ibew_theme_preprocess_block(array &$variables) {
-  $front_regions = [
+  // Avoid adding card styles to the main page content block prevent layout issues.
+  if (isset($variables['plugin_id']) && $variables['plugin_id'] === 'system_main_block') {
+    return;
+  }
+  
+  // Also avoid adding card styles to homepage structural blocks, as they often contain their own grids.
+  // We only want these classes on "widget" style blocks (like sidebars).
+  $homepage_regions = [
+    'header',
     'homepage_hero',
     'homepage_about',
     'homepage_news',
     'homepage_events',
     'homepage_members',
     'homepage_contact',
+    'footer'
   ];
-
-  $region = $variables['elements']['#configuration']['region'] ?? '';
-
-  if (!in_array($region, $front_regions, TRUE)) {
-    return;
+  if (isset($variables['elements']['#id'])) {
+      $block = \Drupal\block\Entity\Block::load($variables['elements']['#id']);
+      if ($block && in_array($block->getRegion(), $homepage_regions)) {
+          return;
+      }
   }
 
-  $variables['attributes']->addClass([
-    'ibew-card',
-    'ibew-ghost-border',
-  ]);
+  // Safely add classes ensuring attributes is an object.
+  if (isset($variables['attributes']) && $variables['attributes'] instanceof \Drupal\Core\Template\Attribute) {
+    $variables['attributes']->addClass(['ibew-card', 'ibew-ghost-border']);
+  }
+  elseif (isset($variables['attributes']) && is_array($variables['attributes'])) {
+    if (empty($variables['attributes']['class'])) {
+      $variables['attributes']['class'] = [];
+    }
+    $variables['attributes']['class'][] = 'ibew-card';
+    $variables['attributes']['class'][] = 'ibew-ghost-border';
+  }
 }
 
 /**
@@ -64,11 +86,6 @@ function ibew_theme_preprocess_block(array &$variables) {
  */
 function ibew_theme_preprocess_region(array &$variables) {
   $layout_classes = [
-    'homepage_hero' => ['ibew-grid'],
-    'homepage_about' => ['ibew-grid', 'ibew-grid--feature'],
-    'homepage_news' => ['ibew-grid'],
-    'homepage_events' => ['ibew-grid'],
-    'homepage_members' => ['ibew-grid'],
     'homepage_contact' => ['ibew-row'],
   ];
 
@@ -76,5 +93,16 @@ function ibew_theme_preprocess_region(array &$variables) {
     return;
   }
 
-  $variables['attributes']->addClass($layout_classes[$variables['region']]);
+  // Safely add classes ensuring attributes is an object.
+  if (isset($variables['attributes']) && $variables['attributes'] instanceof \Drupal\Core\Template\Attribute) {
+    $variables['attributes']->addClass($layout_classes[$variables['region']]);
+  }
+  elseif (isset($variables['attributes']) && is_array($variables['attributes'])) {
+    if (empty($variables['attributes']['class'])) {
+      $variables['attributes']['class'] = [];
+    }
+    foreach ($layout_classes[$variables['region']] as $class) {
+      $variables['attributes']['class'][] = $class;
+    }
+  }
 }
