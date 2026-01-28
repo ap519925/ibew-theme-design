@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * Theme implementation for Basic 'Page' content type.
+ */
+#}
+<article{{ attributes.addClass('ibew-basic-page', 'py-5') }}>
+  <div class="ibew-shell">
+    
+    <header class="mb-5 pb-4 border-bottom">
+       <h1 class="display-4 fw-bold font-oswald text-dark mb-0">{{ label }}</h1>
+    </header>
+
+    <div class="row">
+       <div class="col-lg-12">
+          <div class="content-body lead text-dark">
+             {{ content.body }}
+          </div>
+          
+          <div class="mt-4">
+             {{ content|without('body') }}
+          </div>
+       </div>
+    </div>
+
+  </div>
+</article>

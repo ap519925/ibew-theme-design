@@ -7,6 +7,7 @@
 <a id="main-content" tabindex="-1"></a>
 
 <div class="ibew-page bg-gray-100 text-gray-900 min-h-screen">
+  <!-- ANTI-GRAVITY-DEBUG: PAGE-FRONT-ACTIVE -->
   <div class="ibew-header-wrapper">
     {# Top Utility Bar (Dark) #}
     <div class="ibew-top-bar" style="background-color: #1f2937; color: white;">
@@ -47,15 +48,19 @@
         </a>
 
         {# Desktop Links #}
-        <div class="d-none d-lg-flex align-items-center flex-grow-1 justify-content-center">
-            <nav class="ibew-nav__links">
-              <a href="/about">{{ 'About'|t }}</a>
-              <a href="/events">{{ 'Events'|t }}</a>
-              <a href="/training">{{ 'Training'|t }}</a>
-              <a href="/contractors">{{ 'Contractors'|t }}</a>
-              <a href="/members">{{ 'Members'|t }}</a>
-              <a href="/resources">{{ 'Resources'|t }}</a>
-            </nav>
+        <div class="flex-grow-1 d-flex justify-content-center">
+            {% if page.primary_menu %}
+                {{ page.primary_menu }}
+            {% else %}
+                <nav class="ibew-nav__links">
+                  <a href="/about">{{ 'About'|t }}</a>
+                  <a href="/events">{{ 'Events'|t }}</a>
+                  <a href="/training">{{ 'Training'|t }}</a>
+                  <a href="/contractors">{{ 'Contractors'|t }}</a>
+                  <a href="/members">{{ 'Members'|t }}</a>
+                  <a href="/resources">{{ 'Resources'|t }}</a>
+                </nav>
+            {% endif %}
         </div>
 
         <div class="d-none d-lg-block">
@@ -124,42 +129,74 @@
     {# Check if the current node has Canvas content populated #}
     {% set has_canvas = node.field_content_canvas and not node.field_content_canvas.isEmpty() %}
 
-    {% if has_canvas %}
-      {# --- Canvas Mode: Full Width Content Control --- #}
-      <div class="ibew-canvas-layout w-full min-h-screen">
-          {{ page.content }}
-      </div>
-    {% else %}
       {# --- Default Mode: Hardcoded Theme Sections --- #}
 
       {# 1. About Section (New placement above News) #}
       {% if page.homepage_about %}
-        <section id="about" class="ibew-section py-20 bg-white text-gray-900">
-          <div class="ibew-shell max-w-7xl mx-auto px-6">
-            <div class="ibew-region ibew-region--about">
-              {{ page.homepage_about }}
-            </div>
+        <section id="about" class="ibew-section py-20 bg-white text-gray-900 w-100">
+          <div class="ibew-region ibew-region--about w-100">
+            {{ page.homepage_about }}
           </div>
         </section>
       {% endif %}
 
-      {# 2. News Section #}
-      {% if page.homepage_news %}
-        <section id="news" class="ibew-section py-20 bg-gray-50">
-          <div class="ibew-shell max-w-7xl mx-auto px-6">
-            <div class="ibew-region ibew-region--news">
-              {{ page.homepage_news }}
-            </div>
-          </div>
-        </section>
-      {% endif %}
+      {# 2. Combined News & Events Section #}
+      {% if page.homepage_news or page.homepage_events %}
+        <section id="news-events" class="ibew-section py-20 bg-gray-50">
+          {# We keep a container for this wrapper because the grid itself is defined HERE, not in a block #}
+          <div class="container">
+            <div class="row g-5">
+              
+               {# Left Column: Recent News #}
+              <div class="col-lg-7">
+                <div class="d-flex justify-content-between align-items-end mb-4">
+                   <h2 class="display-6 fw-bold font-oswald text-uppercase text-dark mb-0">Latest News</h2>
+                   <a href="/news" class="text-decoration-none fw-bold small text-primary">View All &rarr;</a>
+                </div>
+                
+                <div class="ibew-region ibew-region--news">
+                  {{ page.homepage_news }}
+                </div>
+              </div>
 
-      {# 3. Events Section (Split into new section) #}
-      {% if page.homepage_events %}
-        <section id="events" class="ibew-section py-20 bg-white">
-          <div class="ibew-shell max-w-7xl mx-auto px-6">
-            <div class="ibew-region ibew-region--events">
-              {{ page.homepage_events }}
+              {# Right Column: Events & Training #}
+              <div class="col-lg-5">
+                 <div class="d-flex justify-content-between align-items-end mb-4">
+                   <h2 class="display-6 fw-bold font-oswald text-uppercase text-dark mb-0">Events & Training</h2>
+                   <a href="/events" class="text-decoration-none fw-bold small text-primary">Calendar &rarr;</a>
+                </div>
+
+                {# Optional "For Contractors" Block (Hardcoded for now based on image, unless dynamic region available) #}
+                <div class="ibew-card bg-primary-subtle border-0 p-4 mb-4 rounded-4 position-relative overflow-hidden">
+                   <div class="position-relative z-10">
+                      <div class="d-flex align-items-center gap-3 mb-3">
+                         <div class="bg-primary text-white rounded p-2">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5z"/></svg> 
+                         </div>
+                         <h3 class="h5 fw-bold font-oswald mb-0 text-dark">FOR CONTRACTORS</h3>
+                      </div>
+                      <p class="small text-muted mb-4">Connect with skilled IBEW professionals and submit your project requirements.</p>
+                      
+                      <div class="d-grid gap-2">
+                         <a href="/contractors" class="btn btn-light shadow-sm text-start fw-bold d-flex justify-content-between align-items-center">
+                            Find IBEW Contractors
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
+                         </a>
+                         <a href="/projects" class="btn btn-light shadow-sm text-start fw-bold d-flex justify-content-between align-items-center">
+                            Submit Project Request
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
+                         </a>
+                      </div>
+                   </div>
+                   <!-- Decor -->
+                   <div class="position-absolute top-0 end-0 rounded-circle bg-white opacity-25" style="width: 150px; height: 150px; margin-top: -50px; margin-right: -50px;"></div>
+                </div>
+
+                <div class="ibew-region ibew-region--events">
+                  {{ page.homepage_events }}
+                </div>
+              </div>
+
             </div>
           </div>
         </section>
@@ -167,13 +204,12 @@
 
       {# 4. Stats / Members Section #}
       {% if page.homepage_stats or page.homepage_members %}
-        <section id="stats" class="ibew-section py-20 bg-gray-900 text-white relative overflow-hidden">
-          <div class="ibew-shell max-w-7xl mx-auto px-6 relative z-10">
-            <div class="ibew-region ibew-region--stats">
+        <section id="stats" class="ibew-section py-20 bg-gray-900 text-white relative overflow-hidden w-100">
+           {# Full width region, no shell #}
+            <div class="ibew-region ibew-region--stats w-100">
                {{ page.homepage_stats }}
                {{ page.homepage_members }}
             </div>
-          </div>
           {# Background accent for stats #}
           <div class="absolute inset-0 bg-blue-900/20 pointer-events-none"></div>
         </section>
@@ -181,48 +217,16 @@
 
       {# 5. Contact / CTA #}
       {% if page.homepage_contact %}
-        <section id="contact" class="ibew-section py-16 bg-gray-50">
-          <div class="ibew-shell max-w-7xl mx-auto px-6">
-            <div class="ibew-region ibew-region--contact">
+        <section id="contact" class="ibew-section py-16 bg-gray-50 w-100">
+           <div class="ibew-region ibew-region--contact w-100">
               {{ page.homepage_contact }}
-            </div>
-          </div>
-        </section>
-      {% endif %}
-
-      {% if page.content %}
-        <section class="ibew-section py-16">
-          <div class="ibew-shell max-w-7xl mx-auto px-6">
-            {% if page.sidebar_first or page.sidebar_second %}
-              <div class="ibew-row">
-                {% if page.sidebar_first %}
-                  <aside class="ibew-card ibew-ghost-border">
-                    {{ page.sidebar_first }}
-                  </aside>
-                {% endif %}
-
-                <div class="ibew-card ibew-ghost-border">
-                  {{ page.content }}
-                </div>
-
-                {% if page.sidebar_second %}
-                  <aside class="ibew-card ibew-ghost-border">
-                    {{ page.sidebar_second }}
-                  </aside>
-                {% endif %}
-              </div>
-            {% else %}
-              <div class="ibew-card ibew-ghost-border">
-                {{ page.content }}
-              </div>
-            {% endif %}
-          </div>
+           </div>
         </section>
       {% endif %}
 
       {# --- New CTA Section --- #}
-      <section class="ibew-cta-section">
-        <div class="ibew-shell ibew-cta-container max-w-7xl mx-auto px-6">
+      <section class="ibew-cta-section w-100">
+        <div class="container text-center">
           <h2 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 0.5rem; line-height: 1.1;">
             READY TO BUILD YOUR FUTURE?
           </h2>
@@ -251,7 +255,7 @@
           </div>
         </div>
       </section>
-    {% endif %}
+      </section>
   </main>
 
   {# --- Redesigned Footer --- #}
@@ -290,7 +294,7 @@
         <!-- Col 3: Members -->
         <div>
           {% if page.footer_col_3 %}
-             {{ page.footer_col_3 }}
+            {{ page.footer_col_3 }}
           {% else %}
             <h4>Members</h4>
             <ul class="ibew-footer__links">

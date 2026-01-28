@@ -1,0 +1,96 @@
+{#
+/**
+ * @file
+ * Theme implementation for the 'IBEW Event' content type (Full Page).
+ */
+#}
+<article{{ attributes.addClass('ibew-event-page', 'py-5') }}>
+  <div class="ibew-shell">
+    
+    {# Header Section #}
+    <header class="row mb-5 align-items-center">
+      <div class="col-lg-8">
+        <div class="d-flex align-items-center gap-3 mb-3">
+             <span class="badge bg-primary fs-6 px-3 py-2 rounded-pill text-uppercase tracking-wider">Event</span>
+             {% if content.field_event_time %}
+               <span class="d-flex align-items-center text-muted fw-semibold">
+                  <svg class="me-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+                  {{ content.field_event_time }}
+               </span>
+             {% endif %}
+        </div>
+
+        <h1 class="display-4 fw-bold font-oswald text-dark mb-2">{{ label }}</h1>
+        
+        {# Date Large Display #}
+        <div class="d-flex align-items-center gap-2 text-secondary h4 font-oswald mb-0">
+           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/></svg>
+           {{ content.field_event_date }}
+        </div>
+      </div>
+      
+      {# Optional Right Side Actions #}
+      <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+         <div class="ibew-card bg-light p-4 border-0">
+             <div class="fw-bold text-uppercase text-muted small mb-2">Actions</div>
+             <a href="#register" class="btn ibew-btn--gold w-100 mb-2">Register Now</a>
+             <a href="/events" class="btn btn-outline-secondary w-100">Back to Events</a>
+         </div>
+      </div>
+    </header>
+
+    {# Main Content & Sidebar #}
+    <div class="row g-5">
+       <div class="col-lg-8">
+          {# Featured Image #}
+          {% if content.field_event_image %}
+            <div class="mb-5 rounded-4 overflow-hidden shadow-sm">
+               {{ content.field_event_image }}
+            </div>
+          {% endif %}
+
+          <div class="lead text-dark mb-4">
+            {{ content.body }}
+          </div>
+          
+          <div class="ibew-event-details">
+             {{ content.field_event_description }}
+          </div>
+          
+          {# Remaining Content #}
+          <div class="mt-4">
+             {{ content|without('field_event_image', 'field_event_date', 'field_event_time', 'field_event_description', 'body') }}
+          </div>
+       </div>
+
+       <div class="col-lg-4">
+         <div class="sticky-top" style="top: 120px;">
+           <div class="ibew-card p-4 border shadow-sm">
+             <h3 class="h5 font-oswald fw-bold mb-4 border-bottom pb-2">Event Details</h3>
+             
+             <ul class="ibew-list">
+               <li>
+                 <strong>Date:</strong> {{ content.field_event_date }}
+               </li>
+               {% if content.field_event_time %}
+               <li>
+                 <strong>Time:</strong> {{ content.field_event_time }}
+               </li>
+               {% endif %}
+               {% if content.field_event_location %}
+               <li>
+                 <strong>Location:</strong> {{ content.field_event_location }}
+               </li>
+               {% endif %}
+             </ul>
+             
+             <div class="mt-4 pt-4 border-top">
+                <p class="small text-muted">Questions? Contact the hall at <a href="tel:1234567890">123-456-7890</a>.</p>
+             </div>
+           </div>
+         </div>
+       </div>
+    </div>
+
+  </div>
+</article>

@@ -1,42 +1,38 @@
-{#
-/**
- * @file
- * Teaser template for News Articles in Card Format.
- */
-#}
-<article class="ibew-card h-100 p-0 overflow-hidden d-flex flex-column border-0 shadow-sm">
+<article class="ibew-card h-100 p-0 overflow-hidden d-flex flex-column border-0 shadow-sm rounded-4">
+  {% set external_url = node.field_external_link.uri %}
+  {% set link_url = external_url ? external_url : url %}
+  {% set link_target = external_url ? '_blank' : '_self' %}
+  {% set source_label = node.field_news_source.value ? node.field_news_source.value : 'Union News' %}
+
   {# Image Top #}
   {% if content.field_news_image %}
-    <div class="position-relative" style="height: 240px; overflow: hidden;">
+    <div class="position-relative bg-light" style="height: 200px; overflow: hidden;">
        {{ content.field_news_image }}
-       <div class="position-absolute top-0 start-0 m-3 px-3 py-1 bg-primary text-white text-uppercase fw-bold rounded-pill small shadow">
-          News
-       </div>
+       <a href="{{ link_url }}" target="{{ link_target }}" class="stretched-link visually-hidden" aria-label="Read {{ label }}"></a>
     </div>
   {% else %}
-    <div class="bg-secondary" style="height: 240px;"></div>
+    <div class="bg-secondary position-relative" style="height: 200px;">
+       <a href="{{ link_url }}" target="{{ link_target }}" class="stretched-link visually-hidden" aria-label="Read {{ label }}"></a>
+    </div>
   {% endif %}
 
-  <div class="p-4 d-flex flex-column flex-grow-1 bg-white dark:bg-slate-800">
-    {# Date Badge embedded in text or separate #}
-    <div class="text-muted small mb-2 fw-semibold d-flex align-items-center gap-2">
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/></svg> 
-      {{ content.field_news_date }}
+  <div class="p-4 d-flex flex-column flex-grow-1 bg-white">
+    {# Meta Row: Tag & Date #}
+    <div class="d-flex align-items-center flex-wrap gap-2 mb-3 small">
+       {# Tag #}
+       <span class="badge {{ external_url ? 'bg-info text-dark' : 'bg-primary text-white' }} rounded-1 px-2 py-1 fw-bold text-uppercase" style="font-size: 0.7rem;">
+          {{ source_label }}
+       </span>
+       <span class="text-muted fw-bold">&bull;</span>
+       <span class="text-muted fw-bold">{{ content.field_news_date }}</span>
     </div>
 
-    <h3 class="h5 fw-bold mb-3 font-oswald text-dark">
-      <a href="{{ url }}" class="text-decoration-none text-reset stretched-link">
-        {{ label }}
-      </a>
+    <h3 class="h6 fw-bold mb-0 font-oswald text-uppercase text-dark lh-base" style="letter-spacing: 0.02em;">
+      {{ label }}
+      {% if external_url %}
+        <svg class="ms-1 text-muted" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16" style="vertical-align: text-top;"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>
+      {% endif %}
     </h3>
-
-    <div class="card-text text-muted mb-4 flex-grow-1">
-      {{ content.body|render|striptags|slice(0, 120) ~ '...' }}
-    </div>
-
-    <div class="mt-auto d-flex align-items-center text-primary fw-bold">
-      Read More 
-      <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
-    </div>
+    
   </div>
 </article>

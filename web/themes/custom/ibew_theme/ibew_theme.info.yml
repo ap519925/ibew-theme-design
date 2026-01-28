@@ -7,6 +7,7 @@ base theme: radix
 regions:
   top_bar: 'Top Bar'
   header: Header
+  primary_menu: 'Primary Menu'
   homepage_hero: 'Homepage Hero (Background)'
   homepage_hero_content: 'Homepage Hero Content (Text)'
   homepage_about: 'Homepage About'

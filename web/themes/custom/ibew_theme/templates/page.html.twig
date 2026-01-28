@@ -51,11 +51,12 @@
               </div>
             </a>
             
-            <div class="d-none d-lg-flex align-items-center flex-grow-1 justify-content-center">
+            {# Wrapper for primary menu - allows flex centering on desktop #}
+            <div class="flex-grow-1 d-flex justify-content-center">
               {% if page.primary_menu %}
                 {{ page.primary_menu }}
               {% else %}
-                 {# Default / Fallback Menu if block not placed #}
+                 {# Fallback Menu if block not placed #}
                  <nav class="ibew-nav__links">
                    <a href="/about">{{ 'About'|t }}</a>
                    <a href="/events">{{ 'Events'|t }}</a>

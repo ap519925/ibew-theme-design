@@ -59,7 +59,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
             const nav = context.querySelector('.ibew-nav');
             if (nav && !nav.dataset.ibewNavReady) {
                 nav.dataset.ibewNavReady = 'true';
-                const toggle = nav.querySelector('.ibew-mobile-toggle');
+                const toggle = nav.querySelector('.js-ibew-nav-toggle');
 
                 // Mobile Toggle
                 if (toggle) {
@@ -117,11 +117,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
                 function updateIcons(isDark) {
                     if (!moonIcon || !sunIcon) return;
                     if (isDark) {
-                        sunIcon.classList.add('hidden');
-                        moonIcon.classList.remove('hidden');
+                        sunIcon.classList.add('d-none');
+                        moonIcon.classList.remove('d-none');
                     } else {
-                        sunIcon.classList.remove('hidden');
-                        moonIcon.classList.add('hidden');
+                        sunIcon.classList.remove('d-none');
+                        moonIcon.classList.add('d-none');
                     }
                 }
             }

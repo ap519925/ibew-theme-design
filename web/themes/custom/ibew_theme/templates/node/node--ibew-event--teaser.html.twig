@@ -1,51 +1,42 @@
-{#
-/**
- * @file
- * Teaser template for Events in Timeline Format.
- */
-#}
-<div class="ibew-event-row position-relative ps-5 py-4 border-start border-2 border-light-subtle">
-  {# Timeline Dot #}
-  <div class="position-absolute translate-middle-x rounded-circle bg-primary border border-4 border-white shadow-sm d-flex align-items-center justify-content-center" style="width: 48px; height: 48px; left: 0; top: 2rem;">
-     <div class="text-white fw-bold small lh-1 text-center">
-        <span class="d-block" style="font-size: 0.7rem;">{{ content.field_event_date[0]['#text']|date('M') }}</span>
-        <span class="d-block h6 mb-0">{{ content.field_event_date[0]['#text']|date('d') }}</span>
-     </div>
+{# Robust Event Teaser #}
+{% set event_date = node.field_event_date.date %} {# Get Date Object if available #}
+{% if event_date %}
+  {% set day = event_date|date('d') %}
+  {% set month = event_date|date('M')|upper %}
+  {% set time = event_date|date('g:i A') %}
+{% else %}
+  {% set day = "00" %}
+  {% set month = "OCT" %}
+  {% set time = "TBD" %}
+{% endif %}
+
+{% set location = node.field_event_location.value %}
+
+<article class="ibew-event-card d-flex align-items-center bg-white rounded-3 shadow-sm p-3 mb-3 border-0 position-relative transition-hover">
+  
+  {# Date Badge #}
+  <div class="ibew-date-badge d-flex flex-column align-items-center justify-content-center rounded-2 text-white flex-shrink-0 me-3 bg-primary" style="width: 60px; height: 60px;">
+    <span class="fs-4 fw-bold lh-1">{{ day }}</span>
+    <span class="small fw-bold text-uppercase lh-1" style="font-size: 0.7rem;">{{ month }}</span>
   </div>
 
-  <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
-     <div class="row g-0 h-100">
-        {# Optional Image Left #}
-        {% if content.field_event_image %}
-           <div class="col-md-4 d-none d-md-block">
-              <div class="h-100 bg-cover bg-center" style="background-image: url('{{ file_url(content.field_event_image[0]['#item'].entity.uri.value) }}'); min-height: 160px;"></div>
-           </div>
-        {% endif %}
-        
-        <div class="col">
-           <div class="card-body p-4 d-flex flex-column h-100">
-               <div class="d-flex justify-content-between align-items-start mb-2">
-                 <span class="badge bg-secondary-subtle text-secondary-emphasis rounded-pill px-3 py-1 fw-bold font-monospace small">
-                    {{ content.field_event_time[0]['#markup']|default('6:00 PM') }}
-                 </span>
-                 {# Location Icon if needed #}
-               </div>
-
-               <h3 class="h5 fw-bold font-oswald mb-3">
-                  <a href="{{ url }}" class="text-reset text-decoration-none stretched-link">{{ label }}</a>
-               </h3>
-               
-               <p class="card-text text-muted small flex-grow-1 mb-0">
-                  {{ content.field_event_description|render|striptags|slice(0, 120) ~ '...' }}
-               </p>
-           </div>
-        </div>
-        
-         <div class="col-auto d-flex align-items-center pe-4 d-none d-sm-flex">
-             <div class="btn btn-icon btn-light rounded-circle shadow-sm text-primary">
-               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
-             </div>
-         </div>
-     </div>
+  {# Info #}
+  <div class="flex-grow-1 min-w-0">
+    <h3 class="h6 fw-bold text-uppercase text-dark mb-1 text-truncate font-oswald text-wrap" style="line-height:1.2;">
+      <a href="{{ url }}" class="text-decoration-none text-dark stretched-link">{{ node.label }}</a>
+    </h3>
+    
+    <div class="d-flex flex-column flex-sm-row gap-2 small text-muted">
+       <div class="d-flex align-items-center gap-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+          <span>{{ time }}</span>
+       </div>
+       {% if location %}
+       <div class="d-flex align-items-center gap-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+          <span class="text-truncate">{{ location }}</span>
+       </div>
+       {% endif %}
+    </div>
   </div>
-</div>
+</article>

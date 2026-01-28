@@ -32,7 +32,7 @@ $news_view_config = [
                 'cache' => ['type' => 'tag'],
                 'query' => ['type' => 'views_query'],
                 'exposed_form' => ['type' => 'basic'],
-                'pager' => ['type' => 'some', 'options' => ['items_per_page' => 3]],
+                'pager' => ['type' => 'some', 'options' => ['items_per_page' => 4]],
                 'style' => ['type' => 'default'],
                 'row' => ['type' => 'entity:node', 'options' => ['view_mode' => 'teaser']], // Critical: Use Teaser Mode
                 'fields' => ['title' => ['id' => 'title', 'table' => 'node_field_data', 'field' => 'title', 'plugin_id' => 'field']],
@@ -111,15 +111,16 @@ function save_view_config($config_data)
     echo "Created View: " . $config_data['label'] . "\n";
 }
 
-// Check and Save
-if (!View::load('homepage_news')) {
-    save_view_config($news_view_config);
-} else {
-    echo "View 'homepage_news' already exists.\n";
+// 1. Homepage News
+if ($view = View::load('homepage_news')) {
+    $view->delete();
+    echo "Deleted old View: homepage_news\n";
 }
+save_view_config($news_view_config);
 
-if (!View::load('homepage_events')) {
-    save_view_config($events_view_config);
-} else {
-    echo "View 'homepage_events' already exists.\n";
+// 2. Homepage Events
+if ($view = View::load('homepage_events')) {
+    $view->delete();
+    echo "Deleted old View: homepage_events\n";
 }
+save_view_config($events_view_config);
