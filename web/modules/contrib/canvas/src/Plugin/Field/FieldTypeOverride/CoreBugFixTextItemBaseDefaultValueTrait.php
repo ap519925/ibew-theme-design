@@ -10,11 +10,9 @@ namespace Drupal\canvas\Plugin\Field\FieldTypeOverride;
  * @todo Fix upstream in core; \Drupal\text\Plugin\Field\FieldType\TextItemBase::applyDefaultValue() is broken due to its unsolved @todo!
  * @todo Consider moving this logic into \Drupal\filter\Plugin\DataType\FilterFormat::applyDefaultValue(), possible thanks to \Drupal\text\Plugin\Field\FieldType\TextItemBase::propertyDefinitions() passing it on
  */
-trait CoreBugFixTextItemBaseDefaultValueTrait
-{
+trait CoreBugFixTextItemBaseDefaultValueTrait {
 
-  public function applyDefaultValue($notify = TRUE)
-  {
+  public function applyDefaultValue($notify = TRUE) {
     $allowed_formats = $this->getDataDefinition()->getSetting('allowed_formats');
     $default_format = match (TRUE) {
       is_array($allowed_formats) && !empty($allowed_formats) => reset($allowed_formats),
@@ -25,8 +23,7 @@ trait CoreBugFixTextItemBaseDefaultValueTrait
     return $this;
   }
 
-  public function setValue($values, $notify = TRUE): void
-  {
+  public function setValue($values, $notify = TRUE): void {
     // If `format` is missing, fall back to the first allowed format from
     // settings if any.
     if (!is_array($values) || !array_key_exists('format', $values)) {
@@ -46,7 +43,7 @@ trait CoreBugFixTextItemBaseDefaultValueTrait
     // Notify the parent if necessary.
     if ($notify && $this->parent) {
       $name = $this->getName();
-      // \assert(\is_string($name));
+      \assert(\is_string($name));
       $this->parent->onChange($name);
     }
   }

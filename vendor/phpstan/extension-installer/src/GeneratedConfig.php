@@ -21,7 +21,7 @@ final class GeneratedConfig
         0 => 'phpstan/rules.neon',
       ),
     ),
-    'version' => '2.9.2',
+    'version' => '2.9.4',
     'phpstanVersionConstraint' => NULL,
   ),
   'composer/pcre' => 
@@ -79,7 +79,7 @@ final class GeneratedConfig
         1 => 'rules.neon',
       ),
     ),
-    'version' => '2.0.8',
+    'version' => '2.0.12',
     'phpstanVersionConstraint' => '>=2.1.32.0-dev, <3.0.0.0-dev',
   ),
 );

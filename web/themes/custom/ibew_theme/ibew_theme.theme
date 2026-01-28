@@ -16,6 +16,10 @@ function ibew_theme_preprocess_page(&$variables) {
   if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
     $variables['#attached']['library'][] = 'ibew_theme/global-styling';
   }
+
+  // Manually embed Views to guarantee placement and bypass ghost blocks
+  $variables['embedded_news_view'] = views_embed_view('homepage_news', 'block_1');
+  $variables['embedded_events_view'] = views_embed_view('homepage_events', 'block_1');
 }
 
 

@@ -45,8 +45,7 @@ use Drupal\canvas\Plugin\Field\FieldType\ComponentTreeItemList;
     ],
   ],
 )]
-final class PageRegion extends ComponentTreeConfigEntityBase
-{
+final class PageRegion extends ComponentTreeConfigEntityBase {
 
   public const string ENTITY_TYPE_ID = 'page_region';
   public const string ADMIN_PERMISSION = 'administer page template';
@@ -73,8 +72,7 @@ final class PageRegion extends ComponentTreeConfigEntityBase
   /**
    * {@inheritdoc}
    */
-  public function __construct(array $values, $entity_type)
-  {
+  public function __construct(array $values, $entity_type) {
     $non_existent_properties = array_keys(array_diff_key($values, get_class_vars(__CLASS__)));
     if (!empty($non_existent_properties)) {
       throw new \LogicException(sprintf(
@@ -88,8 +86,7 @@ final class PageRegion extends ComponentTreeConfigEntityBase
   /**
    * {@inheritdoc}
    */
-  public function label(): TranslatableMarkup
-  {
+  public function label(): TranslatableMarkup {
     assert(is_string($this->theme));
     $regions = system_region_list($this->theme);
     return new TranslatableMarkup('@region region', [
@@ -109,8 +106,7 @@ final class PageRegion extends ComponentTreeConfigEntityBase
    * @throws \Drupal\canvas\Exception\ConstraintViolationException
    *   If violations exist and $throwOnViolations is TRUE.
    */
-  public function forAutoSaveData(array $autoSaveData, bool $validate): static
-  {
+  public function forAutoSaveData(array $autoSaveData, bool $validate): static {
     // Ignore auto-saved regions that are no longer editable.
     if (!$this->status()) {
       // @todo Throw an exception instead. Better yet: wipe the stale auto-save
@@ -136,8 +132,7 @@ final class PageRegion extends ComponentTreeConfigEntityBase
   /**
    * {@inheritdoc}
    */
-  public function getComponentTree(): ComponentTreeItemList
-  {
+  public function getComponentTree(): ComponentTreeItemList {
     assert(is_array($this->component_tree));
 
     $field_items = $this->createDanglingComponentTreeItemList();
@@ -149,8 +144,7 @@ final class PageRegion extends ComponentTreeConfigEntityBase
   /**
    * {@inheritdoc}
    */
-  public function calculateDependencies()
-  {
+  public function calculateDependencies() {
     parent::calculateDependencies();
     $this->addDependency('theme', $this->theme);
     $this->addDependencies($this->getComponentTree()->calculateDependencies());
@@ -163,14 +157,12 @@ final class PageRegion extends ComponentTreeConfigEntityBase
    * @return PageRegion[]
    *   Page regions for the active theme.
    */
-  public static function loadForActiveTheme(): array
-  {
+  public static function loadForActiveTheme(): array {
     $theme = \Drupal::service('theme.manager')->getActiveTheme()->getName();
     return self::loadForTheme($theme);
   }
 
-  public static function loadForTheme(string $theme, bool $include_non_editable = FALSE): array
-  {
+  public static function loadForTheme(string $theme, bool $include_non_editable = FALSE): array {
     $properties = [
       'theme' => $theme,
     ];
@@ -185,8 +177,7 @@ final class PageRegion extends ComponentTreeConfigEntityBase
   /**
    * @return array<string, \Drupal\canvas\Entity\PageRegion>
    */
-  public static function loadForActiveThemeByClientSideId(): array
-  {
+  public static function loadForActiveThemeByClientSideId(): array {
     $regions = self::loadForActiveTheme();
     return array_combine(
       array_map(fn(PageRegion $r) => $r->get('region'), $regions),
@@ -197,16 +188,14 @@ final class PageRegion extends ComponentTreeConfigEntityBase
   /**
    * {@inheritdoc}
    */
-  public function id(): string
-  {
+  public function id(): string {
     return $this->theme . '.' . $this->region;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function preSave(EntityStorageInterface $storage): void
-  {
+  public function preSave(EntityStorageInterface $storage): void {
     $this->id = $this->id();
     if ($this->region === CanvasPageVariant::MAIN_CONTENT_REGION) {
       throw new \LogicException('Attempted to save a PageRegion targeting the main content region, which is not allowed. (This means it bypassed validation.)');
@@ -232,13 +221,12 @@ final class PageRegion extends ComponentTreeConfigEntityBase
    *
    * @see \Drupal\canvas\Plugin\DisplayVariant\CanvasPageVariant::MAIN_CONTENT_REGION
    */
-  public static function createFromBlockLayout(string $theme): array
-  {
+  public static function createFromBlockLayout(string $theme): array {
     $theme_info = \Drupal::service('theme_handler')->getTheme($theme);
     $region_names = array_filter(
       array_keys($theme_info->info['regions']),
       // No PageRegion config entity is allowed for the `content` region.
-      fn($s) => $s !== CanvasPageVariant::MAIN_CONTENT_REGION,
+      fn ($s) => $s !== CanvasPageVariant::MAIN_CONTENT_REGION,
     );
 
     $blocks = \Drupal::service('entity_type.manager')->getStorage('block')->loadByProperties(['theme' => $theme]);
@@ -252,7 +240,7 @@ final class PageRegion extends ComponentTreeConfigEntityBase
         continue;
       }
       $region_name = match ($block->getRegion()) {
-          // Move from the `content` region to the first region in the theme.
+        // Move from the `content` region to the first region in the theme.
         CanvasPageVariant::MAIN_CONTENT_REGION => reset($region_names),
         // Use the original region.
         default => $block->getRegion(),
@@ -289,7 +277,7 @@ final class PageRegion extends ComponentTreeConfigEntityBase
         'region' => $region_name,
         'component_tree' => $items,
       ]);
-      // assert([] === iterator_to_array($page_region->getTypedData()->validate()));
+      assert([] === iterator_to_array($page_region->getTypedData()->validate()));
       $region_instances[$page_region->id()] = $page_region;
     }
 
@@ -299,8 +287,7 @@ final class PageRegion extends ComponentTreeConfigEntityBase
   /**
    * {@inheritdoc}
    */
-  public function set($property_name, $value): self
-  {
+  public function set($property_name, $value): self {
     if ($property_name === 'component_tree') {
       // Ensure predictable order of tree items.
       $value = self::generateComponentTreeKeys($value);

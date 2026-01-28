@@ -41,6 +41,89 @@ html.dark {
   .text-dark {
     color: #f3f4f6 !important;
   }
+
+  body {
+    background-color: #111827 !important;
+    color: #f3f4f6 !important;
+  }
+
+  // High Contrast Text Overrides for Dark Mode
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6,
+  .text-dark {
+    color: #ffffff !important;
+  }
+
+  p,
+  .text-body,
+  .text-secondary {
+    color: #e5e7eb !important; // Gray 200
+  }
+
+  .text-muted {
+    color: #9ca3af !important; // Gray 400 - Readable on Dark
+  }
+
+  .card,
+  .ibew-card,
+  .bg-white {
+    background-color: #1f2937 !important; // Gray 800
+    color: #f3f4f6 !important;
+    border-color: #374151 !important; // Gray 700
+  }
+
+  // Targeted Fix for About Section
+  #about {
+    color: #f3f4f6 !important;
+
+    p,
+    div:not(.btn),
+    span,
+    li {
+      color: #f3f4f6 !important;
+    }
+
+    .btn {
+      color: #111827 !important;
+    }
+
+    .row {
+      flex-direction: row-reverse;
+    }
+  }
+}
+
+// News Adaptive Styling
+.ibew-news-featured {
+  .card-img-top {
+    height: 320px !important;
+  }
+
+  .card-title,
+  h3 {
+    font-size: 1.75rem !important;
+  }
+}
+
+.ibew-news-grid {
+  .card-img-top {
+    height: 180px !important;
+  }
+
+  .card-title,
+  h4 {
+    font-size: 1.1rem !important;
+  }
 }
 
 /* Force white text in dark backgrounds for legibility */

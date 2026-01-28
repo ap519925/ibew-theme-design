@@ -1,0 +1,36 @@
+{#
+/**
+ * @file
+ * Template for Homepage News View.
+ * Implements 'Featured Item + Grid' layout.
+ */
+#}
+<div class="ibew-news-container">
+  {% for row in rows %}
+    {% if loop.index == 1 %}
+       <!-- Featured Item (First Result) -->
+       <div{{ row.attributes.addClass('ibew-news-featured mb-4') }}>
+         {{ row.content }}
+       </div>
+       
+       {# If there are more items, open the grid wrapper #}
+       {% if rows|length > 1 %}
+         <div class="row g-4 ibew-news-grid">
+       {% endif %}
+
+    {% else %}
+       <!-- Grid Item (Subsequent Results) -->
+       <div{{ row.attributes.addClass('col-md-6') }}>
+         <!-- We wrap in h-100 to ensure even heights if the node teaser card has h-100 -->
+         <div class="h-100">
+             {{ row.content }}
+         </div>
+       </div>
+    {% endif %}
+  {% endfor %}
+
+  {# Close grid wrapper if it was opened #}
+  {% if rows|length > 1 %}
+    </div>
+  {% endif %}
+</div>
