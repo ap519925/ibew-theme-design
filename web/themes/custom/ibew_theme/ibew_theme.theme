@@ -116,3 +116,22 @@ function ibew_theme_preprocess_region(array &$variables) {
     }
   }
 }
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function ibew_theme_preprocess_paragraph(&$variables) {
+  $paragraph = $variables['paragraph'];
+  $bundle = $paragraph->bundle();
+
+  if ($bundle == 'ibew_section_news_events') {
+    $variables['embedded_news_view'] = views_embed_view('homepage_news', 'block_1');
+    $variables['embedded_events_view'] = views_embed_view('homepage_events', 'block_1');
+  }
+  elseif ($bundle == 'ibew_section_news') {
+    $variables['embedded_news_view'] = views_embed_view('homepage_news', 'block_1');
+  }
+  elseif ($bundle == 'ibew_section_events') {
+    $variables['embedded_events_view'] = views_embed_view('homepage_events', 'block_1');
+  }
+}

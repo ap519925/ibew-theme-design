@@ -206,6 +206,23 @@ h4,
   padding: 0;
 }
 
+/* Force Hero Content to be transparent, overriding generic Dark Mode rules */
+.ibew-hero__content,
+html.dark .ibew-hero__content {
+  background: transparent !important;
+
+  .block,
+  .card,
+  .ibew-card,
+  .bg-white,
+  .bg-gray-100,
+  .bg-gray-50 {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
+
 /* --- Buttons --- */
 .ibew-btn-lg {
   display: inline-flex;
@@ -1393,10 +1410,19 @@ html.dark {
     }
   }
 }
+
 /* Typography Utilities */
-.font-oswald { font-family: 'Oswald', sans-serif; }
-.tracking-wider { letter-spacing: 0.05em; }
-.leading-none { line-height: 1; }
+.font-oswald {
+  font-family: 'Oswald', sans-serif;
+}
+
+.tracking-wider {
+  letter-spacing: 0.05em;
+}
+
+.leading-none {
+  line-height: 1;
+}
 
 /* Event Card Specifics */
 .ibew-event-card {
@@ -1410,4 +1436,3 @@ html.dark {
     content: '';
   }
 }
-

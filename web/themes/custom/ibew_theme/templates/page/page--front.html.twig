@@ -43,7 +43,7 @@
           <img src="/themes/custom/ibew_theme/logo.png" alt="IBEW Local 90" class="ibew-brand__logo">
           <div class="ibew-brand__text">
             <span class="ibew-brand__title">{{ 'IBEW LOCAL 90'|t }}</span>
-            <span class="ibew-eyebrow">{{ 'International Brotherhood of Electrical Workers'|t }}</span>
+            <span class="ibew-eyebrow">{{ 'IBEW Local 90'|t }}</span>
           </div>
         </a>
 
@@ -65,7 +65,7 @@
 
         <div class="d-none d-xl-block">
             <div class="d-flex align-items-center gap-3">
-               <a class="ibew-cta ibew-cta--nav" href="/civicrm/user">
+               <a class="ibew-cta ibew-cta--nav" href="/user/login">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg>
                   {{ 'Member Sign-In'|t }}
                </a>
@@ -95,7 +95,7 @@
          <a href="/training" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">Training</a>
          <a href="/contractors" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">Contractors</a>
          <a href="/members" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">Members</a>
-         <a href="/civicrm/user" class="btn btn-primary w-100 mt-2">Member Sign-In</a>
+         <a href="/user/login" class="btn btn-primary w-100 mt-2">Member Sign-In</a>
       </nav>
     </div>
   </div>
@@ -125,12 +125,12 @@
     </div>
 
     {# Global Overlay (Z-10) #}
-    <div class="absolute inset-0 z-10 bg-black/40 pointer-events-none"></div>
+    <div class="absolute inset-0 z-10 pointer-events-none" style="background-color: rgba(0, 0, 0, 0.6);"></div>
 
     {# Content Overlay (Z-20) #}
     {% if page.homepage_hero_content %}
-      <div class="ibew-hero__content absolute inset-0 z-20 flex flex-col justify-center items-center text-center px-4 pointer-events-none">
-        <div class="pointer-events-auto max-w-4xl mx-auto w-full"> 
+      <div class="ibew-hero__content absolute inset-0 z-20 flex flex-col justify-center items-center text-center px-4 pointer-events-none" style="background: transparent !important;">
+        <div class="pointer-events-auto max-w-4xl mx-auto w-full" style="background: transparent !important;"> 
             {{ page.homepage_hero_content }}
         </div>
       </div>
@@ -160,10 +160,11 @@
           <div class="container">
             {# Replaced Bootstrap Row with Tailwind Grid for better layout control #}
             {# Added js-reveal-grid for GSAP animation #}
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start js-reveal-grid">
+            {# Restoring News & Events with Bootstrap Grid for immediate reliability #}
+            <div class="row g-4">
               
-               {# Left Column: Recent News (Span 8) #}
-              <div class="lg:col-span-8">
+               {# Left Column: Recent News (Col-8) #}
+              <div class="col-lg-8">
                 <div class="d-flex justify-content-between align-items-end mb-4">
                    <h2 class="display-6 fw-bold font-oswald text-uppercase text-dark mb-0">Latest News</h2>
                    <a href="/news" class="text-decoration-none fw-bold small text-primary">View All &rarr;</a>
@@ -174,8 +175,8 @@
                 </div>
               </div>
 
-              {# Right Column: Events & Training (Span 4) #}
-              <div class="lg:col-span-4 mt-8 lg:mt-0">
+              {# Right Column: Events & Training (Col-4) #}
+              <div class="col-lg-4">
                  <div class="d-flex justify-content-between align-items-end mb-4">
                    <h2 class="display-6 fw-bold font-oswald text-uppercase text-dark mb-0">Events & Training</h2>
                    <a href="/events" class="text-decoration-none fw-bold small text-primary">Calendar &rarr;</a>
@@ -223,21 +224,23 @@
            {# Full width region, no shell #}
             <div class="ibew-region ibew-region--stats w-100">
                {{ page.homepage_stats }}
-               {{ page.homepage_members }}
+               {# {{ page.homepage_members }} #}
             </div>
           {# Background accent for stats #}
           <div class="absolute inset-0 bg-blue-900/20 pointer-events-none"></div>
         </section>
       {% endif %}
 
-      {# 5. Contact / CTA #}
+      {# 5. Contact / CTA - REMOVED PER REQUEST #}
+      {# 
       {% if page.homepage_contact %}
-        <section id="contact" class="ibew-section py-16 bg-gray-50 w-100">
-           <div class="ibew-region ibew-region--contact w-100">
-              {{ page.homepage_contact }}
-           </div>
-        </section>
-      {% endif %}
+            <section id="contact" class="ibew-section py-16 bg-gray-50 w-100">
+              <div class="ibew-region ibew-region--contact w-100">
+                  {{ page.homepage_contact }}
+              </div>
+            </section>
+          {% endif %}
+          #}
 
       {# --- New CTA Section --- #}
       <section class="ibew-cta-section w-100">

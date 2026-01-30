@@ -1,0 +1,25 @@
+{# block--block-content--hero-slider.html.twig #}
+<div id="ibewHeroSplide" class="splide h-full w-full">
+  <div class="splide__track h-full w-full">
+    <ul class="splide__list h-full w-full">
+       {{ content.field_hero_slides }}
+    </ul>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (document.querySelector('#ibewHeroSplide')) {
+        new Splide('#ibewHeroSplide', {
+            type: 'fade',
+            rewind: true,
+            autoplay: true,
+            interval: 5000,
+            arrows: false,
+            pagination: false,
+            cover: true,
+            height: '100%',
+        }).mount();
+    }
+  });
+</script>

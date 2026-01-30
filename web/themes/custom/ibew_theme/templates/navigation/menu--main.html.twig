@@ -12,22 +12,14 @@
 {% macro menu_links(items, attributes, menu_level) %}
   {% import _self as menus %}
   {% if items %}
-    {# Top Level Wrapper #}
+    {# Top Level Wrapper matching fallback structure #}
     {% if menu_level == 0 %}
-      <nav class="ibew-nav__links d-flex align-items-center">
+      <nav class="ibew-nav__links">
     {% endif %}
 
     {% for item in items %}
-      {% set classes = [
-        'text-decoration-none',
-        'fw-bold',
-        'small',
-        'text-primary',
-        'gap-3',
-        'px-3',
-        item.in_active_trail ? 'active' : '',
-      ] %}
-      <a href="{{ item.url }}" {{ item.attributes.addClass(classes) }}>{{ item.title }}</a>
+      {# Use minimal classes to let theme CSS handle styling #}
+      <a href="{{ item.url }}" {{ item.attributes }}>{{ item.title }}</a>
     {% endfor %}
 
     {% if menu_level == 0 %}
