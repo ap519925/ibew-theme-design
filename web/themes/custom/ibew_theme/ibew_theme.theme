@@ -35,7 +35,13 @@ function ibew_theme_form_alter(&$form, FormStateInterface $form_state, $form_id)
  * Implements hook_theme_suggestions_HOOK_alter() for page templates.
  */
 function ibew_theme_theme_suggestions_page_alter(array &$suggestions, array $variables) {
-  // Add custom page suggestions here
+  // Add custom page suggestions based on path alias
+  $path = \Drupal::service('path.current')->getPath();
+  $alias = \Drupal::service('path_alias.manager')->getAliasByPath($path);
+  
+  if ($alias == '/events') {
+    $suggestions[] = 'page__events';
+  }
 }
 
 /**

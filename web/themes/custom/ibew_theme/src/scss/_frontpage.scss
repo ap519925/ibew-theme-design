@@ -76,10 +76,13 @@ html.dark {
 
   .card,
   .ibew-card,
-  .bg-white {
-    background-color: #1f2937 !important; // Gray 800
+  .bg-white,
+  .bg-gray-100,
+  .bg-gray-50,
+  .ibew-page {
+    background-color: #1f2937; // Gray 800
     color: #f3f4f6 !important;
-    border-color: #374151 !important; // Gray 700
+    border-color: #374151; // Gray 700
   }
 
   // Targeted Fix for About Section
@@ -166,8 +169,7 @@ html.dark {
 }
 
 .ibew-section {
-  padding: 5rem 0;
-  /* py-20 approx */
+  padding: 4rem 0; // Mobile: 4rem
   position: relative;
 
   /* Ensure full-width sections have a minimum gutter on mobile/desktop so content doesn't hit edge */
@@ -175,6 +177,8 @@ html.dark {
   padding-right: 1.5rem;
 
   @include media-breakpoint-up(md) {
+    padding-top: 6rem; // Desktop: 6rem
+    padding-bottom: 6rem;
     padding-left: 2rem;
     padding-right: 2rem;
   }
@@ -486,69 +490,31 @@ html:not(.dark) .ibew-stat-item {
 .ibew-region--news {
   .view-content {
     display: grid;
-    grid-template-columns: repeat(1, 1fr); // Mobile default
+    grid-template-columns: minmax(0, 1fr);
     gap: 1.5rem;
-
-    @include media-breakpoint-up(md) {
-      grid-template-columns: repeat(2, 1fr); // 2 Cols on Desktop
-    }
   }
 
-  // Feature the first item
-  .view-content>.views-row:first-child {
-    @include media-breakpoint-up(md) {
-      grid-column: span 2;
-
-      // Transform the teaser card into a horizontal layout for the featured item
-      .ibew-card {
-        flex-direction: row !important; // Horizontal layout
-        min-height: 280px;
-
-        // Image container adjustments
-        >div:first-child {
-          width: 45%;
-          height: auto !important;
-          min-height: 100%;
-        }
-
-        // Content body adjustments
-        >div:last-child {
-          width: 55%;
-          padding: 2rem !important;
-          justify-content: center;
-        }
-
-        h3 {
-          font-size: 1.75rem; // Larger title
-          margin-bottom: 1rem;
-        }
-
-        .toggle-summary {
-          display: block !important; // distinct class I'll add to teaser if needed, or rely on generalized CSS
-        }
-      }
-    }
-  }
+  // Feature the first item logic removed to ensure consistent stacking
+  /* 
+  .view-content>.views-row:first-child { ... }
+  */
 }
 
 .bg-gray-50 {
   background-color: #f9fafb !important;
-  background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
-  background-size: 20px 20px;
+  /* Dots removed per request */
 }
 
-.ibew-section {
-  padding: 4rem 0;
-  position: relative;
-}
+// Merged into top definition
+/* .ibew-section removed */
 
 .ibew-section__header {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-end;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  gap: 1rem;
+  margin-bottom: 3rem; // Increased from 1.5rem
 }
 
 .ibew-section__title {
@@ -745,6 +711,46 @@ html:not(.dark) .ibew-stat-item {
   color: #fff;
 }
 
+/* --- Interactive Effects (New) --- */
+
+/* Nav Link Underline Slide */
+.ibew-nav__links a {
+  transition: color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    color: #CFA655 !important;
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+}
+
+/* Button Lift & Glow */
+.btn {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+/* Card Hover Border */
+.ibew-card,
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-color: rgba(207, 166, 85, 0.5) !important;
+    /* Gold hint */
+  }
+}
+
 .ibew-footer__brand {
   font-weight: 800;
   color: #fff;
@@ -766,7 +772,9 @@ html:not(.dark) .ibew-stat-item {
   border-radius: 1.1rem;
 }
 
-.ibew-footer .block {
+.ibew-footer .block,
+.ibew-footer .ibew-card,
+.ibew-footer .card {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
@@ -1385,3 +1393,21 @@ html.dark {
     }
   }
 }
+/* Typography Utilities */
+.font-oswald { font-family: 'Oswald', sans-serif; }
+.tracking-wider { letter-spacing: 0.05em; }
+.leading-none { line-height: 1; }
+
+/* Event Card Specifics */
+.ibew-event-card {
+  .stretched-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    content: '';
+  }
+}
+

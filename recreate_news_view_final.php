@@ -11,20 +11,20 @@ if ($view) {
     $view->delete();
 }
 
-// 2. Create New View configuration (Array structure closest to YAML export)
+// 2. Create New View configuration (Targeting news_article)
 $config = [
     'langcode' => 'en',
     'status' => true,
     'dependencies' => [
-        'config' => ['node.type.ibew_news'],
+        'config' => ['node.type.news_article'],
         'module' => ['node', 'user', 'views'],
     ],
     'id' => $view_id,
-    'label' => 'Homepage News',
+    'label' => 'Latest News',
     'module' => 'views',
     'base_table' => 'node_field_data',
     'base_field' => 'nid',
-    'core' => '11', // Drupal 11
+    'core' => '11',
     'display' => [
         'default' => [
             'display_plugin' => 'default',
@@ -47,7 +47,8 @@ $config = [
                 'fields' => ['title' => ['id' => 'title', 'table' => 'node_field_data', 'field' => 'title', 'plugin_id' => 'field']],
                 'filters' => [
                     'status' => ['id' => 'status', 'table' => 'node_field_data', 'field' => 'status', 'plugin_id' => 'boolean', 'value' => '1', 'group' => 1],
-                    'type' => ['id' => 'type', 'table' => 'node_field_data', 'field' => 'type', 'plugin_id' => 'bundle', 'value' => ['ibew_news' => 'ibew_news'], 'group' => 1],
+                    // UPDATED: Filter by news_article
+                    'type' => ['id' => 'type', 'table' => 'node_field_data', 'field' => 'type', 'plugin_id' => 'bundle', 'value' => ['news_article' => 'news_article'], 'group' => 1],
                 ],
                 'sorts' => [
                     'created' => ['id' => 'created', 'table' => 'node_field_data', 'field' => 'created', 'order' => 'DESC'],
@@ -68,16 +69,16 @@ $config = [
     ],
 ];
 
-echo "Creating View '$view_id' from scratch...\n";
+echo "Creating View '$view_id' targeting 'news_article'...\n";
 $view = View::create($config);
 $view->save();
 echo "View Saved.\n";
 
-// 3. Ensure Events View is also reset to Unformatted/Teaser
+// 3. Ensure Events View is also reset (Just in case)
 $event_view_id = 'homepage_events';
 $ev = View::load($event_view_id);
 if ($ev) {
-    echo "Resetting Events View to Unformatted/Teaser...\n";
+    echo "Resetting Events View config...\n";
     $displays = $ev->get('display');
     foreach ($displays as $id => &$d) {
         $d['display_options']['style']['type'] = 'default';

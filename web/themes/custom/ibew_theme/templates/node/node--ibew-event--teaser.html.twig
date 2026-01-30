@@ -1,42 +1,51 @@
-{# Robust Event Teaser #}
-{% set event_date = node.field_event_date.date %} {# Get Date Object if available #}
-{% if event_date %}
-  {% set day = event_date|date('d') %}
-  {% set month = event_date|date('M')|upper %}
-  {% set time = event_date|date('g:i A') %}
-{% else %}
-  {% set day = "00" %}
-  {% set month = "OCT" %}
-  {% set time = "TBD" %}
-{% endif %}
+{% set date_day = node.field_event_date.value|date('d') %}
+{% set date_month = node.field_event_date.value|date('M') %}
+{% set date_time_start = node.field_event_date.value|date('g:i A') %}
+{% set label_text = node.label %}
+{% set is_training = 'Training' in label_text or 'Safety' in label_text %}
+{% set date_bg_class = is_training ? 'bg-ibew-raspberry' : 'bg-ibew-navy' %}
 
-{% set location = node.field_event_location.value %}
-
-<article class="ibew-event-card d-flex align-items-center bg-white rounded-3 shadow-sm p-3 mb-3 border-0 position-relative transition-hover">
+<article{{ attributes.addClass('ibew-event-card group flex flex-col md:flex-row bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 h-full') }}>
   
-  {# Date Badge #}
-  <div class="ibew-date-badge d-flex flex-column align-items-center justify-content-center rounded-2 text-white flex-shrink-0 me-3 bg-primary" style="width: 60px; height: 60px;">
-    <span class="fs-4 fw-bold lh-1">{{ day }}</span>
-    <span class="small fw-bold text-uppercase lh-1" style="font-size: 0.7rem;">{{ month }}</span>
+  {# Date Strip #}
+  <div class="ibew-event-date w-full md:w-32 {{ date_bg_class }} text-white flex flex-col items-center justify-center p-4 flex-shrink-0">
+    <span class="text-4xl fw-bold font-oswald leading-none">{{ date_day }}</span>
+    <span class="text-sm uppercase tracking-wider mt-1 fw-bold">{{ date_month }}</span>
   </div>
 
-  {# Info #}
-  <div class="flex-grow-1 min-w-0">
-    <h3 class="h6 fw-bold text-uppercase text-dark mb-1 text-truncate font-oswald text-wrap" style="line-height:1.2;">
-      <a href="{{ url }}" class="text-decoration-none text-dark stretched-link">{{ node.label }}</a>
-    </h3>
-    
-    <div class="d-flex flex-column flex-sm-row gap-2 small text-muted">
-       <div class="d-flex align-items-center gap-1">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
-          <span>{{ time }}</span>
-       </div>
-       {% if location %}
-       <div class="d-flex align-items-center gap-1">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
-          <span class="text-truncate">{{ location }}</span>
-       </div>
-       {% endif %}
+  {# Content #}
+  <div class="p-6 flex-grow flex flex-col justify-between">
+    <div>
+        <h3 class="font-oswald text-xl fw-bold text-ibew-navy mb-2 group-hover:text-ibew-gold transition-colors">
+          <a href="{{ url }}" class="text-decoration-none text-reset">{{ label }}</a>
+        </h3>
+        
+        <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-500 mb-3">
+             <div class="flex items-center gap-2">
+                 {# Clock Icon #}
+                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+                 <span>{{ date_time_start }}</span>
+             </div>
+             {% if content.field_location|render %}
+             <div class="flex items-center gap-2">
+                 {# Map Icon #}
+                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+                 <span>{{ content.field_location }}</span>
+             </div>
+             {% endif %}
+        </div>
+
+        <div class="text-sm text-gray-600 line-clamp-2 mb-4">
+             {{ content.body }}
+        </div>
     </div>
+    
+    <div class="flex justify-between items-center border-top pt-3 mt-auto">
+        <div class="text-xs font-bold text-uppercase tracking-wider {{ is_training ? 'text-ibew-raspberry' : 'text-ibew-navy' }}">
+            {{ is_training ? 'Training' : 'Meeting' }}
+        </div>
+        <a href="{{ url }}" class="text-sm fw-bold text-primary text-decoration-none group-hover:translate-x-1 transition-transform inline-block">Register &rarr;</a>
+    </div>
+
   </div>
 </article>

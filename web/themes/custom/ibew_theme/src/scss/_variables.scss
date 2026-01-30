@@ -1,16 +1,24 @@
-// IBEW Brand Colors
-$ibew-navy: #002855; // Deep Official Navy
-$ibew-blue: #005696; // Brighter Primary Blue
-$ibew-gold: #FFB81C; // Standard Union Gold (High Vis)
-$ibew-gold-metallic: #CFA655; // Premium accent
+// IBEW Brand Colors (Updated Palette)
+$ibew-navy: #313F6B;
+$ibew-gold: #CFA655;
+$ibew-cream: #E8DFC1;
+$ibew-raspberry: #983A54;
+$ibew-orange: #E27859;
+$ibew-offwhite: #FEFEFE;
+
+// Legacy/Helper Variables
+$ibew-blue: lighten($ibew-navy, 10%); // Derived for internal usage requiring a lighter shade
+$ibew-gold-metallic: darken($ibew-gold, 5%);
 
 // Bootstrap Overrides
 $primary: $ibew-navy;
 $secondary: $ibew-gold;
-$danger: #D6001C;
-$info: #FFFFFF;
-$light: #F3F4F6;
-$dark: #111827;
+$success: #10b981;
+$info: $ibew-offwhite;
+$warning: $ibew-orange;
+$danger: $ibew-raspberry;
+$light: $ibew-offwhite;
+$dark: #0f172a; // Keeping deep slate for text contrast if needed, or use Navy
 
 // Typography
 $font-family-sans-serif: 'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;

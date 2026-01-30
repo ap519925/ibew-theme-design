@@ -160,7 +160,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
             });
 
             // Card Grids Stagger Reveal
-            const grids = context.querySelectorAll('.ibew-grid');
+            // Updated to include .js-reveal-grid for Tailwind layouts
+            const grids = context.querySelectorAll('.ibew-grid, .js-reveal-grid');
             grids.forEach(grid => {
                 gsap.from(grid.children, {
                     scrollTrigger: {
@@ -201,6 +202,45 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
                     });
                 }
             });
+
+            // Mobile Menu Population (Dynamic)
+            const desktopNav = context.querySelector('.ibew-nav__links');
+            const mobileNavContainer = context.querySelector('#ibewMobileMenu nav');
+
+            if (desktopNav && mobileNavContainer && !mobileNavContainer.dataset.populated) {
+                // Clear hardcoded placeholder links
+                mobileNavContainer.innerHTML = '';
+
+                const links = desktopNav.querySelectorAll('a');
+                links.forEach(link => {
+                    const mobileLink = link.cloneNode(true);
+                    // Adjust classes for Mobile
+                    mobileLink.className = 'text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom d-block';
+                    mobileNavContainer.appendChild(mobileLink);
+                });
+
+                // Append Sign In Button (Manual)
+                const signInBtn = document.createElement('a');
+                signInBtn.href = '/civicrm/user';
+                signInBtn.className = 'btn btn-primary w-100 mt-2';
+                signInBtn.innerText = 'Member Sign-In';
+                mobileNavContainer.appendChild(signInBtn);
+
+                mobileNavContainer.dataset.populated = 'true';
+            }
+
+            // Mobile Menu Toggle
+            const mobileToggle = context.querySelector('#ibewMobileToggle');
+            const mobileMenu = context.querySelector('#ibewMobileMenu');
+            if (mobileToggle && mobileMenu && !mobileToggle.dataset.hasListener) {
+                mobileToggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    mobileMenu.classList.toggle('d-none');
+                    const isExpanded = !mobileMenu.classList.contains('d-none');
+                    mobileToggle.setAttribute('aria-expanded', isExpanded);
+                });
+                mobileToggle.dataset.hasListener = 'true';
+            }
         },
     };
 })(Drupal);
