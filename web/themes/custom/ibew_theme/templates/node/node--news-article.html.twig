@@ -4,48 +4,88 @@
  * Theme implementation for the 'IBEW News' content type (Full Page).
  */
 #}
-<article{{ attributes.addClass('ibew-news-page', 'py-5') }}>
-  {# Hero Header (Narrow) #}
-  <div class="container-md max-w-4xl text-center mb-5">
-     <div class="d-inline-flex flex-wrap justify-content-center align-items-center gap-2 text-primary fw-bold text-uppercase tracking-wider small mb-3">
-        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1">News</span>
-        <span>&bull;</span>
-        {# Published Date Field #}
-        {{ content.field_published_date }}
-     </div>
-     
-     <h1 class="display-5 fw-bold font-oswald text-dark mb-4">{{ label }}</h1>
-  </div>
+<article{{attributes.addClass('ibew-news-page','py-5')}}>
+	{# Hero Header (Narrow) #}
+	<div class="container-md max-w-4xl text-center mb-5">
+		<div class="d-inline-flex flex-wrap justify-content-center align-items-center gap-2 text-primary fw-bold text-uppercase tracking-wider small mb-3">
+			<span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1">News</span>
+			<span>&bull;</span>
+			{# Published Date Field #}
+			{{ content.field_published_date }}
+		</div>
 
-  {# Featured Image Removed from Full Page Display #}
+		<h1 class="display-5 fw-bold font-oswald text-dark mb-4">{{ label }}</h1>
+	</div>
 
-  {# Main Content (Narrow Reading width) #}
-  <div class="container-md" style="max-width: 800px;">
-     <div class="ibew-prose lead text-dark">
-        {{ content.body }}
-     </div>
+	{# Featured Image Removed from Full Page Display #}
 
-     {# Tags Section #}
-     {% if content.field_tags %}
-       <div class="mt-4 pt-4 border-top">
-         <strong>Tags:</strong>
-         {{ content.field_tags }}
-       </div>
-     {% endif %}
+	{# Main Content (Narrow Reading width) #}
+	<div class="container-md" style="max-width: 800px;">
+		<div class="ibew-prose lead text-dark">
+			{{ content.body }}
+		</div>
 
-     <div class="mt-5 pt-5 border-top d-flex justify-content-between align-items-center">
-        <a href="/news" class="btn btn-outline-dark rounded-pill px-4">
-           ← Back to News
-        </a>
-        <div class="d-flex gap-2">
-           <button class="btn btn-light btn-sm rounded-circle" aria-label="Share">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg>
-           </button>
-        </div>
-     </div>
+		{# Tags Section #}
+		{% if content.field_tags %}
+			<div class="mt-4 pt-4 border-top">
+				<strong>Tags:</strong>
+				{{ content.field_tags }}
+			</div>
+		{% endif %}
 
-     <div class="mt-4">
-        {{ content|without('field_featured_image', 'field_published_date', 'body', 'field_tags') }}
-     </div>
-  </div>
+		<div class="mt-5 pt-5 border-top d-flex justify-content-between align-items-center">
+			<a href="/news" class="btn btn-outline-dark rounded-pill px-4">
+				← Back to News
+			</a>
+			<div class="d-flex gap-2">
+				<span class="text-muted small align-self-center me-2">Share:</span>
+				{# Social Share Links #}
+				<a href="https://www.facebook.com/sharer/sharer.php?u={{ url|url_encode }}" target="_blank" class="btn btn-primary btn-sm rounded-circle" style="background-color: #3b5998; border-color: #3b5998;" aria-label="Share on Facebook">
+					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewbox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg>
+				</a>
+				<a href="https://twitter.com/intent/tweet?url={{ url|url_encode }}&text={{ label|url_encode }}" target="_blank" class="btn btn-info btn-sm rounded-circle text-white" style="background-color: #1da1f2; border-color: #1da1f2;" aria-label="Share on Twitter">
+					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewbox="0 0 16 16"><path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.99-.052A9.341 9.341 0 0 0 5.026 15z"/></svg>
+				</a>
+				<a href="mailto:?subject={{ label|url_encode }}&body={{ url|url_encode }}" class="btn btn-secondary btn-sm rounded-circle" style="background-color: #6c757d; border-color: #6c757d;" aria-label="Share by Email">
+					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewbox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/></svg>
+				</a>
+			</div>
+		</div>
+
+		{# News Gallery #}
+		{% if content.field_image_gallery %}
+			<style>
+				.photoswipe-gallery-container .field__items {
+					display: grid;
+					grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+					gap: 1rem;
+				}
+				.photoswipe-gallery-container .field__item {
+					display: block;
+					overflow: hidden;
+					border-radius: 0.5rem;
+					box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+				}
+				.photoswipe-gallery-container img {
+					width: 100%;
+					height: 200px; /* Fixed height for consistent grid */
+					object-fit: cover;
+					transition: transform 0.3s ease;
+				}
+				.photoswipe-gallery-container .field__item:hover img {
+					transform: scale(1.05);
+				}
+			</style>
+			<div class="mt-5 mb-5 pb-5 border-bottom">
+				<h3 class="h4 font-oswald text-uppercase mb-4 border-start border-4 border-warning ps-3">Photo Gallery</h3>
+				<div class="photoswipe-gallery-container">
+					{{ content.field_image_gallery }}
+				</div>
+			</div>
+		{% endif %}
+
+		<div class="mt-4">
+			{{ content|without('field_featured_image', 'field_published_date', 'body', 'field_tags', 'field_image_gallery') }}
+		</div>
+	</div>
 </article>

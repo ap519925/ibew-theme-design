@@ -10,8 +10,9 @@
 	{% include '@ibew_theme/includes/header.html.twig' %}
 
 	{# Page Header #}
-	<section class="bg-gradient-to-r from-ibew-navy to-ibew-blue text-white py-16">
-		<div class="container">
+	<section class="bg-gradient-to-r from-ibew-navy to-ibew-blue text-white py-16 relative overflow-hidden">
+		<div class="absolute inset-0 z-0" style="background-image: url('/themes/custom/ibew_theme/screenshot.jpg'); background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; mix-blend-mode: overlay; opacity: 0.2;"></div>
+		<div class="container relative z-10">
 			<h1 class="text-5xl font-oswald fw-bold mb-4">News & Updates</h1>
 			<p class="text-xl text-gray-200">Stay informed with the latest news from IBEW Local 90</p>
 		</div>
@@ -268,10 +269,9 @@ noResults.classList.add('d-none');
 
 if (currentView === 'grid') {
 container.className = 'row g-4';
-container.innerHTML = filtered.map(
-article => `
+container.innerHTML = filtered.map(article => `
         <div class="col-md-6 col-lg-4">
-          <article class="ibew-news-card bg-gray-800 rounded-lg shadow-lg overflow-hidden h-100 d-flex flex-column hover-lift transition-all">
+          <article class="ibew-news-card rounded-lg shadow-lg overflow-hidden h-100 d-flex flex-column hover-lift transition-all" style="background-color: #3E4C63;">
             ${
 article.image ? `
               <div class="position-relative" style="height: 200px; overflow: hidden;">
@@ -305,13 +305,11 @@ article.url
             </div>
           </article>
         </div>
-      `
-).join('');
+      `).join('');
 } else {
 container.className = 'd-flex flex-column gap-3';
-container.innerHTML = filtered.map(
-article => `
-        <article class="ibew-news-card bg-gray-800 rounded-lg shadow-lg overflow-hidden d-flex flex-row hover-lift transition-all">
+container.innerHTML = filtered.map(article => `
+        <article class="ibew-news-card rounded-lg shadow-lg overflow-hidden d-flex flex-row hover-lift transition-all" style="background-color: #3E4C63;">
           ${
 article.image ? `
             <div class="position-relative" style="width: 250px; flex-shrink: 0;">
@@ -344,8 +342,7 @@ article.url
 }" class="btn btn-sm btn-outline-light">Read More →</a>
           </div>
         </article>
-      `
-).join('');
+      `).join('');
 }
 }
 
@@ -361,6 +358,13 @@ day: 'numeric'
 </script>
 
 <style>
+	/* Force news card background color in all modes */
+	.ibew-news-card,
+	html.dark .ibew-news-card,
+	html:not(.dark) .ibew-news-card,
+	.ibew-news-card.bg-gray-800 {
+		background-color: #3E4C63 !important;
+	}
 	.hover-lift {
 		transition: transform 0.3s ease, box-shadow 0.3s ease;
 	}

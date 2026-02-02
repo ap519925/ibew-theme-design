@@ -1,0 +1,145 @@
+/* IBEW Custom CKEditor Styles */
+
+/* --- Buttons --- */
+a.btn-primary {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background-color: #313F6B;
+    /* IBEW Navy */
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s;
+}
+
+a.btn-primary:hover {
+    background-color: #1a2542;
+}
+
+a.btn-secondary {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background-color: #983A54;
+    /* IBEW Red (Simulated) */
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 0.25rem;
+}
+
+a.btn-outline {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background-color: transparent;
+    border: 2px solid #313F6B;
+    color: #313F6B;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 0.25rem;
+}
+
+/* --- Typography --- */
+h2.ibew-title {
+    font-family: 'Oswald', sans-serif;
+    color: #313F6B;
+    text-transform: uppercase;
+    border-bottom: 2px solid #F5C518;
+    /* IBEW Gold */
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+h3.ibew-subtitle {
+    font-family: 'Oswald', sans-serif;
+    color: #555;
+    margin-top: 1.5rem;
+}
+
+p.lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: #444;
+}
+
+span.text-gold {
+    color: #F5C518;
+}
+
+span.text-navy {
+    color: #313F6B;
+}
+
+/* --- callouts --- */
+div.alert-info {
+    background-color: #e3f2fd;
+    border-left: 5px solid #313F6B;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+div.alert-warning {
+    background-color: #fff3cd;
+    border-left: 5px solid #F5C518;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+/* --- Images --- */
+img.img-shadow {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+}
+
+/* --- History Page Styles --- */
+.ibew-history-content p {
+    text-align: justify;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.drop-cap::first-letter {
+    float: left;
+    font-size: 4rem;
+    line-height: 3.5rem;
+    font-family: 'Oswald', serif;
+    font-weight: 700;
+    color: #313F6B;
+    /* IBEW Navy */
+    margin-right: 0.75rem;
+    margin-top: -0.25rem;
+}
+
+.ibew-section-title {
+    font-family: 'Oswald', sans-serif;
+    color: #313F6B;
+    /* IBEW Navy */
+    border-left: 5px solid #F5C518;
+    /* IBEW Gold */
+    padding-left: 1rem;
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ibew-callout--primary {
+    background-color: #f8f9fa;
+    border-left: 5px solid #313F6B;
+}
+
+.bg-ibew-navy {
+    background-color: #313F6B !important;
+}
+
+.bg-ibew-blue {
+    background-color: #0056b3 !important;
+    /* Adjust if a specific lighter blue is preferred */
+}
+
+.text-ibew-gold {
+    color: #F5C518 !important;
+}
+
+.text-ibew-blue {
+    color: #313F6B !important;
+}

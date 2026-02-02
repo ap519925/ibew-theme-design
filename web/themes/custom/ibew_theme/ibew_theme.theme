@@ -21,6 +21,28 @@ function ibew_theme_preprocess_page(&$variables) {
   $variables['embedded_news_view'] = views_embed_view('homepage_news', 'block_1');
   $variables['embedded_events_view'] = views_embed_view('homepage_events', 'block_1');
 
+  // LOAD MAIN MENU PROGRAMMATICALLY (Global Navigation)
+  // This ensures the menu is available on EVERY page, regardless of block layout.
+  $menu_tree = \Drupal::menuTree();
+  // Use generic parameters to load the full menu tree, not just the active trail.
+  // This fixes issues where pages not in the menu (like specific news articles) show an empty/fallback menu.
+  $parameters = new \Drupal\Core\Menu\MenuTreeParameters();
+  $parameters->onlyEnabledLinks(); // Only show enabled links
+  $tree = $menu_tree->load('main', $parameters);
+  $manipulators = [
+    ['callable' => 'menu.default_tree_manipulators:checkAccess'],
+    ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
+  ];
+  $tree = $menu_tree->transform($tree, $manipulators);
+  
+  // Desktop Menu
+  $variables['ibew_main_menu'] = $menu_tree->build($tree);
+  
+  // Mobile Menu (Same links, different template)
+  $mobile_menu_build = $menu_tree->build($tree);
+  $mobile_menu_build['#theme'] = 'menu__mobile';
+  $variables['ibew_mobile_menu'] = $mobile_menu_build;
+
   // FORCE INJECT HERO SLIDER (Direct Render Strategy)
   // Load the Block Content (ID 40) that the user is editing.
   $hero_block = \Drupal\block_content\Entity\BlockContent::load(40);
@@ -93,6 +115,9 @@ function ibew_theme_theme_suggestions_page_alter(array &$suggestions, array $var
   if ($alias == '/events') {
     $suggestions[] = 'page__events';
   }
+  if ($alias == '/join') {
+    $suggestions[] = 'page__join';
+  }
 }
 
 /**
@@ -162,7 +187,8 @@ function ibew_theme_preprocess_region(array &$variables) {
 
           // Manual Block Reordering in Homepage Regions
           // To ensure "Welcome" blocks come BEFORE "About" blocks
-          if ($variables['region'] === 'homepage_about' || $variables['region'] === 'content') {
+          // We include 'homepage_hero_content' in case blocks are placed there.
+          if ($variables['region'] === 'homepage_about' || $variables['region'] === 'content' || $variables['region'] === 'homepage_hero_content') {
               if (isset($variables['elements']) && is_array($variables['elements'])) {
                   $needs_sort = false;
 

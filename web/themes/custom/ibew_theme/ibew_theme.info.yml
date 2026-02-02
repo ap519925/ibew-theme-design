@@ -4,6 +4,9 @@ description: 'A custom theme for IBEW based on Radix.'
 core_version_requirement: ^10 || ^11
 base theme: radix
 
+ckeditor5-stylesheets:
+  - css/ckeditor.css
+
 regions:
   top_bar: 'Top Bar'
   header: Header

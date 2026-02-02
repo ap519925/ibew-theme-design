@@ -46,22 +46,19 @@
 			{# Desktop Links - Static to ensure consistency across all pages #}
 			<div
 				class="flex-grow-1 d-none d-xl-flex justify-content-center">
-				{#
-																          {% if page.primary_menu %}
-																              {{ page.primary_menu }}
-																          {% else %}
-																          #}
-				<nav class="ibew-nav__links">
-					<a href="/">{{ 'Home'|t }}</a>
-					<a href="/about">{{ 'About'|t }}</a>
-					<a href="/events">{{ 'Events'|t }}</a>
-					<a href="/news">{{ 'News'|t }}</a>
-					<a href="/contractors">{{ 'Contractors'|t }}</a>
-					<a href="/contact">{{ 'Contact'|t }}</a>
-				</nav>
-				{#
-																          {% endif %}
-																          #}
+				{# Dynamic Main Menu (Global) #}
+				{% if ibew_main_menu %}
+					{{ ibew_main_menu }}
+				{% else %}
+					<nav class="ibew-nav__links">
+						<a href="/">{{ 'Home'|t }}</a>
+						<a href="/about">{{ 'About'|t }}</a>
+						<a href="/events">{{ 'Events'|t }}</a>
+						<a href="/news">{{ 'News'|t }}</a>
+						<a href="/contractors">{{ 'Contractors'|t }}</a>
+						<a href="/contact">{{ 'Contact'|t }}</a>
+					</nav>
+				{% endif %}
 			</div>
 
 			<div class="d-none d-xl-block">
@@ -90,13 +87,21 @@
 
 	{# Standard Mobile Menu Container (Will be hidden by animated menu SCSS) #}
 	<div class="ibew-mobile-menu d-none bg-white border-top shadow-sm p-4" id="ibewMobileMenu" style="position: absolute; width: 100%; z-index: 1050;">
-		<nav class="d-flex flex-column gap-3 text-center">
-			<a href="/" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">Home</a>
-			<a href="/about" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">About</a>
-			<a href="/events" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">Events</a>
-			<a href="/news" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">News</a>
-			<a href="/contractors" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">Contractors</a>
-			<a href="/contact" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">Contact</a>
+		<nav
+			class="d-flex flex-column gap-3 text-center">
+
+			{# Dynamic Mobile Menu #}
+			{% if ibew_mobile_menu %}
+				{{ ibew_mobile_menu }}
+			{% else %}
+				<a href="/" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">Home</a>
+				<a href="/about" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">About</a>
+				<a href="/events" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">Events</a>
+				<a href="/news" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">News</a>
+				<a href="/contractors" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">Contractors</a>
+				<a href="/contact" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">Contact</a>
+			{% endif %}
+
 			<a href="/user/login" class="btn btn-primary w-100 mt-2">Member Sign-In</a>
 		</nav>
 	</div>
@@ -106,14 +111,18 @@
 		<input class="menu-icon-checkbox" type="checkbox" id="menu-icon-checkbox" name="menu-icon-checkbox"/>
 		<label class="menu-icon-label" for="menu-icon-checkbox"></label>
 		<div class="nav-animated">
-			<ul>
-				<li><a href="/">{{ 'Home'|t }}</a></li>
-				<li><a href="/about">{{ 'About'|t }}</a></li>
-				<li><a href="/events">{{ 'Events'|t }}</a></li>
-				<li><a href="/news">{{ 'News'|t }}</a></li>
-				<li><a href="/contractors">{{ 'Contractors'|t }}</a></li>
-				<li><a href="/contact">{{ 'Contact'|t }}</a></li>
-			</ul>
+			{% if ibew_mobile_menu %}
+				{{ ibew_mobile_menu }}
+			{% else %}
+				<ul>
+					<li><a href="/">{{ 'Home'|t }}</a></li>
+					<li><a href="/about">{{ 'About'|t }}</a></li>
+					<li><a href="/events">{{ 'Events'|t }}</a></li>
+					<li><a href="/news">{{ 'News'|t }}</a></li>
+					<li><a href="/contractors">{{ 'Contractors'|t }}</a></li>
+					<li><a href="/contact">{{ 'Contact'|t }}</a></li>
+				</ul>
+			{% endif %}
 		</div>
 	</div>
 </div>

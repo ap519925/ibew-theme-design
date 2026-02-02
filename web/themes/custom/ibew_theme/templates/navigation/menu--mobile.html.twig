@@ -1,0 +1,15 @@
+{# templates/navigation/menu--mobile.html.twig #}
+{% import _self as menus %}
+{{ menus.menu_links(items, attributes, 0) }}
+
+{% macro menu_links(items, attributes, menu_level) %}
+	{% if items %}
+		<ul>
+			{% for item in items %}
+				<li>
+					<a href="{{ item.url }}">{{ item.title }}</a>
+				</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+{% endmacro %}
