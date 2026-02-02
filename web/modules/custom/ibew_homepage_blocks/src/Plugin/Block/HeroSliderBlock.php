@@ -111,7 +111,7 @@ class HeroSliderBlock extends BlockBase
 
             $file = File::load($fid);
             if ($file) {
-                return $file->createFileUrl();
+                return \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri());
             }
             return null;
         };

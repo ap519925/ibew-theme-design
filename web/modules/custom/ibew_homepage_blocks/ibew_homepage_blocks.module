@@ -84,3 +84,18 @@ function ibew_homepage_blocks_theme() {
     ],
   ];
 }
+
+use Drupal\block_content\BlockContentInterface;
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Session\AccountInterface;
+
+/**
+ * Implements hook_block_content_access().
+ */
+function ibew_homepage_blocks_block_content_access(BlockContentInterface $entity, $operation, AccountInterface $account) {
+  // Allow everyone to view the hero slider block content.
+  if ($operation === 'view' && $entity->bundle() === 'hero_slider') {
+    return AccessResult::allowed();
+  }
+  return AccessResult::neutral();
+}

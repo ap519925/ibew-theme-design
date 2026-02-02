@@ -12,7 +12,15 @@
     <ul class="splide__list w-100" style="height: 100vh;">
       {% for slide in slides %}
         <li class="splide__slide w-100" style="height: 100vh;">
-           <div class="ibew-slide-bg" style="height: 100%; width: 100%; background: linear-gradient(rgba(11, 18, 34, 0.4), rgba(11, 18, 34, 0.6)), url('{{ slide.url }}') center/cover no-repeat;"></div>
+           <div class="ibew-slide-bg" style="
+               height: 100%; 
+               width: 100%; 
+               background-image: linear-gradient(rgba(11, 18, 34, 0.4), rgba(11, 18, 34, 0.6)), url('{{ slide.url }}');
+               background-position: center;
+               background-size: cover;
+               background-repeat: no-repeat;
+               background-attachment: fixed;
+           "></div>
         </li>
       {% endfor %}
     </ul>

@@ -1,0 +1,374 @@
+{#
+/**
+ * @file
+ * News page layout with filtering and sorting.
+ */
+#}
+<a id="main-content" tabindex="-1"></a>
+
+<div class="ibew-page bg-gray-100 text-gray-900 min-h-screen">
+	{% include '@ibew_theme/includes/header.html.twig' %}
+
+	{# Page Header #}
+	<section class="bg-gradient-to-r from-ibew-navy to-ibew-blue text-white py-16">
+		<div class="container">
+			<h1 class="text-5xl font-oswald fw-bold mb-4">News & Updates</h1>
+			<p class="text-xl text-gray-200">Stay informed with the latest news from IBEW Local 90</p>
+		</div>
+	</section>
+
+	{# Filter & Sort Controls #}
+	<section class="bg-white border-bottom shadow-sm sticky-top" style="top: 80px; z-index: 100;">
+		<div class="container py-4">
+			<div
+				class="d-flex flex-wrap gap-3 align-items-center justify-content-between">
+				{# Search #}
+				<div class="flex-grow-1" style="max-width: 400px;">
+					<div class="input-group">
+						<span class="input-group-text bg-white border-end-0">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewbox="0 0 16 16">
+								<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+							</svg>
+						</span>
+						<input type="text" id="newsSearch" class="form-control border-start-0" placeholder="Search news articles...">
+					</div>
+				</div>
+
+				{# Sort Options #}
+				<div class="d-flex gap-2 align-items-center">
+					<label class="mb-0 fw-bold text-secondary small">Sort by:</label>
+					<select id="newsSort" class="form-select form-select-sm" style="width: auto;">
+						<option value="date-desc">Newest First</option>
+						<option value="date-asc">Oldest First</option>
+						<option value="title-asc">Title (A-Z)</option>
+						<option value="title-desc">Title (Z-A)</option>
+					</select>
+				</div>
+
+				{# View Toggle #}
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-sm btn-outline-secondary active" id="gridView">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewbox="0 0 16 16">
+							<path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3z"/>
+						</svg>
+					</button>
+					<button type="button" class="btn btn-sm btn-outline-secondary" id="listView">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewbox="0 0 16 16">
+							<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	{# News Grid/List #}
+	<main class="py-16">
+		<div class="container">
+			<div
+				id="newsContainer" class="row g-4">{# News articles will be loaded here via JavaScript #}
+			</div>
+
+			{# Loading State #}
+			<div id="newsLoading" class="text-center py-5">
+				<div class="spinner-border text-primary" role="status">
+					<span class="visually-hidden">Loading...</span>
+				</div>
+				<p class="mt-3 text-muted">Loading news articles...</p>
+			</div>
+
+			{# No Results #}
+			<div id="noResults" class="text-center py-5 d-none">
+				<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="text-muted mb-3" viewbox="0 0 16 16">
+					<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+					<path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+				</svg>
+				<h3 class="text-muted">No articles found</h3>
+				<p class="text-secondary">Try adjusting your search or filters</p>
+			</div>
+		</div>
+	</main>
+
+	{# --- Redesigned Footer --- #}
+	<footer class="ibew-footer">
+		<div class="ibew-shell max-w-7xl mx-auto px-6">
+
+			<div
+				class="ibew-footer__container">
+				<!-- Col 1: Brand -->
+				<div class="ibew-footer__brand-col">
+					{% if page.footer_col_1 %}
+						{{ page.footer_col_1 }}
+					{% else %}
+						<a href="/" class="ibew-footer__brand-logo">
+							<img src="/themes/custom/ibew_theme/logo.png" alt="Local 90">
+							<span>Local 90</span>
+						</a>
+						<p>Serving our community with excellence in electrical work since 1892. Building tomorrow's infrastructure today.</p>
+					{% endif %}
+				</div>
+
+				<!-- Col 2: Quick Links -->
+				<div>
+					{% if page.footer_col_2 %}
+						{{ page.footer_col_2 }}
+					{% else %}
+						<h4>Quick Links</h4>
+						<ul class="ibew-footer__links">
+							<li>
+								<a href="/about">About Us</a>
+							</li>
+							<li>
+								<a href="/training">Training Programs</a>
+							</li>
+							<li>
+								<a href="/join">Become a Member</a>
+							</li>
+							<li>
+								<a href="/contractors">Find a Contractor</a>
+							</li>
+						</ul>
+					{% endif %}
+				</div>
+
+				<!-- Col 3: Members -->
+				<div>
+					{% if page.footer_col_3 %}
+						{{ page.footer_col_3 }}
+					{% else %}
+						<h4>Members</h4>
+						<ul class="ibew-footer__links">
+							<li>
+								<a href="/member-portal" class="highlight">Member Portal</a>
+							</li>
+							<li>
+								<a href="/dues">Pay Dues</a>
+							</li>
+							<li>
+								<a href="/benefits">Benefits Info</a>
+							</li>
+							<li>
+								<a href="/jobs">Job Board</a>
+							</li>
+						</ul>
+					{% endif %}
+				</div>
+
+				<!-- Col 4: Contact -->
+				<div>
+					{% if page.footer_col_4 %}
+						{{ page.footer_col_4 }}
+					{% else %}
+						<h4>Contact</h4>
+						<div class="ibew-footer__contact-item">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewbox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/></svg>
+							<span>(203) 265-9533</span>
+						</div>
+						<div class="ibew-footer__contact-item">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewbox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/></svg>
+							<a href="mailto:info@ibewlocal90.org" class="text-gray-400 hover:text-white">info@ibewlocal90.org</a>
+						</div>
+						<div class="ibew-footer__contact-item">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewbox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+							<span>2 N Plains Industrial Rd<br>Wallingford, CT 06492</span>
+						</div>
+					{% endif %}
+				</div>
+
+			</div>
+
+			<div class="ibew-footer__bottom">
+				{% if page.footer %}
+					{{ page.footer }}
+				{% else %}
+					&copy;
+					{{ "now"|date("Y") }}
+					IBEW Local 90. All rights reserved.
+				{% endif %}
+			</div>
+		</div>
+	</footer>
+</div>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+let newsArticles = [];
+let currentView = 'grid';
+
+// Fetch news articles
+fetch('/news-json').then(response => response.json()).then(data => {
+newsArticles = data;
+renderNews();
+document.getElementById('newsLoading').classList.add('d-none');
+}).catch(error => {
+console.error('Error loading news:', error);
+document.getElementById('newsLoading').innerHTML = '<p class="text-danger">Error loading news articles</p>';
+});
+
+// Search functionality
+document.getElementById('newsSearch').addEventListener('input', function (e) {
+renderNews();
+});
+
+// Sort functionality
+document.getElementById('newsSort').addEventListener('change', function (e) {
+renderNews();
+});
+
+// View toggle
+document.getElementById('gridView').addEventListener('click', function () {
+currentView = 'grid';
+this.classList.add('active');
+document.getElementById('listView').classList.remove('active');
+renderNews();
+});
+
+document.getElementById('listView').addEventListener('click', function () {
+currentView = 'list';
+this.classList.add('active');
+document.getElementById('gridView').classList.remove('active');
+renderNews();
+});
+
+function renderNews() {
+const searchTerm = document.getElementById('newsSearch').value.toLowerCase();
+const sortBy = document.getElementById('newsSort').value;
+
+// Filter
+let filtered = newsArticles.filter(article => {
+return article.title.toLowerCase().includes(searchTerm) || (article.summary && article.summary.toLowerCase().includes(searchTerm));
+});
+
+// Sort
+filtered.sort((a, b) => {
+switch (sortBy) {
+case 'date-desc':
+return new Date(b.date) - new Date(a.date);
+case 'date-asc':
+return new Date(a.date) - new Date(b.date);
+case 'title-asc':
+return a.title.localeCompare(b.title);
+case 'title-desc':
+return b.title.localeCompare(a.title);
+default:
+return 0;
+}
+});
+
+const container = document.getElementById('newsContainer');
+const noResults = document.getElementById('noResults');
+
+if (filtered.length === 0) {
+container.innerHTML = '';
+noResults.classList.remove('d-none');
+return;
+}
+
+noResults.classList.add('d-none');
+
+if (currentView === 'grid') {
+container.className = 'row g-4';
+container.innerHTML = filtered.map(
+article => `
+        <div class="col-md-6 col-lg-4">
+          <article class="ibew-news-card bg-gray-800 rounded-lg shadow-lg overflow-hidden h-100 d-flex flex-column hover-lift transition-all">
+            ${
+article.image ? `
+              <div class="position-relative" style="height: 200px; overflow: hidden;">
+                <img src="${
+article.image
+}" alt="${
+article.title
+}" class="w-100 h-100 object-fit-cover">
+              </div>
+            ` : ''
+}
+            <div class="p-4 flex-grow-1 d-flex flex-column">
+              <div class="text-xs text-ibew-gold fw-bold mb-2">${
+formatDate(article.date)
+}</div>
+              <h3 class="h5 fw-bold text-white mb-3">
+                <a href="${
+article.url
+}" class="text-decoration-none text-white hover:text-ibew-gold transition-colors">${
+article.title
+}</a>
+              </h3>
+              ${
+article.summary ? `<p class="text-gray-400 text-sm mb-4 flex-grow-1">${
+article.summary
+}</p>` : ''
+}
+              <a href="${
+article.url
+}" class="btn btn-sm btn-outline-light mt-auto">Read More →</a>
+            </div>
+          </article>
+        </div>
+      `
+).join('');
+} else {
+container.className = 'd-flex flex-column gap-3';
+container.innerHTML = filtered.map(
+article => `
+        <article class="ibew-news-card bg-gray-800 rounded-lg shadow-lg overflow-hidden d-flex flex-row hover-lift transition-all">
+          ${
+article.image ? `
+            <div class="position-relative" style="width: 250px; flex-shrink: 0;">
+              <img src="${
+article.image
+}" alt="${
+article.title
+}" class="w-100 h-100 object-fit-cover">
+            </div>
+          ` : ''
+}
+          <div class="p-4 flex-grow-1">
+            <div class="text-xs text-ibew-gold fw-bold mb-2">${
+formatDate(article.date)
+}</div>
+            <h3 class="h4 fw-bold text-white mb-3">
+              <a href="${
+article.url
+}" class="text-decoration-none text-white hover:text-ibew-gold transition-colors">${
+article.title
+}</a>
+            </h3>
+            ${
+article.summary ? `<p class="text-gray-400 mb-3">${
+article.summary
+}</p>` : ''
+}
+            <a href="${
+article.url
+}" class="btn btn-sm btn-outline-light">Read More →</a>
+          </div>
+        </article>
+      `
+).join('');
+}
+}
+
+function formatDate(dateString) {
+const date = new Date(dateString);
+return date.toLocaleDateString('en-US', {
+year: 'numeric',
+month: 'long',
+day: 'numeric'
+});
+}
+});
+</script>
+
+<style>
+	.hover-lift {
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+	.hover-lift:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4) !important;
+	}
+	.object-fit-cover {
+		object-fit: cover;
+	}
+</style>

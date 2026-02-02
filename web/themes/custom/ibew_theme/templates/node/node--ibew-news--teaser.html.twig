@@ -6,7 +6,11 @@
 
   {# Image Top Wrapper - height controlled by CSS context (.ibew-news-featured or .ibew-news-grid) #}
   <div class="card-img-top position-relative bg-secondary w-100 overflow-hidden illustration-container">
-    {% if content.field_news_image %}
+    {% if node.field_news_image.entity %}
+      {% set image_file = node.field_news_image.entity %}
+      {% set image_url = file_url(image_file.uri.value) %}
+      <img src="{{ image_url }}" alt="{{ node.field_news_image.alt }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
+    {% elseif content.field_news_image %}
        {{ content.field_news_image }}
     {% endif %}
     <a href="{{ link_url }}" target="{{ link_target }}" class="stretched-link visually-hidden" aria-label="Read {{ label }}"></a>

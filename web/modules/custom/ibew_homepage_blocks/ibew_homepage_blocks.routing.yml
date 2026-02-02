@@ -1,0 +1,23 @@
+ibew_homepage_blocks.events_json:
+  path: '/events-json'
+  defaults:
+    _controller: '\Drupal\ibew_homepage_blocks\Controller\EventsJsonController::json'
+    _title: 'Events JSON Feed'
+  requirements:
+    _permission: 'access content'
+
+ibew_homepage_blocks.news_json:
+  path: '/news-json'
+  defaults:
+    _controller: '\Drupal\ibew_homepage_blocks\Controller\NewsJsonController::json'
+    _title: 'News JSON Feed'
+  requirements:
+    _permission: 'access content'
+
+ibew_homepage_blocks.news:
+  path: '/news'
+  defaults:
+    _controller: '\Drupal\ibew_homepage_blocks\Controller\NewsPageController::content'
+    _title: 'News'
+  requirements:
+    _permission: 'access content'

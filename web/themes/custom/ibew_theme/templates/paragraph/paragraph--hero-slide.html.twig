@@ -1,7 +1,19 @@
 {# paragraph--hero-slide.html.twig #}
-{% set image_url = file_url(content.field_hero_image['0']['#item'].entity.uri.value) %}
+{% set media_entity = paragraph.field_hero_media.0.entity %}
+{% if media_entity %}
+  {% set file_entity = media_entity.field_media_image.0.entity %}
+  {% set image_uri = file_entity.uri.value %}
+  {% set image_url = file_url(image_uri) %}
+<!-- DEBUG: Media ID: {{ media_entity.id() }} | URI: {{ image_uri }} | URL: {{ image_url }} -->
+{% else %}
+  {# Fallback/Debug #}
+  {% set image_url = '' %}
+<!-- DEBUG: No Media Entity Found -->
+{% endif %}
 
 <li class="splide__slide h-full w-full relative">
-    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ image_url }}');">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ image_url }}'); background-attachment: fixed;">
+
+
     </div>
 </li>

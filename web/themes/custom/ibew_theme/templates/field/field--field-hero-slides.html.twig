@@ -1,0 +1,27 @@
+{# Field template for Hero Slides - Wraps content in Splide markup #}
+<div id="ibewHeroSplide" class="splide h-full w-full">
+  <div class="splide__track h-full w-full">
+    <ul class="splide__list h-full w-full">
+      {% for item in items %}
+        {{ item.content }}
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (document.querySelector('#ibewHeroSplide')) {
+      new Splide('#ibewHeroSplide', {
+        type: 'fade',
+        rewind: true,
+        autoplay: true,
+        interval: 5000,
+        arrows: true,
+        pagination: true,
+        cover: true,
+        height: '100%',
+      }).mount();
+    }
+  });
+</script>

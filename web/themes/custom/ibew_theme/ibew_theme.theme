@@ -20,8 +20,59 @@ function ibew_theme_preprocess_page(&$variables) {
   // Manually embed Views to guarantee placement and bypass ghost blocks
   $variables['embedded_news_view'] = views_embed_view('homepage_news', 'block_1');
   $variables['embedded_events_view'] = views_embed_view('homepage_events', 'block_1');
-}
 
+  // FORCE INJECT HERO SLIDER (Direct Render Strategy)
+  // Load the Block Content (ID 40) that the user is editing.
+  $hero_block = \Drupal\block_content\Entity\BlockContent::load(40);
+  if ($hero_block) {
+    $slides_data = [];
+    
+    // Check fields and iterate
+    if ($hero_block->hasField('field_hero_slides') && !$hero_block->get('field_hero_slides')->isEmpty()) {
+       $slides = $hero_block->get('field_hero_slides')->referencedEntities();
+       foreach ($slides as $slide) {
+         if ($slide->hasField('field_hero_media') && !$slide->get('field_hero_media')->isEmpty()) {
+           $media = $slide->get('field_hero_media')->entity;
+           if ($media && $media->hasField('field_media_image') && !$media->get('field_media_image')->isEmpty()) {
+             $file = $media->get('field_media_image')->entity;
+             if ($file) {
+               $url = \Drupal::service('file_url_generator')->generateAbsoluteString($file->getFileUri());
+               $slides_data[] = ['url' => $url];
+             }
+           }
+         }
+       }
+    }
+    
+    $script_markup = '<script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (document.querySelector("#ibewHeroSplide")) {
+          new Splide("#ibewHeroSplide", {
+            type: "fade",
+            rewind: true,
+            autoplay: true,
+            interval: 5000,
+            arrows: true,
+            pagination: true,
+            cover: true,
+            height: "100%",
+          }).mount();
+        }
+      });
+    </script>';
+
+    $variables['page']['homepage_hero'] = [
+      'slider' => [
+        '#theme' => 'ibew_hero_slider',
+        '#slides' => $slides_data,
+      ],
+      'script' => [
+        '#markup' => $script_markup,
+        '#allowed_tags' => ['script'],
+      ],
+    ];
+  }
+}
 
 
 /**
@@ -61,6 +112,7 @@ function ibew_theme_preprocess_block(array &$variables) {
   $homepage_regions = [
     'header',
     'homepage_hero',
+    'homepage_hero_content',
     'homepage_about',
     'homepage_news',
     'homepage_events',
@@ -68,6 +120,14 @@ function ibew_theme_preprocess_block(array &$variables) {
     'homepage_contact',
     'footer'
   ];
+
+  // If we are on the front page, treats 'content' region as a homepage region too
+  // to prevent standard blocks placed there from getting boxed.
+  $is_front = \Drupal::service('path.matcher')->isFrontPage();
+  if ($is_front) {
+      $homepage_regions[] = 'content';
+  }
+
   if (isset($variables['elements']['#id'])) {
       $block = \Drupal\block\Entity\Block::load($variables['elements']['#id']);
       if ($block && in_array($block->getRegion(), $homepage_regions)) {
@@ -77,6 +137,7 @@ function ibew_theme_preprocess_block(array &$variables) {
 
   // Safely add classes ensuring attributes is an object.
   if (isset($variables['attributes']) && $variables['attributes'] instanceof \Drupal\Core\Template\Attribute) {
+    // Only add card styling if NOT in excluded regions (logic handled above)
     $variables['attributes']->addClass(['ibew-card', 'ibew-ghost-border']);
   }
   elseif (isset($variables['attributes']) && is_array($variables['attributes'])) {
@@ -98,6 +159,45 @@ function ibew_theme_preprocess_region(array &$variables) {
   $layout_classes = [
     'homepage_contact' => ['ibew-row'],
   ];
+
+          // Manual Block Reordering in Homepage Regions
+          // To ensure "Welcome" blocks come BEFORE "About" blocks
+          if ($variables['region'] === 'homepage_about' || $variables['region'] === 'content') {
+              if (isset($variables['elements']) && is_array($variables['elements'])) {
+                  $needs_sort = false;
+
+                  // Find the blocks
+                  foreach (\Drupal\Core\Render\Element::children($variables['elements']) as $key) {
+                      $element = $variables['elements'][$key];
+                      
+                      // CLEANUP: specific fix for "broken or missing" block errors
+                      if (isset($element['#plugin_id']) && ($element['#plugin_id'] === 'broken' || strpos($element['#plugin_id'], 'broken') !== false)) {
+                          unset($variables['elements'][$key]);
+                          continue; 
+                      }
+
+                      if (isset($element['#configuration']['label'])) {
+                          $label = $element['#configuration']['label'];
+                          
+                          // Force "Welcome" / "Intro" blocks to the top
+                          if (stripos($label, 'Welcome') !== false || stripos($label, 'Intro') !== false) {
+                              $variables['elements'][$key]['#weight'] = -1000;
+                              $needs_sort = true;
+                          }
+                          // Force "About" / "History" blocks to the bottom
+                          elseif (stripos($label, 'About') !== false || stripos($label, 'History') !== false) {
+                              $variables['elements'][$key]['#weight'] = 1000;
+                              $needs_sort = true;
+                          }
+                      }
+                  }
+
+                  // Resort if weights were changed
+                  if ($needs_sort) {
+                       uasort($variables['elements'], ['\Drupal\Component\Utility\SortArray', 'sortByWeightProperty']);
+                  }
+              }
+          }
 
   if (!isset($layout_classes[$variables['region']])) {
     return;

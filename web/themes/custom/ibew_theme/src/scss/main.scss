@@ -11,6 +11,7 @@
 @import '~@splidejs/splide/dist/css/splide.min.css';
 @import '../../components/ibew-header/ibew-header';
 @import 'frontpage';
+@import 'mobile-menu-animated';
 
 // Override/Reset Hero for Slider
 // Override/Reset Hero for Slider
@@ -44,6 +45,53 @@ body {
     flex-direction: column;
     background-color: var(--ibew-bg-dark, $dark);
     color: var(--ibew-text-dark, $light);
+
+    // Page Transitions
+    opacity: 0; // Default hidden
+    transition: opacity 400ms ease-in-out;
+
+    &.page-loaded {
+        opacity: 1;
+    }
+
+    &.page-transitioning {
+        opacity: 0;
+    }
+}
+
+// Semantic Card Surface Class
+.ibew-card-surface {
+    background-color: #ffffff;
+    color: inherit;
+}
+
+html.dark .ibew-card-surface {
+    background-color: #1f2937; // Default Dark Mode (Gray 800)
+    color: #f3f4f6;
+}
+
+// Explicit News Page Override (Selector Chain for Max Specificity)
+body.path-news .ibew-card-surface,
+html.dark body.path-news .ibew-card-surface,
+.view-news .ibew-card-surface,
+html.dark .view-news .ibew-card-surface {
+    background-color: #3E4C63 !important;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: white !important;
+}
+
+// Ensure children text is readable on the slate background
+body.path-news,
+html.dark body.path-news,
+.view-news {
+    .ibew-card-surface .text-muted {
+        color: rgba(255, 255, 255, 0.8) !important;
+    }
+
+    .ibew-card-surface h3,
+    .ibew-card-surface .card-title {
+        color: white !important;
+    }
 }
 
 .layout-container {
