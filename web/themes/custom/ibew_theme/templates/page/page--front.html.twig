@@ -65,13 +65,40 @@
 
 			{# 2. About Section #}
 			{# 2. Welcome / About Section (Static) #}
-				<section id="about" class="ibew-section py-24 bg-white text-gray-900 w-100"> <div class="container text-center">
-					<h2 class="display-5 fw-bold font-oswald text-uppercase text-dark mb-4">Welcome to IBEW Local 90</h2>
-					<div class="w-24 h-1 bg-warning mx-auto mb-4"></div>
-					<p class="lead text-muted max-w-4xl mx-auto mb-5">
-						For over 130 years, IBEW Local 90 has been powering our community with excellence, safety, and dedication. We are proud to represent the finest electrical workers in the industry.
-					</p>
-					<a href="/about" class="btn btn-outline-dark px-4 py-2 fw-bold text-uppercase">Learn More About Us</a>
+				<section id="about" class="ibew-section py-20 text-white w-100" style="background-color: #1e3a5f;"> <div class="container">
+					<div
+						class="row align-items-center gx-5">
+						{# Left Column: Text Content #}
+						<div class="col-lg-6 mb-5 mb-lg-0 text-start">
+							<h2 class="display-5 fw-bold font-oswald text-uppercase text-white mb-4">WELCOME TO IBEW 90!</h2>
+
+							<div class="text-gray-200 space-y-4 text-lg font-light leading-relaxed">
+								<p>
+									Get the most productive, safest and skilled electricians on your projects. It is more important to you the business partner, owner and end user than ever before. We offer professionalism, a positive construction experience. Safer projects bring smaller insurance premiums. All your employees will be OSHA 10 certified workers.
+								</p>
+								<p>
+									We can man up any size project while we move toward our goal of a drug free workforce. How many electrical craftsmen do you need? We'll get them there for you.
+								</p>
+							</div>
+
+							<a href="/about" class="btn btn-warning btn-lg mt-5 text-uppercase fw-bold px-5 py-3 shadow-lg" style="min-width: 250px; background-color: #f7c948; border: none; color: #1e3a5f;">
+								Learn More About Us
+							</a>
+						</div>
+
+						{# Right Column: Image #}
+						<div class="col-lg-6">
+							<div
+								class="position-relative rounded-4 overflow-hidden shadow-2xl h-100">
+								{# Using screenshot.png (fixed extension) and forcing larger height #}
+								<img
+								src="/themes/custom/ibew_theme/screenshot.png" alt="IBEW Electrician at work" class="img-fluid w-100 object-cover" style="height: 600px; min-height: 500px; object-fit: cover;">
+
+								{# Optional overlay gradient #}
+								<div class="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent pointer-events-none"></div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</section>
 		</div>
@@ -156,14 +183,14 @@
 
 		{# 5. Contact / CTA - REMOVED PER REQUEST #}
 		{# 
-												      {% if page.homepage_contact %}
-												            <section id="contact" class="ibew-section py-16 bg-gray-50 w-100">
-												              <div class="ibew-region ibew-region--contact w-100">
-												                  {{ page.homepage_contact }}
-												              </div>
-												            </section>
-												          {% endif %}
-												          #}
+																      {% if page.homepage_contact %}
+																            <section id="contact" class="ibew-section py-16 bg-gray-50 w-100">
+																              <div class="ibew-region ibew-region--contact w-100">
+																                  {{ page.homepage_contact }}
+																              </div>
+																            </section>
+																          {% endif %}
+																          #}
 
 		{# --- New CTA Section --- #}
 			<section class="ibew-cta-section w-100"> <div class="container text-center">
