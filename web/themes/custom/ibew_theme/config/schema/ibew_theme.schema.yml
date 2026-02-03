@@ -1,0 +1,18 @@
+# Schema for IBEW Theme settings
+ibew_theme.settings:
+  type: theme_settings
+  label: 'IBEW Theme Settings'
+  mapping:
+    canvas:
+      type: mapping
+      label: 'Drupal Canvas Settings'
+      mapping:
+        use_canvas:
+          type: boolean
+          label: 'Use Drupal Canvas'
+        editable:
+          type: sequence
+          label: 'Editable Regions'
+          sequence:
+            type: boolean
+            label: 'Region Status'

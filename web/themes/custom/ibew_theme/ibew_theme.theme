@@ -57,6 +57,12 @@ function ibew_theme_preprocess_page(&$variables) {
   $variables['embedded_news_view'] = views_embed_view('homepage_news', 'block_1');
   $variables['embedded_events_view'] = views_embed_view('homepage_events', 'block_1');
 
+  // Ensure logo availability
+  $logo_url = theme_get_setting('logo.url');
+  if ($logo_url) {
+    $variables['logo'] = $logo_url;
+  }
+
   // LOAD MAIN MENU PROGRAMMATICALLY (Global Navigation)
   // This ensures the menu is available on EVERY page, regardless of block layout.
   $menu_tree = \Drupal::menuTree();

@@ -31,11 +31,7 @@
 			</span>
 			<span class="text-muted fw-bold">&bull;</span>
 			<span class="text-muted fw-bold">
-				{% if node.field_published_date.value %}
-					{{ node.field_published_date.value|date("F j, Y") }}
-				{% else %}
-					{{ node.created.value|date("F j, Y") }}
-				{% endif %}
+				{{ node.created.value|date("F j, Y") }}
 			</span>
 		</div>
 
