@@ -23,16 +23,21 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
                 const bgImage = hero.querySelector('.ibew-parallax-bg');
 
                 if (bgImage) {
-                    gsap.to(bgImage, {
-                        yPercent: 30, // Move background down 30% of its height
-                        ease: "none",
-                        scrollTrigger: {
-                            trigger: hero,
-                            start: "top top", // Start when hero top hits viewport top
-                            end: "bottom top", // End when hero bottom hits viewport top
-                            scrub: true // Smooth scrubbing based on scroll position
+                    gsap.fromTo(bgImage,
+                        {
+                            yPercent: -20 // Start pulled up
+                        },
+                        {
+                            yPercent: 10, // Move down slightly
+                            ease: "none",
+                            scrollTrigger: {
+                                trigger: hero,
+                                start: "top bottom", // Start when hero enters viewport
+                                end: "bottom top", // End when hero leaves viewport
+                                scrub: true // Smooth scrubbing based on scroll position
+                            }
                         }
-                    });
+                    );
                 }
             });
         }

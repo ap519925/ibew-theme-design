@@ -65,11 +65,24 @@
 
 			{# 2. About Section #}
 			{# 2. Welcome / About Section (Static) #}
-				<section id="about" class="ibew-section py-20 text-white w-100" style="background-color: #1e3a5f;"> <div class="container">
+				<section id="about" class="ibew-section text-white w-100" style="background-color: #1e3a5f; padding-top: 8rem; padding-bottom: 8rem;"> <div class="container-fluid" style="max-width: 1400px;">
 					<div
 						class="row align-items-center gx-5">
-						{# Left Column: Text Content #}
-						<div class="col-lg-6 mb-5 mb-lg-0 text-start">
+						{# Left Column: Image (Wider) #}
+						<div class="col-lg-7 mb-5 mb-lg-0">
+							<div
+								class="position-relative rounded-4 overflow-hidden shadow-2xl h-100">
+								{# Using the painting image #}
+								<img
+								src="/themes/custom/ibew_theme/images/ibew-building-painting.jpg" alt="IBEW Local 90 Building Painting" class="img-fluid w-100 object-cover" style="height: 600px; min-height: 500px; object-fit: cover;">
+
+								{# Optional overlay gradient #}
+								<div class="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent pointer-events-none"></div>
+							</div>
+						</div>
+
+						{# Right Column: Text Content #}
+						<div class="col-lg-5 text-start ps-lg-5">
 							<h2 class="display-5 fw-bold font-oswald text-uppercase text-white mb-4">WELCOME TO IBEW 90!</h2>
 
 							<div class="text-gray-200 space-y-4 text-lg font-light leading-relaxed">
@@ -81,22 +94,9 @@
 								</p>
 							</div>
 
-							<a href="/about" class="btn btn-warning btn-lg mt-5 text-uppercase fw-bold px-5 py-3 shadow-lg" style="min-width: 250px; background-color: #f7c948; border: none; color: #1e3a5f;">
+							<a href="/about" class="btn btn-warning btn-lg mt-5 text-uppercase fw-bold px-5 py-3 shadow-lg font-oswald tracking-wide" style="min-width: 250px; background-color: #f7c948; border: none; color: #1e3a5f;">
 								Learn More About Us
 							</a>
-						</div>
-
-						{# Right Column: Image #}
-						<div class="col-lg-6">
-							<div
-								class="position-relative rounded-4 overflow-hidden shadow-2xl h-100">
-								{# Using screenshot.png (fixed extension) and forcing larger height #}
-								<img
-								src="/themes/custom/ibew_theme/screenshot.png" alt="IBEW Electrician at work" class="img-fluid w-100 object-cover" style="height: 600px; min-height: 500px; object-fit: cover;">
-
-								{# Optional overlay gradient #}
-								<div class="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent pointer-events-none"></div>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -183,48 +183,55 @@
 
 		{# 5. Contact / CTA - REMOVED PER REQUEST #}
 		{# 
-																      {% if page.homepage_contact %}
-																            <section id="contact" class="ibew-section py-16 bg-gray-50 w-100">
-																              <div class="ibew-region ibew-region--contact w-100">
-																                  {{ page.homepage_contact }}
-																              </div>
-																            </section>
-																          {% endif %}
-																          #}
+																																										      {% if page.homepage_contact %}
+																																										            <section id="contact" class="ibew-section py-16 bg-gray-50 w-100">
+																																										              <div class="ibew-region ibew-region--contact w-100">
+																																										                  {{ page.homepage_contact }}
+																																										              </div>
+																																										            </section>
+																																										          {% endif %}
+																																										          #}
 
 		{# --- New CTA Section --- #}
-			<section class="ibew-cta-section w-100"> <div class="container text-center">
-				<h2 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 0.5rem; line-height: 1.1;">
+		{# --- New CTA Section (Parallax) --- #}
+			<section
+			class="ibew-parallax-hero ibew-cta-section w-100 relative py-20 overflow-hidden text-white" style="margin-bottom: 0 !important;"> {# Parallax Background #}
+			<div class="ibew-parallax-bg" style="background-image: url('/themes/custom/ibew_theme/images/cta-background.jpg');"></div>
+
+			{# Overlay #}
+			<div class="ibew-parallax-overlay" style="background: linear-gradient(135deg, rgba(30, 58, 95, 0.6) 0%, rgba(45, 74, 111, 0.5) 100%);"></div>
+
+			<div class="container relative z-10 text-center">
+				<h2 class="display-4 fw-bold font-oswald text-uppercase mb-5 text-shadow-md">
 					READY TO BUILD YOUR FUTURE?
 				</h2>
 
 				<div
-					class="ibew-cta-grid">
+					class="ibew-cta-grid grid grid-cols-1 md:grid-cols-3 gap-6">
 					<!-- Prospective Members -->
-					<div class="ibew-cta-card">
-						<h3>Prospective Members</h3>
-						<p>Start your journey in the electrical trade with world-class training and support</p>
-						<a href="/join" class="ibew-btn-lg ibew-btn--gold">Become a Member</a>
+					<div class="ibew-cta-card bg-white/10 backdrop-blur-sm border border-white/20 p-8 rounded-2xl hover:bg-white/20 transition-all duration-300">
+						<h3 class="font-oswald text-2xl font-bold mb-3 text-white uppercase text-shadow-sm">Prospective Members</h3>
+						<p class="text-white/90 mb-6 min-h-[60px] font-light">Start your journey in the electrical trade with world-class training and support</p>
+						<a href="/join" class="btn w-full py-3 fw-bold text-uppercase font-oswald tracking-wide shadow-lg hover:shadow-xl transition-all" style="background-color: #cc9c42; color: #1e3a5f; border: none;">Become a Member</a>
 					</div>
 
 					<!-- Contractors -->
-					<div class="ibew-cta-card">
-						<h3>Contractors</h3>
-						<p>Find skilled IBEW electricians for your next project today</p>
-						<a href="/contractors" class="ibew-btn-lg ibew-btn--blue">Find Contractors</a>
+					<div class="ibew-cta-card bg-white/10 backdrop-blur-sm border border-white/20 p-8 rounded-2xl hover:bg-white/20 transition-all duration-300">
+						<h3 class="font-oswald text-2xl font-bold mb-3 text-white uppercase text-shadow-sm">Contractors</h3>
+						<p class="text-white/90 mb-6 min-h-[60px] font-light">Find skilled IBEW electricians for your next project today</p>
+						<a href="/contractors" class="btn w-full py-3 fw-bold text-uppercase font-oswald tracking-wide shadow-lg hover:shadow-xl transition-all" style="background-color: #465a8c; color: white; border: none;">Find Contractors</a>
 					</div>
 
 					<!-- Training -->
-					<div class="ibew-cta-card">
-						<h3>Training</h3>
-						<p>Advance your skills with comprehensive apprenticeship programs</p>
-						<a href="/training" class="ibew-btn-lg ibew-btn--red">Learn more</a>
+					<div class="ibew-cta-card bg-white/10 backdrop-blur-sm border border-white/20 p-8 rounded-2xl hover:bg-white/20 transition-all duration-300">
+						<h3 class="font-oswald text-2xl font-bold mb-3 text-white uppercase text-shadow-sm">Training</h3>
+						<p class="text-white/90 mb-6 min-h-[60px] font-light">Advance your skills with comprehensive apprenticeship programs</p>
+						<a href="/training" class="btn w-full py-3 fw-bold text-uppercase font-oswald tracking-wide shadow-lg hover:shadow-xl transition-all" style="background-color: #9e373f; color: white; border: none;">Learn more</a>
 					</div>
 				</div>
 			</div>
 		</section>
-	</section>
-</main>
+	</main>
 
-{# --- Footer (Reusable Include) --- #}
-{% include '@ibew_theme/includes/footer.html.twig' %}</div>
+	{# --- Footer (Reusable Include) --- #}
+	{% include '@ibew_theme/includes/footer.html.twig' %}</div>
