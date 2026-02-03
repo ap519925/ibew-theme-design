@@ -78,51 +78,76 @@
 				</div>
 			</div>
 
-			<!-- Mobile Menu Toggle -->
-			<button class="ibew-mobile-toggle d-xl-none border-0 bg-transparent p-2 text-white" aria-label="Toggle Menu" id="ibewMobileToggle">
-				<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg>
-			</button>
+			{# ========================================
+												   MOBILE HAMBURGER TOGGLE (Inside Nav Bar)
+												   ======================================== #}
+			<a href="#nav-mobile" class="nav-mobile__toggle d-xl-none" role="button" aria-expanded="false" aria-controls="nav-mobile-menu">
+				<svg class="menuicon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewbox="0 0 50 50">
+					<title>{{ 'Toggle Menu'|t }}</title>
+					<g>
+						<line class="menuicon__bar" x1="13" y1="16.5" x2="37" y2="16.5"/>
+						<line class="menuicon__bar" x1="13" y1="24.5" x2="37" y2="24.5"/>
+						<line class="menuicon__bar" x1="13" y1="24.5" x2="37" y2="24.5"/>
+						<line class="menuicon__bar" x1="13" y1="32.5" x2="37" y2="32.5"/>
+						<circle class="menuicon__circle" r="23" cx="25" cy="25"/>
+					</g>
+				</svg>
+			</a>
 		</div>
 	</nav>
 
-	{# Standard Mobile Menu Container (Will be hidden by animated menu SCSS) #}
-	<div class="ibew-mobile-menu d-none bg-white border-top shadow-sm p-4" id="ibewMobileMenu" style="position: absolute; width: 100%; z-index: 1050;">
-		<nav
-			class="d-flex flex-column gap-3 text-center">
+	{# ========================================
+			   MOBILE MENU OVERLAY (Splash + Menu Items)
+			   ======================================== #}
+	<nav
+		id="nav-mobile" class="nav-mobile d-xl-none" role="navigation">
 
-			{# Dynamic Mobile Menu #}
-			{% if ibew_mobile_menu %}
-				{{ ibew_mobile_menu }}
-			{% else %}
-				<a href="/" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">Home</a>
-				<a href="/about" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">About</a>
-				<a href="/events" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">Events</a>
-				<a href="/news" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">News</a>
-				<a href="/contractors" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">Contractors</a>
-				<a href="/contact" class="text-decoration-none fw-bold text-dark fs-5 py-2 border-bottom">Contact</a>
-			{% endif %}
+		{# ANIMATED BACKGROUND ELEMENT #}
+		<div class="nav-mobile__splash"></div>
 
-			<a href="/user/login" class="btn btn-primary w-100 mt-2">Member Sign-In</a>
-		</nav>
-	</div>
+		{# CLOSE BUTTON (Inside Overlay) #}
+		<button class="nav-mobile__close" aria-label="{{ 'Close Menu'|t }}">
+			<svg class="menuicon menuicon--close" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewbox="0 0 50 50">
+				<title>{{ 'Close Menu'|t }}</title>
+				<g>
+					<line class="menuicon__bar" x1="13" y1="16.5" x2="37" y2="16.5"/>
+					<line class="menuicon__bar" x1="13" y1="24.5" x2="37" y2="24.5"/>
+					<line class="menuicon__bar" x1="13" y1="24.5" x2="37" y2="24.5"/>
+					<line class="menuicon__bar" x1="13" y1="32.5" x2="37" y2="32.5"/>
+					<circle class="menuicon__circle" r="23" cx="25" cy="25"/>
+				</g>
+			</svg>
+		</button>
 
-	{# Animated Mobile Menu (Managed by _mobile-menu-animated.scss) #}
-	<div class="d-xl-none">
-		<input class="menu-icon-checkbox" type="checkbox" id="menu-icon-checkbox" name="menu-icon-checkbox"/>
-		<label class="menu-icon-label" for="menu-icon-checkbox"></label>
-		<div class="nav-animated">
-			{% if ibew_mobile_menu %}
-				{{ ibew_mobile_menu }}
-			{% else %}
-				<ul>
-					<li><a href="/">{{ 'Home'|t }}</a></li>
-					<li><a href="/about">{{ 'About'|t }}</a></li>
-					<li><a href="/events">{{ 'Events'|t }}</a></li>
-					<li><a href="/news">{{ 'News'|t }}</a></li>
-					<li><a href="/contractors">{{ 'Contractors'|t }}</a></li>
-					<li><a href="/contact">{{ 'Contact'|t }}</a></li>
-				</ul>
-			{% endif %}
-		</div>
-	</div>
+
+		{# NAVIGATION MENU #}
+		<ul class="nav-mobile__menu" id="nav-mobile-menu" tabindex="-1" aria-label="{{ 'Main Navigation'|t }}" hidden>
+			<li class="nav-mobile__item">
+				<a href="/" class="nav-mobile__link">{{ 'Home'|t }}</a>
+			</li>
+			<li class="nav-mobile__item">
+				<a href="/about" class="nav-mobile__link">{{ 'About'|t }}</a>
+			</li>
+			<li class="nav-mobile__item">
+				<a href="/events" class="nav-mobile__link">{{ 'Events'|t }}</a>
+			</li>
+			<li class="nav-mobile__item">
+				<a href="/news" class="nav-mobile__link">{{ 'News'|t }}</a>
+			</li>
+			<li class="nav-mobile__item">
+				<a href="/contractors" class="nav-mobile__link">{{ 'Contractors'|t }}</a>
+			</li>
+			<li class="nav-mobile__item">
+				<a href="/contact" class="nav-mobile__link">{{ 'Contact'|t }}</a>
+			</li>
+			<li class="nav-mobile__item nav-mobile__cta">
+				<a href="/user/login" class="nav-mobile__cta-btn">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewbox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg>
+					{{ 'Member Sign-In'|t }}
+				</a>
+			</li>
+		</ul>
+
+	</nav>
+
 </div>

@@ -1,0 +1,7 @@
+ibew_contact.contact_page:
+  path: '/contact'
+  defaults:
+    _form: '\Drupal\ibew_contact\Form\ContactForm'
+    _title: 'Contact Us'
+  requirements:
+    _permission: 'access content'

@@ -8,6 +8,30 @@
 use Drupal\Core\Form\FormStateInterface;
 
 /**
+ * Implements hook_preprocess_HOOK() for html templates.
+ */
+function ibew_theme_preprocess_html(&$variables) {
+  // Add path-based body classes for CSS targeting
+  $current_path = \Drupal::service('path.current')->getPath();
+  $path_alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+  
+  // Convert path to CSS-safe class name
+  $path_class = \Drupal\Component\Utility\Html::getClass($current_path);
+  $variables['attributes']['class'][] = $path_class;
+  
+  // Add specific class for user pages
+  if (str_starts_with($current_path, '/user')) {
+    $variables['attributes']['class'][] = 'path-user';
+  }
+
+  // Add specific class for contact page
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if ($route_name === 'ibew_contact.contact_page') {
+    $variables['attributes']['class'][] = 'path-contact';
+  }
+}
+
+/**
  * Implements hook_preprocess_HOOK() for page templates.
  */
 function ibew_theme_preprocess_page(&$variables) {
@@ -15,6 +39,18 @@ function ibew_theme_preprocess_page(&$variables) {
   // Only attach global styling if we are NOT on an admin route.
   if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
     $variables['#attached']['library'][] = 'ibew_theme/global-styling';
+  }
+
+  // Attach login page styling on user routes
+  $current_path = \Drupal::service('path.current')->getPath();
+  if (str_starts_with($current_path, '/user')) {
+    $variables['#attached']['library'][] = 'ibew_theme/login-page';
+  }
+
+  // Attach contact page styling
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if ($route_name === 'ibew_contact.contact_page') {
+    $variables['#attached']['library'][] = 'ibew_theme/contact-page';
   }
 
   // Manually embed Views to guarantee placement and bypass ghost blocks
@@ -118,6 +154,30 @@ function ibew_theme_theme_suggestions_page_alter(array &$suggestions, array $var
   if ($alias == '/join') {
     $suggestions[] = 'page__join';
   }
+
+  // Add template suggestion for contact page route
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if ($route_name === 'ibew_contact.contact_page') {
+    $suggestions[] = 'page__contact';
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for html templates.
+ */
+function ibew_theme_theme_suggestions_html_alter(array &$suggestions, array $variables) {
+  // Add custom html template for login page
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  
+  if ($route_name === 'user.login') {
+    $suggestions[] = 'html__user__login';
+  }
+  if ($route_name === 'user.register') {
+    $suggestions[] = 'html__user__register';
+  }
+  if ($route_name === 'user.pass') {
+    $suggestions[] = 'html__user__password';
+  }
 }
 
 /**
@@ -196,8 +256,24 @@ function ibew_theme_preprocess_region(array &$variables) {
                   foreach (\Drupal\Core\Render\Element::children($variables['elements']) as $key) {
                       $element = $variables['elements'][$key];
                       
-                      // CLEANUP: specific fix for "broken or missing" block errors
-                      if (isset($element['#plugin_id']) && ($element['#plugin_id'] === 'broken' || strpos($element['#plugin_id'], 'broken') !== false)) {
+                      // CLEANUP: aggressive fix for "broken or missing" block errors
+                      // If a block is "broken", it often has a specific plugin ID.
+                      $is_broken = false;
+                      if (isset($element['#plugin_id']) && (
+                          $element['#plugin_id'] === 'broken' || 
+                          strpos($element['#plugin_id'], 'broken') !== false ||
+                          strpos($element['#plugin_id'], 'missing') !== false
+                      )) {
+                          $is_broken = true;
+                      }
+
+                      // Also check if the #block content entity is null (common cause of OOB exception)
+                      if (isset($element['#id']) && !isset($element['content']['#block_content'])) {
+                           // This is harder to detect safely without loading entities, which we want to avoid in preprocess if possible.
+                           // But often broken blocks render just a message.
+                      }
+
+                      if ($is_broken) {
                           unset($variables['elements'][$key]);
                           continue; 
                       }

@@ -7,273 +7,197 @@
 <a id="main-content" tabindex="-1"></a>
 
 <div class="ibew-page bg-gray-100 text-gray-900 min-h-screen">
-  {% include '@ibew_theme/includes/header.html.twig' %}
-  
-  <style>
-    /* EMERGENCY OVERRIDE FOR HERO TRANSPARENCY */
-    .ibew-region--hero-content,
-    .ibew-region--hero-content .block,
-    .ibew-region--hero-content .ibew-card,
-    .ibew-region--hero-content .card,
-    .ibew-region--hero-content .field--name-body,
-    html.dark .ibew-region--hero-content .ibew-card,
-    html.dark .ibew-region--hero-content .card {
-        background: transparent !important;
-        background-color: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-    }
-    
-    .ibew-region--hero-content h1,
-    .ibew-region--hero-content h2,
-    .ibew-region--hero-content p {
-         text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-    }
-  </style>
+	{% include '@ibew_theme/includes/header.html.twig' %}
 
-  <section class="ibew-hero p-0 relative h-screen">
-    {# Background Slider (Z-0) #}
-    <div class="absolute inset-0 w-full h-full z-0">
-      {% if page.homepage_hero %}
-        {{ page.homepage_hero }}
-      {% endif %}
-    </div>
-    {# Global Overlay (Z-10) #}
-    <div class="absolute inset-0 z-10 pointer-events-none" style="background-color: rgba(0, 0, 0, 0.6);"></div>
+	<style>
+		/* EMERGENCY OVERRIDE FOR HERO TRANSPARENCY */
+		.ibew-region--hero-content,
+		.ibew-region--hero-content .block,
+		.ibew-region--hero-content .ibew-card,
+		.ibew-region--hero-content .card,
+		.ibew-region--hero-content .field--name-body,
+		html.dark .ibew-region--hero-content .ibew-card,
+		html.dark .ibew-region--hero-content .card {
+			background: transparent !important;
+			background-color: transparent !important;
+			border: none !important;
+			box-shadow: none !important;
+		}
+
+		.ibew-region--hero-content h1,
+		.ibew-region--hero-content h2,
+		.ibew-region--hero-content p {
+			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+		}
+	</style>
+
+	<section
+		class="ibew-hero p-0 relative h-screen">
+		{# Background Slider (Z-0) #}
+		<div class="absolute inset-0 w-full h-full z-0">
+			{% if page.homepage_hero %}
+				{{ page.homepage_hero }}
+			{% endif %}
+		</div>
+		{# Global Overlay (Z-10) #}
+		<div class="absolute inset-0 z-10 pointer-events-none" style="background-color: rgba(0, 0, 0, 0.6);"></div>
 
 
+		{# Content Overlay (Z-20) #}
+		{% if page.homepage_hero_content %}
+			<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 20; display: flex; align-items: center; justify-content: center; text-align: center; pointer-events: none;">
+				<div class="container" style="pointer-events: auto;">
+					<div class="ibew-region ibew-region--hero-content w-100">
+						{{ page.homepage_hero_content }}
+					</div>
+				</div>
+			</div>
+		{% endif %}
+	</section>
 
-    {# Content Overlay (Z-20) #}
-    {% if page.homepage_hero_content %}
-      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 20; display: flex; align-items: center; justify-content: center; text-align: center; pointer-events: none;">
-        <div class="container" style="pointer-events: auto;">
-          <div class="ibew-region ibew-region--hero-content w-100">
-            {{ page.homepage_hero_content }}
-          </div>
-        </div>
-      </div>
-    {% endif %}
-  </section>
+	<main>
+		{# Check if the current node has Canvas content populated #}
+		{% set has_canvas = node.field_content_canvas and not node.field_content_canvas.isEmpty() %}
+		{# --- Default Mode: Hardcoded Theme Sections --- #}
 
-  <main>
-    {# Check if the current node has Canvas content populated #}
-    {% set has_canvas = node.field_content_canvas and not node.field_content_canvas.isEmpty() %}
+		{# Sections in correct order: About second #}
+			<div class="sections-wrapper"> {# Welcome Section moved to Hero Overlay #}
 
-      {# --- Default Mode: Hardcoded Theme Sections --- #}
+			{# 2. About Section #}
+			{# 2. Welcome / About Section (Static) #}
+				<section id="about" class="ibew-section py-24 bg-white text-gray-900 w-100"> <div class="container text-center">
+					<h2 class="display-5 fw-bold font-oswald text-uppercase text-dark mb-4">Welcome to IBEW Local 90</h2>
+					<div class="w-24 h-1 bg-warning mx-auto mb-4"></div>
+					<p class="lead text-muted max-w-4xl mx-auto mb-5">
+						For over 130 years, IBEW Local 90 has been powering our community with excellence, safety, and dedication. We are proud to represent the finest electrical workers in the industry.
+					</p>
+					<a href="/about" class="btn btn-outline-dark px-4 py-2 fw-bold text-uppercase">Learn More About Us</a>
+				</div>
+			</section>
+		</div>
 
-      {# Sections in correct order: About second #}
-      <div class="sections-wrapper">
-        {# Welcome Section moved to Hero Overlay #}
+		{# 2. Combined News & Events Section #}
+		{% if embedded_news_view or embedded_events_view %}
+			<section
+				id="news-events" class="ibew-section py-24 bg-gray-50">
+				{# We keep a container for this wrapper because the grid itself is defined HERE, not in a block #}
+				<div class="container">
+					{# Replaced Bootstrap Row with Tailwind Grid for better layout control #}
+					{# Restoring News & Events with Bootstrap Grid with tight horizontal spacing #}
+					{# USER REQUEST: Add small margin between columns (gx-1 was too tight, gx-3 adds 1rem gap) #}
+						<div
+						class="row gx-3"> {# Left Column: Recent News (Col-9) #}
+						<div class="col-lg-8">
+							<div class="d-flex justify-content-between align-items-end mb-4">
+								<h2 class="display-6 fw-bold font-oswald text-uppercase text-dark mb-0">Latest News</h2>
+							</div>
 
-        {# 2. About Section SECOND #}
-        {% if page.homepage_about %}
-          <section id="about" class="ibew-section py-24 bg-white text-gray-900 w-100">
-            <div class="ibew-region ibew-region--about w-100">
-              {{ page.homepage_about }}
-            </div>
-          </section>
-        {% endif %}
-      </div>
+							<div class="ibew-region ibew-region--news">
+								{{ embedded_news_view }}
+							</div>
+						</div>
 
-      {# 2. Combined News & Events Section #}
-      {% if embedded_news_view or embedded_events_view %}
-        <section id="news-events" class="ibew-section py-24 bg-gray-50">
-          {# We keep a container for this wrapper because the grid itself is defined HERE, not in a block #}
-          <div class="container">
-            {# Replaced Bootstrap Row with Tailwind Grid for better layout control #}
-            {# Restoring News & Events with Bootstrap Grid with tight horizontal spacing #}
-            {# USER REQUEST: Add small margin between columns (gx-1 was too tight, gx-3 adds 1rem gap) #}
-            <div class="row gx-3">
-               {# Left Column: Recent News (Col-9) #}
-              <div class="col-lg-9">
-                <div class="d-flex justify-content-between align-items-end mb-4">
-                   <h2 class="display-6 fw-bold font-oswald text-uppercase text-dark mb-0">Latest News</h2>
-                </div>
-                
-                <div class="ibew-region ibew-region--news">
-                  {{ embedded_news_view }}
-                </div>
-              </div>
+						{# Right Column: Events & Training (Col-3) #}
+						<div class="col-lg-4">
+							<div class="d-flex justify-content-between align-items-end mb-4">
+								<h2 class="display-6 fw-bold font-oswald text-uppercase text-dark mb-0">Events & Training</h2>
+								<a href="/events" class="text-decoration-none fw-bold small text-primary">Calendar &rarr;</a>
+							</div>
 
-              {# Right Column: Events & Training (Col-3) #}
-              <div class="col-lg-3">
-                 <div class="d-flex justify-content-between align-items-end mb-4">
-                   <h2 class="display-6 fw-bold font-oswald text-uppercase text-dark mb-0">Events & Training</h2>
-                   <a href="/events" class="text-decoration-none fw-bold small text-primary">Calendar &rarr;</a>
-                </div>
+							{# Optional "For Contractors" Block #}
+							<div class="ibew-card bg-primary-subtle border-0 p-4 mb-4 rounded-4 position-relative overflow-hidden">
+								<div class="position-relative z-10">
+									<div class="d-flex align-items-center gap-3 mb-3">
+										<div class="bg-primary text-white rounded p-2">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewbox="0 0 16 16"><path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5z"/></svg>
+										</div>
+										<h3 class="h5 fw-bold font-oswald mb-0 text-dark">FOR CONTRACTORS</h3>
+									</div>
+									<p class="small text-muted mb-4">Connect with skilled IBEW professionals and submit your project requirements.</p>
 
-                {# Optional "For Contractors" Block #}
-                <div class="ibew-card bg-primary-subtle border-0 p-4 mb-4 rounded-4 position-relative overflow-hidden">
-                   <div class="position-relative z-10">
-                      <div class="d-flex align-items-center gap-3 mb-3">
-                         <div class="bg-primary text-white rounded p-2">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5z"/></svg> 
-                         </div>
-                         <h3 class="h5 fw-bold font-oswald mb-0 text-dark">FOR CONTRACTORS</h3>
-                      </div>
-                      <p class="small text-muted mb-4">Connect with skilled IBEW professionals and submit your project requirements.</p>
-                      
-                      <div class="d-grid gap-2">
-                         <a href="/contractors" class="btn btn-light shadow-sm text-start fw-bold d-flex justify-content-between align-items-center">
-                            Find IBEW Contractors
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
-                         </a>
-                         <a href="/projects" class="btn btn-light shadow-sm text-start fw-bold d-flex justify-content-between align-items-center">
-                            Submit Project Request
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
-                         </a>
-                      </div>
-                   </div>
-                   <!-- Decor -->
-                   <div class="position-absolute top-0 end-0 rounded-circle bg-white opacity-25" style="width: 150px; height: 150px; margin-top: -50px; margin-right: -50px;"></div>
-                </div>
+									<div class="d-grid gap-2">
+										<a href="/contractors" class="btn btn-light shadow-sm text-start fw-bold d-flex justify-content-between align-items-center">
+											Find IBEW Contractors
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
+										</a>
+										<a href="/projects" class="btn btn-light shadow-sm text-start fw-bold d-flex justify-content-between align-items-center">
+											Submit Project Request
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
+										</a>
+									</div>
+								</div>
+								<!-- Decor -->
+								<div class="position-absolute top-0 end-0 rounded-circle bg-white opacity-25" style="width: 150px; height: 150px; margin-top: -50px; margin-right: -50px;"></div>
+							</div>
 
-                <div class="ibew-region ibew-region--events">
-                  {{ embedded_events_view }}
-                </div>
-              </div>
+							<div class="ibew-region ibew-region--events">
+								{{ embedded_events_view }}
+							</div>
+						</div>
 
-            </div>
-          </div>
-        </section>
-      {% endif %}
+					</div>
+				</div>
+			</section>
+		{% endif %}
 
-      {# 4. Stats / Members Section #}
-      {% if page.homepage_stats or page.homepage_members %}
-        <section id="stats" class="ibew-section py-20 bg-gray-900 text-white relative overflow-hidden w-100">
-           {# Full width region, no shell #}
-            <div class="ibew-region ibew-region--stats w-100">
-               {{ page.homepage_stats }}
-               {# {{ page.homepage_members }} #}
-            </div>
-          {# Background accent for stats #}
-          <div class="absolute inset-0 bg-blue-900/20 pointer-events-none"></div>
-        </section>
-      {% endif %}
+		{# 4. Stats / Members Section #}
+		{% if page.homepage_stats or page.homepage_members %}
+			<section
+				id="stats" class="ibew-section py-20 bg-gray-900 text-white relative overflow-hidden w-100">
+				{# Full width region, no shell #}
+				<div class="ibew-region ibew-region--stats w-100">
+					{{ page.homepage_stats }}
+					{# {{ page.homepage_members }} #}
+				</div>
+				{# Background accent for stats #}
+				<div class="absolute inset-0 bg-blue-900/20 pointer-events-none"></div>
+			</section>
+		{% endif %}
 
-      {# 5. Contact / CTA - REMOVED PER REQUEST #}
-      {# 
-      {% if page.homepage_contact %}
-            <section id="contact" class="ibew-section py-16 bg-gray-50 w-100">
-              <div class="ibew-region ibew-region--contact w-100">
-                  {{ page.homepage_contact }}
-              </div>
-            </section>
-          {% endif %}
-          #}
+		{# 5. Contact / CTA - REMOVED PER REQUEST #}
+		{# 
+												      {% if page.homepage_contact %}
+												            <section id="contact" class="ibew-section py-16 bg-gray-50 w-100">
+												              <div class="ibew-region ibew-region--contact w-100">
+												                  {{ page.homepage_contact }}
+												              </div>
+												            </section>
+												          {% endif %}
+												          #}
 
-      {# --- New CTA Section --- #}
-      <section class="ibew-cta-section w-100">
-        <div class="container text-center">
-          <h2 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 0.5rem; line-height: 1.1;">
-            READY TO BUILD YOUR FUTURE?
-          </h2>
-          
-          <div class="ibew-cta-grid">
-            <!-- Prospective Members -->
-            <div class="ibew-cta-card">
-              <h3>Prospective Members</h3>
-              <p>Start your journey in the electrical trade with world-class training and support</p>
-              <a href="/join" class="ibew-btn-lg ibew-btn--gold">Become a Member</a>
-            </div>
+		{# --- New CTA Section --- #}
+			<section class="ibew-cta-section w-100"> <div class="container text-center">
+				<h2 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 0.5rem; line-height: 1.1;">
+					READY TO BUILD YOUR FUTURE?
+				</h2>
 
-            <!-- Contractors -->
-            <div class="ibew-cta-card">
-              <h3>Contractors</h3>
-              <p>Find skilled IBEW electricians for your next project today</p>
-              <a href="/contractors" class="ibew-btn-lg ibew-btn--blue">Find Contractors</a>
-            </div>
+				<div
+					class="ibew-cta-grid">
+					<!-- Prospective Members -->
+					<div class="ibew-cta-card">
+						<h3>Prospective Members</h3>
+						<p>Start your journey in the electrical trade with world-class training and support</p>
+						<a href="/join" class="ibew-btn-lg ibew-btn--gold">Become a Member</a>
+					</div>
 
-            <!-- Training -->
-            <div class="ibew-cta-card">
-              <h3>Training</h3>
-              <p>Advance your skills with comprehensive apprenticeship programs</p>
-              <a href="/training" class="ibew-btn-lg ibew-btn--red">Learn more</a>
-            </div>
-          </div>
-        </div>
-      </section>
-      </section>
-  </main>
+					<!-- Contractors -->
+					<div class="ibew-cta-card">
+						<h3>Contractors</h3>
+						<p>Find skilled IBEW electricians for your next project today</p>
+						<a href="/contractors" class="ibew-btn-lg ibew-btn--blue">Find Contractors</a>
+					</div>
 
-  {# --- Redesigned Footer --- #}
-  <footer class="ibew-footer">
-    <div class="ibew-shell max-w-7xl mx-auto px-6">
-      
-      <div class="ibew-footer__container">
-        <!-- Col 1: Brand -->
-        <div class="ibew-footer__brand-col">
-          {% if page.footer_col_1 %}
-            {{ page.footer_col_1 }}
-          {% else %}
-            <a href="/" class="ibew-footer__brand-logo">
-               <img src="/themes/custom/ibew_theme/logo.png" alt="Local 90">
-               <span>Local 90</span>
-            </a>
-            <p>Serving our community with excellence in electrical work since 1892. Building tomorrow's infrastructure today.</p>
-          {% endif %}
-        </div>
+					<!-- Training -->
+					<div class="ibew-cta-card">
+						<h3>Training</h3>
+						<p>Advance your skills with comprehensive apprenticeship programs</p>
+						<a href="/training" class="ibew-btn-lg ibew-btn--red">Learn more</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</section>
+</main>
 
-        <!-- Col 2: Quick Links -->
-        <div>
-          {% if page.footer_col_2 %}
-            {{ page.footer_col_2 }}
-          {% else %}
-            <h4>Quick Links</h4>
-            <ul class="ibew-footer__links">
-              <li><a href="/about">About Us</a></li>
-              <li><a href="/training">Training Programs</a></li>
-              <li><a href="/join">Become a Member</a></li>
-              <li><a href="/contractors">Find a Contractor</a></li>
-            </ul>
-          {% endif %}
-        </div>
-
-        <!-- Col 3: Members -->
-        <div>
-          {% if page.footer_col_3 %}
-            {{ page.footer_col_3 }}
-          {% else %}
-            <h4>Members</h4>
-            <ul class="ibew-footer__links">
-              <li><a href="/member-portal" class="highlight">Member Portal</a></li>
-              <li><a href="/dues">Pay Dues</a></li>
-              <li><a href="/benefits">Benefits Info</a></li>
-              <li><a href="/jobs">Job Board</a></li>
-            </ul>
-          {% endif %}
-        </div>
-
-        <!-- Col 4: Contact -->
-        <div>
-          {% if page.footer_col_4 %}
-            {{ page.footer_col_4 }}
-          {% else %}
-            <h4>Contact</h4>
-            <div class="ibew-footer__contact-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/></svg>
-              <span>(203) 265-9533</span>
-            </div>
-            <div class="ibew-footer__contact-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/></svg>
-              <a href="mailto:info@ibewlocal90.org" class="text-gray-400 hover:text-white">info@ibewlocal90.org</a>
-            </div>
-            <div class="ibew-footer__contact-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
-              <span>2 N Plains Industrial Rd<br>Wallingford, CT 06492</span>
-            </div>
-          {% endif %}
-        </div>
-
-      </div>
-
-      <div class="ibew-footer__bottom">
-        {% if page.footer %}
-          {{ page.footer }}
-        {% else %}
-          &copy; {{ "now"|date("Y") }} IBEW Local 90. All rights reserved.
-        {% endif %}
-      </div>
-    </div>
-  </footer>
-</div>
+{# --- Footer (Reusable Include) --- #}
+{% include '@ibew_theme/includes/footer.html.twig' %}</div>

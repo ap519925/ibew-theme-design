@@ -1,62 +1,71 @@
 <article class="card ibew-card h-100 p-0 overflow-hidden d-flex flex-column border-0 shadow-sm rounded-4">
-  {% set link_url = url %}
-  {% set link_target = '_self' %}
-  {# Use first tag as source label or default to News #}
-  {% set source_label = node.field_tags.0.entity.label ? node.field_tags.0.entity.label : 'News' %}
+	{% set link_url = url %}
+	{% set link_target = '_self' %}
+	{# Use first tag as source label or default to News #}
+	{% set source_label = node.field_tags.0.entity.label ? node.field_tags.0.entity.label : 'News' %}
 
-  {# Image Top Wrapper #}
-  <div class="card-img-top position-relative bg-secondary w-100 overflow-hidden illustration-container">
-    {% if node.field_featured_image.entity %}
-      {# Handle Media Entity Reference #}
-      {% set media_entity = node.field_featured_image.entity %}
-      {% if media_entity.field_media_image.entity %}
-          {% set image_file = media_entity.field_media_image.entity %}
-          {% set image_url = file_url(image_file.uri.value) %}
-          <img src="{{ image_url }}" alt="{{ media_entity.field_media_image.alt }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
-      {% endif %}
-    {% elseif content.field_featured_image %}
-       {{ content.field_featured_image }}
-    {% endif %}
-    <a href="{{ link_url }}" target="{{ link_target }}" class="stretched-link visually-hidden" aria-label="Read {{ label }}"></a>
-  </div>
+	{# Image Top Wrapper #}
+	<div class="card-img-top position-relative bg-secondary w-100 overflow-hidden illustration-container">
+		{% if node.field_featured_image.entity %}
+			{# Handle Media Entity Reference #}
+			{% set media_entity = node.field_featured_image.entity %}
+			{% if media_entity.field_media_image.entity %}
+				{% set image_file = media_entity.field_media_image.entity %}
+				{% set image_url = file_url(image_file.uri.value) %}
+				<img src="{{ image_url }}" alt="{{ media_entity.field_media_image.alt }}" class="w-100 h-100" style="object-fit: cover;" loading="lazy">
+			{% endif %}
+		{% elseif content.field_featured_image %}
+			{{ content.field_featured_image }}
+		{% endif %}
+		<a href="{{ link_url }}" target="{{ link_target }}" class="stretched-link visually-hidden" aria-label="Read {{ label }}"></a>
+	</div>
 
-  <div class="card-body p-4 d-flex flex-column flex-grow-1 ibew-card-surface">
-    {# Meta Row: Tag & Date #}
-    <div class="d-flex align-items-center flex-wrap gap-2 mb-2 small">
-       {# Tag #}
-       <span class="badge bg-primary text-white rounded-1 px-2 py-1 fw-bold text-uppercase" style="font-size: 0.7rem;">
-          {{ source_label }}
-       </span>
-       <span class="text-muted fw-bold">&bull;</span>
-       <span class="text-muted fw-bold">{{ content.field_published_date }}</span>
-    </div>
+	<div
+		class="card-body p-4 d-flex flex-column flex-grow-1 ibew-card-surface">
+		{# Meta Row: Tag & Date #}
+		<div
+			class="d-flex align-items-center flex-wrap gap-2 mb-2 small">
+			{# Tag #}
+			<span class="badge bg-primary text-white rounded-1 px-2 py-1 fw-bold text-uppercase" style="font-size: 0.7rem;">
+				{{ source_label }}
+			</span>
+			<span class="text-muted fw-bold">&bull;</span>
+			<span class="text-muted fw-bold">
+				{% if node.field_published_date.value %}
+					{{ node.field_published_date.value|date("F j, Y") }}
+				{% else %}
+					{{ node.created.value|date("F j, Y") }}
+				{% endif %}
+			</span>
+		</div>
 
-    <h3 class="card-title fw-bold mb-3 font-oswald text-uppercase text-dark lh-base">
-      {{ label }}
-      {% if external_url %}
-        <svg class="ms-1 text-muted" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16" style="vertical-align: text-top;"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>
-      {% endif %}
-    </h3>
+		<h3 class="card-title fw-bold mb-3 font-oswald text-uppercase text-dark lh-base">
+			{{ label }}
+			{% if external_url %}
+				<svg class="ms-1 text-muted" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewbox="0 0 16 16" style="vertical-align: text-top;"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>
+			{% endif %}
+		</h3>
 
-    {% if content.body %}
-      <div class="card-text text-muted opacity-75 small mb-4 flex-grow-1">
-        {{ content.body|render|striptags|trim|slice(0, 120) ~ '...' }}
-      </div>
-    {% endif %}
+		{% if content.body %}
+			<div class="card-text text-muted opacity-75 small mb-4 flex-grow-1">
+				{{ content.body|render|striptags|trim|slice(0, 120) ~ '...' }}
+			</div>
+		{% endif %}
 
-    <div class="mt-auto">
-      <a href="{{ link_url }}" class="fw-bold text-decoration-none text-primary d-inline-flex align-items-center gap-1">
-        Read More <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
-      </a>
-    </div>
-    
-  </div>
+		<div class="mt-auto">
+			<a href="{{ link_url }}" class="fw-bold text-decoration-none text-primary d-inline-flex align-items-center gap-1">
+				Read More
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
+			</a>
+		</div>
+
+	</div>
 </article>
 <style>
-/* Local override to ensure image fills the constrained container */
-.illustration-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+	/* Local override to ensure image fills the constrained container */
+	.illustration-container img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
 </style>

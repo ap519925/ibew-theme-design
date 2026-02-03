@@ -1,0 +1,601 @@
+/**
+ * @file
+ * IBEW Contact Page Styles
+ */
+
+/* ========================================
+   CONTACT PAGE LAYOUT
+   ======================================== */
+
+.path-contact {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.path-contact main {
+    padding: 0;
+}
+
+/* Contact Page Hero */
+.ibew-contact-hero,
+.ibew-parallax-hero {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2d4a6f 100%);
+    padding: 8rem 0 6rem;
+    /* Increased padding for impact */
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 3rem;
+    color: #fff;
+    /* Ensure content is above bg */
+    z-index: 1;
+}
+
+.ibew-parallax-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    /* Taller than container for parallax movement */
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+    /* Behind everything */
+    opacity: 0.4;
+    /* Adjust overlay opacity */
+    pointer-events: none;
+    transform: translateZ(0);
+    /* Optimize */
+}
+
+.ibew-parallax-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(30, 58, 95, 0.85) 0%, rgba(45, 74, 111, 0.75) 100%);
+    z-index: -1;
+}
+
+.ibew-contact-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f7c948' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+}
+
+.ibew-contact-hero h1 {
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.ibew-contact-hero p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* ========================================
+   CONTACT CONTENT GRID
+   ======================================== */
+
+.ibew-contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    padding: 0 1.5rem;
+    position: relative;
+    z-index: 10;
+}
+
+@media (max-width: 992px) {
+    .ibew-contact-wrapper {
+        grid-template-columns: 1fr;
+        margin-top: -2rem;
+    }
+}
+
+/* ========================================
+   CONTACT FORM STYLES
+   ======================================== */
+
+/* Form wrapper - targets Drupal rendered form */
+.ibew-contact-form,
+.ibew-contact-form-wrapper,
+.path-contact .region-content,
+.path-contact form {
+    background: #3E4C63;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+}
+
+.path-contact .region-content {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+}
+
+.path-contact form {
+    margin: 0;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+}
+
+/* Style all form inputs on contact page */
+.path-contact input[type="text"],
+.path-contact input[type="email"],
+.path-contact input[type="tel"],
+.path-contact input[type="password"],
+.path-contact select,
+.path-contact textarea {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+    background: #fff;
+    transition: all 0.2s ease;
+    margin-bottom: 0.5rem;
+}
+
+.path-contact input[type="text"]:focus,
+.path-contact input[type="email"]:focus,
+.path-contact input[type="tel"]:focus,
+.path-contact select:focus,
+.path-contact textarea:focus {
+    outline: none;
+    border-color: #f7c948;
+    box-shadow: 0 0 0 4px rgba(247, 201, 72, 0.15);
+}
+
+.path-contact textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.path-contact select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%231e3a5f' d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+    cursor: pointer;
+}
+
+/* Labels */
+.path-contact label {
+    display: block;
+    font-weight: 600;
+    color: #1e3a5f;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.path-contact .form-required::after {
+    content: ' *';
+    color: #dc3545;
+}
+
+/* Form items */
+.path-contact .form-item {
+    margin-bottom: 1.5rem;
+}
+
+/* Submit button - explicit styling for Drupal buttons */
+.path-contact input[type="submit"],
+.path-contact button[type="submit"],
+.path-contact .form-submit,
+.path-contact .button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    padding: 1rem 2rem !important;
+    background: linear-gradient(135deg, #f7c948 0%, #e5b83a 100%) !important;
+    color: #1e3a5f !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-family: 'Oswald', sans-serif !important;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    margin-top: 1rem !important;
+}
+
+.path-contact input[type="submit"]:hover,
+.path-contact button[type="submit"]:hover,
+.path-contact .form-submit:hover,
+.path-contact .button:hover {
+    background: linear-gradient(135deg, #e5b83a 0%, #d4a82e 100%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(247, 201, 72, 0.4);
+}
+
+/* Checkbox styling */
+.path-contact input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #f7c948;
+    cursor: pointer;
+    margin-right: 0.5rem;
+}
+
+.ibew-contact-intro h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1e3a5f;
+    margin-bottom: 0.5rem;
+}
+
+.ibew-contact-intro p {
+    color: #6c757d;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+/* Form Row (Two Columns) */
+.ibew-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+@media (max-width: 576px) {
+    .ibew-form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Form Fields */
+.ibew-contact-fields .form-item {
+    margin-bottom: 1.5rem;
+}
+
+.ibew-contact-fields label {
+    display: block;
+    font-weight: 600;
+    color: #1e3a5f;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.ibew-contact-fields .form-required::after {
+    content: ' *';
+    color: #dc3545;
+}
+
+.ibew-form-input,
+.ibew-form-select,
+.ibew-form-textarea {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+.ibew-form-input:focus,
+.ibew-form-select:focus,
+.ibew-form-textarea:focus {
+    outline: none;
+    border-color: #f7c948;
+    box-shadow: 0 0 0 4px rgba(247, 201, 72, 0.15);
+}
+
+.ibew-form-input::placeholder,
+.ibew-form-textarea::placeholder {
+    color: #adb5bd;
+}
+
+.ibew-form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%231e3a5f' d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+.ibew-form-textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+/* Checkbox */
+.ibew-contact-fields .form-type-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.ibew-contact-fields .form-type-checkbox label {
+    font-weight: 400;
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-bottom: 0;
+    order: 2;
+}
+
+.ibew-form-checkbox {
+    width: 20px;
+    height: 20px;
+    accent-color: #f7c948;
+    cursor: pointer;
+    order: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* Submit Button */
+.ibew-form-actions {
+    margin-top: 2rem;
+}
+
+.ibew-btn--primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #f7c948 0%, #e5b83a 100%);
+    color: #1e3a5f;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.ibew-btn--primary:hover {
+    background: linear-gradient(135deg, #e5b83a 0%, #d4a82e 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(247, 201, 72, 0.4);
+}
+
+/* ========================================
+   CONTACT INFO SIDEBAR
+   ======================================== */
+
+.ibew-contact-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.ibew-contact-card {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2d4a6f 100%);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+    color: #fff;
+}
+
+.ibew-contact-card h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ibew-contact-card h3 svg {
+    color: #f7c948;
+}
+
+/* Contact Details */
+.ibew-contact-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ibew-contact-detail:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.ibew-contact-detail:first-child {
+    padding-top: 0;
+}
+
+.ibew-contact-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(247, 201, 72, 0.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.ibew-contact-icon svg {
+    color: #f7c948;
+    width: 20px;
+    height: 20px;
+}
+
+.ibew-contact-text strong {
+    display: block;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.ibew-contact-text span,
+.ibew-contact-text a {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.ibew-contact-text a:hover {
+    color: #f7c948;
+}
+
+/* Office Hours */
+.ibew-hours-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ibew-hours-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+}
+
+.ibew-hours-list li:last-child {
+    border-bottom: none;
+}
+
+.ibew-hours-list .day {
+    color: #fff;
+    font-weight: 500;
+}
+
+.ibew-hours-list .time {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Map Card */
+.ibew-map-container {
+    border-radius: 12px;
+    overflow: hidden;
+    height: 200px;
+    background: #e9ecef;
+}
+
+.ibew-map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* ========================================
+   FORM VALIDATION STYLES
+   ======================================== */
+
+.ibew-contact-form .form-item--error input,
+.ibew-contact-form .form-item--error select,
+.ibew-contact-form .form-item--error textarea {
+    border-color: #dc3545;
+}
+
+.ibew-contact-form .form-item--error-message {
+    color: #dc3545;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+/* Success Message */
+.messages--status {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    border: 1px solid #28a745;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    color: #155724;
+}
+
+/* Error Message */
+.messages--error {
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+    border: 1px solid #dc3545;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    color: #721c24;
+}
+
+/* ========================================
+   DARK MODE SUPPORT
+   ======================================== */
+
+html.dark .path-contact {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+html.dark .ibew-contact-form,
+html.dark .ibew-contact-card {
+    background: #3E4C63;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+html.dark .ibew-contact-intro h2,
+html.dark .ibew-contact-card h3,
+html.dark .ibew-contact-text strong,
+html.dark .ibew-hours-list .day,
+html.dark .ibew-contact-fields label {
+    color: #fff;
+}
+
+html.dark .ibew-contact-intro p,
+html.dark .ibew-contact-text span,
+html.dark .ibew-contact-text a,
+html.dark .ibew-hours-list .time {
+    color: #fff;
+}
+
+html.dark .ibew-form-input,
+html.dark .ibew-form-select,
+html.dark .ibew-form-textarea {
+    background: #374151;
+    border-color: #4b5563;
+    color: #fff;
+}
+
+html.dark .ibew-form-input::placeholder,
+html.dark .ibew-form-textarea::placeholder {
+    color: #6b7280;
+}
+
+html.dark .ibew-contact-detail {
+    border-color: #374151;
+}
+
+html.dark .ibew-hours-list li {
+    border-color: #374151;
+}

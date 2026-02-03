@@ -1,0 +1,481 @@
+/**
+ * @file
+ * Custom Login Page Styles - IBEW Theme
+ * Applied via body class .path-user on /user/* routes
+ */
+
+/* Hide header and footer on login pages */
+body.path-user .ibew-header-wrapper,
+body.path-user .ibew-top-bar,
+body.path-user header,
+body.path-user .ibew-footer,
+body.path-user footer,
+body.path-user .footer,
+body.path-user [class*="footer"] {
+    display: none !important;
+}
+
+/* Full page auth styling */
+body.path-user {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1e3a5f 0%, #0d1f33 50%, #0a1628 100%) !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body.path-user::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url('/themes/custom/ibew_theme/screenshot.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.08;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 0;
+}
+
+body.path-user .ibew-page,
+body.path-user .layout-container,
+body.path-user main,
+body.path-user .main-content {
+    background: transparent !important;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+}
+
+/* Login form container - transparent, no borders */
+body.path-user .region-content,
+body.path-user .block-system-main-block {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Remove any card/box styling from wrappers */
+body.path-user .ibew-card,
+body.path-user .card,
+body.path-user .block {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Form card styling */
+body.path-user form.user-login-form,
+body.path-user form.user-register-form,
+body.path-user form.user-pass {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 40px 35px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+/* Add branding above form */
+body.path-user form.user-login-form::before,
+body.path-user form.user-register-form::before,
+body.path-user form.user-pass::before {
+    content: 'Member Portal';
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1e3a5f;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f7c948;
+}
+
+/* Form labels */
+body.path-user .form-item label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e3a5f;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    transition: color 0.2s ease;
+}
+
+/* Form inputs */
+body.path-user .form-item input[type="text"],
+body.path-user .form-item input[type="password"],
+body.path-user .form-item input[type="email"],
+body.path-user input.form-text {
+    display: block;
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #1e3a5f;
+    background: #f0f4f8;
+    border: 2px solid #dce4ec;
+    border-radius: 10px;
+    transition: all 0.25s ease;
+    box-sizing: border-box;
+}
+
+/* Input hover effect */
+body.path-user .form-item input[type="text"]:hover,
+body.path-user .form-item input[type="password"]:hover,
+body.path-user .form-item input[type="email"]:hover,
+body.path-user input.form-text:hover {
+    border-color: #b0c4d8;
+    background: #f8fafc;
+}
+
+/* Input focus effect */
+body.path-user .form-item input:focus,
+body.path-user input.form-text:focus {
+    outline: none;
+    border-color: #f7c948;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(247, 201, 72, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Focus label color change */
+body.path-user .form-item:focus-within label {
+    color: #f7c948;
+}
+
+/* ========================================
+   GOOEY BUTTON EFFECT
+   ======================================== */
+
+/* Submit button - Gooey Style */
+body.path-user input[type="submit"],
+body.path-user button[type="submit"],
+body.path-user .button--primary {
+    display: block;
+    width: 100%;
+    margin-top: 24px;
+    padding: 20px 32px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #f7c948;
+    background: transparent;
+    border: 3px solid #f7c948;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    transition: color 700ms ease, border-color 300ms ease;
+    overflow: visible;
+}
+
+/* Gooey button wrapper - added by JS */
+body.path-user .gooey-button-wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin-top: 24px;
+}
+
+body.path-user .gooey-button-wrapper input[type="submit"],
+body.path-user .gooey-button-wrapper button[type="submit"] {
+    margin-top: 0;
+}
+
+/* The blobs container */
+body.path-user .c-button__blobs {
+    height: 100%;
+    filter: url(#goo);
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: -3px;
+    right: -1px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Individual blobs */
+body.path-user .c-button__blobs div {
+    background-color: #f7c948;
+    width: 34%;
+    height: 100%;
+    border-radius: 100%;
+    position: absolute;
+    transform: scale(1.4) translateY(125%) translateZ(0);
+    transition: all 700ms ease;
+}
+
+body.path-user .c-button__blobs div:nth-child(1) {
+    left: -5%;
+}
+
+body.path-user .c-button__blobs div:nth-child(2) {
+    left: 30%;
+    transition-delay: 60ms;
+}
+
+body.path-user .c-button__blobs div:nth-child(3) {
+    left: 66%;
+    transition-delay: 25ms;
+}
+
+/* Hover state - blobs rise up */
+body.path-user .gooey-button-wrapper:hover input[type="submit"],
+body.path-user .gooey-button-wrapper:hover button[type="submit"],
+body.path-user input[type="submit"]:hover,
+body.path-user button[type="submit"]:hover {
+    color: #1e3a5f;
+}
+
+body.path-user .gooey-button-wrapper:hover .c-button__blobs div {
+    transform: scale(1.4) translateY(0) translateZ(0);
+}
+
+/* Focus state */
+body.path-user input[type="submit"]:focus,
+body.path-user button[type="submit"]:focus {
+    outline: none;
+    border-color: #ffd75e;
+    box-shadow: 0 0 0 3px rgba(247, 201, 72, 0.3);
+}
+
+body.path-user .gooey-button-wrapper:focus-within .c-button__blobs div {
+    transform: scale(1.4) translateY(0) translateZ(0);
+}
+
+body.path-user .gooey-button-wrapper:focus-within input[type="submit"],
+body.path-user .gooey-button-wrapper:focus-within button[type="submit"] {
+    color: #1e3a5f;
+}
+
+/* Form description text */
+body.path-user .form-item .description {
+    font-size: 12px;
+    color: #888;
+    margin-top: 6px;
+}
+
+/* Form item spacing */
+body.path-user .form-item {
+    margin-bottom: 20px;
+}
+
+/* Hide page title - we're showing it in the form */
+body.path-user h1.page-title,
+body.path-user .page-title {
+    display: none;
+}
+
+/* Links in form */
+body.path-user form a {
+    color: #1e3a5f;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+body.path-user form a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #f7c948;
+    transition: width 0.3s ease;
+}
+
+body.path-user form a:hover {
+    color: #f7c948;
+}
+
+body.path-user form a:hover::after {
+    width: 100%;
+}
+
+body.path-user form a:focus {
+    outline: none;
+    color: #f7c948;
+}
+
+body.path-user form a:focus::after {
+    width: 100%;
+}
+
+/* Extra links under form (forgot password, etc) */
+body.path-user .item-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 0 0;
+    text-align: center;
+}
+
+body.path-user .item-list li {
+    margin: 0.5rem 0;
+}
+
+body.path-user .item-list a {
+    color: #666;
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+body.path-user .item-list a:hover {
+    color: #1e3a5f;
+    background: rgba(30, 58, 95, 0.08);
+}
+
+/* ========================================
+   BACK BUTTON
+   ======================================== */
+body.path-user .block-system-main-block::before {
+    content: '← Back to Website';
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+    padding: 12px 24px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+/* Make the back button clickable via JavaScript injection */
+body.path-user .block-system-main-block {
+    position: relative;
+}
+
+/* Hide CSS pseudo-element when JS link is present */
+body.path-user .block-system-main-block:has(.ibew-back-link)::before {
+    display: none;
+}
+
+/* Back button - Premium style */
+body.path-user .ibew-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 2rem;
+    padding: 14px 28px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(30, 58, 95, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+body.path-user .ibew-back-link::before {
+    content: '←';
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+body.path-user .ibew-back-link:hover {
+    color: #fff;
+    background: rgba(152, 58, 84, 0.4);
+    border-color: #983a54;
+    box-shadow: 0 6px 20px rgba(152, 58, 84, 0.3);
+}
+
+body.path-user .ibew-back-link:hover::before {
+    transform: translateX(-6px);
+}
+
+body.path-user .ibew-back-link:focus {
+    outline: none;
+    color: #fff;
+    background: rgba(152, 58, 84, 0.5);
+    border-color: #983a54;
+    box-shadow: 0 0 0 3px rgba(152, 58, 84, 0.3);
+}
+
+/* Messages */
+body.path-user .messages {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body.path-user .messages--error {
+    background: #fee;
+    border: 1px solid #fcc;
+    color: #c00;
+}
+
+body.path-user .messages--status {
+    background: #efe;
+    border: 1px solid #cfc;
+    color: #060;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+
+    body.path-user .ibew-page,
+    body.path-user .layout-container,
+    body.path-user main,
+    body.path-user .main-content {
+        padding: 1rem;
+    }
+
+    body.path-user form.user-login-form,
+    body.path-user form.user-register-form,
+    body.path-user form.user-pass {
+        padding: 30px 25px;
+    }
+
+    body.path-user .ibew-back-link {
+        padding: 10px 18px;
+        font-size: 13px;
+    }
+}

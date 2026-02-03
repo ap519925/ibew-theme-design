@@ -5,161 +5,91 @@
  */
 #}
 <div class="ibew-page layout-container">
-  <header role="banner" class="ibew-nav sticky-top">
-    {# Top Bar (Desktop Only) #}
-    <div class="ibew-top-bar d-none d-lg-block">
-      <div class="ibew-shell d-flex justify-content-between align-items-center">
-        {% if page.top_bar %}
-          {{ page.top_bar }}
-        {% else %}
-            {# Default / Demo Content matching request #}
-            <div class="d-flex align-items-center gap-4">
-              <span class="d-flex align-items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
-                2 N Plains Industrial Rd, Wallingford, CT 06492
-              </span>
-              <a href="tel:1-800-562-2590" class="d-flex align-items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/></svg>
-                1-800-562-2590
-              </a>
-              <a href="mailto:info@ibewlocal90.org" class="d-flex align-items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/></svg>
-                info@ibewlocal90.org
-              </a>
-            </div>
-            <div class="d-flex align-items-center gap-3">
-              <span class="small me-2"><a href="#" class="text-white text-decoration-none">JoinIBEWCT.org</a></span>
-                {# Icons placeholder #}
-                <a href="#" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.99-.052A9.341 9.341 0 0 0 5.026 15z"/></svg></a>
-                <a href="#" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg></a>
-            </div>
-        {% endif %}
-      </div>
-    </div>
+	{% include '@ibew_theme/includes/header.html.twig' %}
 
-    <div class="ibew-shell">
-      <div class="ibew-nav__inner">
-          {% if page.header %}
-            {{ page.header }}
-          {% else %}
-            {# Fallback branding and nav if blocks not placed #}
-            <a href="/" class="ibew-brand">
-              <div class="ibew-brand__mark">90</div>
-              <div class="ibew-brand__text">
-                <span class="ibew-eyebrow">{{ 'The New Haven Electricians'|t }}</span>
-                <span class="ibew-brand__title">{{ 'IBEW Local'|t }}</span>
-              </div>
-            </a>
-            
-            {# Wrapper for primary menu - allows flex centering on desktop #}
-            <div class="flex-grow-1 d-flex justify-content-center">
-              {% if page.primary_menu %}
-                {{ page.primary_menu }}
-              {% else %}
-                 {# Fallback Menu if block not placed #}
-                 <nav class="ibew-nav__links">
-                   <a href="/about">{{ 'About'|t }}</a>
-                   <a href="/events">{{ 'Events'|t }}</a>
-                   <a href="/training">{{ 'Training'|t }}</a>
-                   <a href="/contractors">{{ 'Contractors'|t }}</a>
-                   <a href="/members">{{ 'Members'|t }}</a>
-                   <a href="/resources">{{ 'Resources'|t }}</a>
-                 </nav>
-              {% endif %}
-            </div>
-          {% endif %}
+	<main role="main" class="main-content">
+		<a id="main-content" tabindex="-1"></a>
 
-          <button class="ibew-nav__toggle js-ibew-nav-toggle" aria-expanded="false">
-            {{ 'Menu'|t }}
-          </button>
+		{# Check if the current node has Canvas content populated #}
+		{% set has_canvas = node.field_content_canvas and not node.field_content_canvas.isEmpty() %}
 
-          <div class="ibew-nav__cta">
-            <a class="ibew-cta ibew-cta--ghost" href="/civicrm/user">{{ 'My IBEW 90'|t }}</a>
-            <a class="ibew-cta ibew-cta--primary" href="/content/book-1-re-sign-procedure">{{ 'Member Re-Sign'|t }}</a>
-          </div>
-      </div>
-    </div>
-  </header>
+		{% if has_canvas %}
+			{# --- Canvas Mode: Full Width Content Control --- #}
+			<div class="ibew-canvas-layout w-full min-h-screen">
+				{{ page.content }}
+			</div>
+		{% else %}
+			{# --- Default Mode: Standard Container & Sidebar Layout --- #}
+			<div class="ibew-shell container py-5">
+				<div
+					class="row g-4">
+					{# Sidebar First #}
+					{% if page.sidebar_first %}
+						<aside class="col-lg-3">
+							<div class="ibew-card ibew-ghost-border h-100">
+								{{ page.sidebar_first }}
+							</div>
+						</aside>
+					{% endif %}
 
-  <main role="main" class="main-content">
-    <a id="main-content" tabindex="-1"></a>
+					{# Main Content #}
+					{% set content_class = (page.sidebar_first and page.sidebar_second) ? 'col-lg-6' : ((page.sidebar_first or page.sidebar_second) ? 'col-lg-9' : 'col-12') %}
+					<div class="{{ content_class }}">
+						<div class="ibew-card ibew-ghost-border min-h-50vh">
+							{{ page.content }}
+						</div>
+					</div>
 
-    {# Check if the current node has Canvas content populated #}
-    {% set has_canvas = node.field_content_canvas and not node.field_content_canvas.isEmpty() %}
+					{# Sidebar Second #}
+					{% if page.sidebar_second %}
+						<aside class="col-lg-3">
+							<div class="ibew-card ibew-ghost-border h-100">
+								{{ page.sidebar_second }}
+							</div>
+						</aside>
+					{% endif %}
+				</div>
+			</div>
+		{% endif %}
+	</main>
 
-    {% if has_canvas %}
-      {# --- Canvas Mode: Full Width Content Control --- #}
-      <div class="ibew-canvas-layout w-full min-h-screen">
-          {{ page.content }}
-      </div>
-    {% else %}
-      {# --- Default Mode: Standard Container & Sidebar Layout --- #}
-      <div class="ibew-shell container py-5">
-        <div class="row g-4">
-          {# Sidebar First #}
-          {% if page.sidebar_first %}
-            <aside class="col-lg-3">
-               <div class="ibew-card ibew-ghost-border h-100">
-                {{ page.sidebar_first }}
-              </div>
-            </aside>
-          {% endif %}
-  
-          {# Main Content #}
-          {% set content_class = (page.sidebar_first and page.sidebar_second) ? 'col-lg-6' : ((page.sidebar_first or page.sidebar_second) ? 'col-lg-9' : 'col-12') %}
-          <div class="{{ content_class }}">
-            <div class="ibew-card ibew-ghost-border min-h-50vh">
-              {{ page.content }}
-            </div>
-          </div>
-  
-          {# Sidebar Second #}
-          {% if page.sidebar_second %}
-            <aside class="col-lg-3">
-              <div class="ibew-card ibew-ghost-border h-100">
-                {{ page.sidebar_second }}
-              </div>
-            </aside>
-          {% endif %}
-        </div>
-      </div>
-    {% endif %}
-  </main>
+	{# --- Redesigned Footer --- #}
+	<footer class="ibew-footer">
+		<div class="ibew-shell max-w-7xl mx-auto px-6">
 
-  {# --- Redesigned Footer --- #}
-  <footer class="ibew-footer">
-    <div class="ibew-shell max-w-7xl mx-auto px-6">
-      
-      <div class="ibew-footer__container">
-        <!-- Col 1: Brand -->
-        <div class="ibew-footer__brand-col">
-          {{ page.footer_col_1 }}
-        </div>
+			<div
+				class="ibew-footer__container">
+				<!-- Col 1: Brand -->
+				<div class="ibew-footer__brand-col">
+					{{ page.footer_col_1 }}
+				</div>
 
-        <!-- Col 2: Quick Links -->
-        <div>
-          {{ page.footer_col_2 }}
-        </div>
+				<!-- Col 2: Quick Links -->
+				<div>
+					{{ page.footer_col_2 }}
+				</div>
 
-        <!-- Col 3: Members -->
-        <div>
-           {{ page.footer_col_3 }}
-        </div>
+				<!-- Col 3: Members -->
+				<div>
+					{{ page.footer_col_3 }}
+				</div>
 
-        <!-- Col 4: Contact -->
-        <div>
-          {{ page.footer_col_4 }}
-        </div>
+				<!-- Col 4: Contact -->
+				<div>
+					{{ page.footer_col_4 }}
+				</div>
 
-      </div>
+			</div>
 
-      <div class="ibew-footer__bottom">
-        {% if page.footer %}
-          {{ page.footer }}
-        {% else %}
-          &copy; {{ "now"|date("Y") }} IBEW Local 90. All rights reserved.
-        {% endif %}
-      </div>
-    </div>
-  </footer>
+			<div class="ibew-footer__bottom">
+				{% if page.footer %}
+					{{ page.footer }}
+				{% else %}
+					&copy;
+					{{ "now"|date("Y") }}
+					IBEW Local 90. All rights reserved.
+				{% endif %}
+			</div>
+		</div>
+	</footer>
 </div>

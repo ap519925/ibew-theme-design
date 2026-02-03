@@ -1,0 +1,5 @@
+name: IBEW Contact Form
+type: module
+description: 'Custom contact form for IBEW Local 90 website using Drupal Forms API.'
+core_version_requirement: ^10 || ^11
+package: Custom
