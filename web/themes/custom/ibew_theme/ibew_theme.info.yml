@@ -1,4 +1,4 @@
-name: IBEW Theme
+name: Local 11
 type: theme
 description: 'A custom theme for IBEW based on Radix.'
 core_version_requirement: ^10 || ^11

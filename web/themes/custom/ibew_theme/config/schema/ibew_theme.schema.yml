@@ -1,7 +1,7 @@
 # Schema for IBEW Theme settings
 ibew_theme.settings:
   type: theme_settings
-  label: 'IBEW Theme Settings'
+  label: 'Local 11 Settings'
   mapping:
     canvas:
       type: mapping
@@ -46,3 +46,43 @@ ibew_theme.settings:
     social_instagram:
       type: string
       label: 'Instagram URL'
+    
+    # Light Mode Colors
+    ibew_light_primary:
+      type: string
+      label: 'Light Mode Primary Color'
+    ibew_light_secondary:
+      type: string
+      label: 'Light Mode Secondary Color'
+    ibew_light_accent:
+      type: string
+      label: 'Light Mode Accent Color'
+    ibew_light_bg:
+      type: string
+      label: 'Light Mode Background Color'
+    ibew_light_card_bg:
+      type: string
+      label: 'Light Mode Card Background Color'
+    ibew_light_text:
+      type: string
+      label: 'Light Mode Text Color'
+
+    # Dark Mode Colors
+    ibew_dark_primary:
+      type: string
+      label: 'Dark Mode Primary Color'
+    ibew_dark_secondary:
+      type: string
+      label: 'Dark Mode Secondary Color'
+    ibew_dark_accent:
+      type: string
+      label: 'Dark Mode Accent Color'
+    ibew_dark_bg:
+      type: string
+      label: 'Dark Mode Background Color'
+    ibew_dark_card_bg:
+      type: string
+      label: 'Dark Mode Card Background Color'
+    ibew_dark_text:
+      type: string
+      label: 'Dark Mode Text Color'

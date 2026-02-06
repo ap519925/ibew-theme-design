@@ -4,56 +4,105 @@
  * Theme implementation for Basic 'Page' content type.
  */
 #}
-<article{{attributes.addClass('ibew-basic-page','py-5')}}>
-	<div class="ibew-shell">
+<article{{attributes.addClass('ibew-basic-page')}}>
 
-		<header class="mb-5 pb-4 border-bottom">
-			<h1 class="display-4 fw-bold font-oswald text-dark mb-0">{{ label }}</h1>
-		</header>
+	{# --- HERO SECTION --- #}
+	{% set hero_image_url = null %}
+	{% if node.field_image.entity %}
+		{% set hero_image_url = file_url(node.field_image.entity.uri.value) %}
+	{% elseif node.field_hero_image.entity %}
+		{% set hero_image_url = file_url(node.field_hero_image.entity.uri.value) %}
+	{% endif %}
 
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="content-body lead text-dark">
-					{{ content.body }}
-				</div>
+	<section
+		class="relative py-20 overflow-hidden d-flex align-items-center" style="min-height: 450px;">
+		{# Background Image or Fallback Pattern #}
+		{% if hero_image_url %}
+			<div class="absolute inset-0 z-0 h-100 w-100" style="background-image: url('{{ hero_image_url }}'); background-position: center; background-repeat: no-repeat; background-size: cover;"></div>
+		{% else %}
+			<div class="absolute inset-0 z-0 h-100 w-100 bg-ibew-navy"></div>
+		{% endif %}
 
-				{# Gallery Section #}
-				{% if not node.field_image_gallery.isEmpty() %}
-					<style>
-						.photoswipe-gallery-container .field__items {
-							display: grid;
-							grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-							gap: 1rem;
-						}
-						.photoswipe-gallery-container .field__item {
-							display: block;
-							overflow: hidden;
-							border-radius: 0.5rem;
-							box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-						}
-						.photoswipe-gallery-container img {
-							width: 100%;
-							height: 200px;
-							object-fit: cover;
-							transition: transform 0.3s ease;
-						}
-						.photoswipe-gallery-container .field__item:hover img {
-							transform: scale(1.05);
-						}
-					</style>
-					<div class="mt-5 mb-5 pb-5 border-bottom">
-						<h3 class="h4 font-oswald text-uppercase mb-4 border-start border-4 border-warning ps-3">Photo Gallery</h3>
-						<div class="photoswipe-gallery-container">
-							{{ content.field_image_gallery }}
-						</div>
+		{# Overlay (Gradient for depth) #}
+		<div class="absolute inset-0 bg-ibew-navy opacity-80 z-1" style="mix-blend-mode: multiply;"></div>
+		<div class="absolute inset-0 bg-gradient-to-t from-ibew-navy/90 to-transparent z-1"></div>
+
+		{# Hero Content #}
+		<div class="container ibew-shell relative z-10 text-center text-white">
+			<h1 class="font-oswald display-3 fw-bold text-uppercase mb-3 tracking-wide text-white">{{ label }}</h1>
+			{# Optional Subtitle or Breadcrumb could go here #}
+			<div class="w-24 h-2 bg-ibew-gold mx-auto mb-4"></div>
+		</div>
+	</section>
+
+	{# --- MAIN CONTENT --- #}
+	<section class="py-5 bg-white">
+		<div class="container ibew-shell max-w-5xl mx-auto">
+			<div class="row">
+				<div class="col-lg-12">
+
+					<div class="content-body lead text-dark ibew-prose">
+						{% if content.body|render|striptags|trim is not empty %}
+							{{ content.body }}
+						{% else %}
+							{# Lorem Ipsum Fallback for Demo/Empty Pages #}
+							<p class="mb-4">
+								<strong>Lorem ipsum dolor sit amet</strong>, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+							</p>
+							<p class="mb-4">
+								Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							</p>
+							<h3 class="font-oswald text-uppercase text-ibew-navy mt-5 mb-3">Our Mission</h3>
+							<p class="mb-4">
+								Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
+							</p>
+							<blockquote class="border-start border-4 border-warning ps-4 fst-italic text-muted my-5 fs-4">
+								"Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
+							</blockquote>
+							<p>
+								At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+							</p>
+						{% endif %}
 					</div>
-				{% endif %}
 
-				<div class="mt-4">
-					{{ content|without('body', 'field_image_gallery') }}
+					{# Gallery Section #}
+					{% if not node.field_image_gallery.isEmpty() %}
+						<style>
+							.photoswipe-gallery-container .field__items {
+								display: grid;
+								grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+								gap: 1rem;
+							}
+							.photoswipe-gallery-container .field__item {
+								display: block;
+								overflow: hidden;
+								border-radius: 0.5rem;
+								box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+							}
+							.photoswipe-gallery-container img {
+								width: 100%;
+								height: 200px;
+								object-fit: cover;
+								transition: transform 0.3s ease;
+							}
+							.photoswipe-gallery-container .field__item:hover img {
+								transform: scale(1.05);
+							}
+						</style>
+						<div class="mt-5 mb-5 pb-5 border-top pt-5">
+							<h3 class="h4 font-oswald text-uppercase mb-4 border-start border-4 border-warning ps-3">Photo Gallery</h3>
+							<div class="photoswipe-gallery-container">
+								{{ content.field_image_gallery }}
+							</div>
+						</div>
+					{% endif %}
+
+					<div class="mt-4">
+						{{ content|without('body', 'field_image_gallery', 'field_image', 'field_hero_image') }}
+					</div>
 				</div>
 			</div>
-		</div>
 
-	</div>
+		</div>
+	</section>
 </article>

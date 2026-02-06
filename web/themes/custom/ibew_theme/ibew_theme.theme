@@ -29,6 +29,81 @@ function ibew_theme_preprocess_html(&$variables) {
   if ($route_name === 'ibew_contact.contact_page') {
     $variables['attributes']['class'][] = 'path-contact';
   }
+
+  // --- Inject Color Scheme CSS Variables ---
+  // Retrieve Light Mode Settings
+  $light_primary = theme_get_setting('ibew_light_primary') ?? '#1e293b';
+  $light_secondary = theme_get_setting('ibew_light_secondary') ?? '#3b82f6';
+  $light_accent = theme_get_setting('ibew_light_accent') ?? '#f59e0b';
+  $light_bg = theme_get_setting('ibew_light_bg') ?? '#ffffff';
+  $light_card_bg = theme_get_setting('ibew_light_card_bg') ?? '#f3f4f6';
+  $light_text = theme_get_setting('ibew_light_text') ?? '#1f2937';
+
+  // Retrieve Dark Mode Settings
+  $dark_primary = theme_get_setting('ibew_dark_primary') ?? '#1e293b';
+  $dark_secondary = theme_get_setting('ibew_dark_secondary') ?? '#3b82f6';
+  $dark_accent = theme_get_setting('ibew_dark_accent') ?? '#f59e0b';
+  $dark_bg = theme_get_setting('ibew_dark_bg') ?? '#1f2937';
+  $dark_card_bg = theme_get_setting('ibew_dark_card_bg') ?? '#3e4c63';
+  $dark_text = theme_get_setting('ibew_dark_text') ?? '#f3f4f6';
+
+  // Build the inline CSS
+  $custom_css = "
+    /* LIGHT MODE (Default) */
+    :root {
+      --ibew-primary: {$light_primary} !important;
+      --ibew-secondary: {$light_secondary} !important;
+      --ibew-accent: {$light_accent} !important;
+      --ibew-accent-hover: {$light_accent} !important;
+      --ibew-bg-light: {$light_bg} !important; /* Maps to body bg in light mode */
+      --ibew-text-dark: {$light_text} !important;
+      --ibew-card-bg: {$light_card_bg} !important;
+    }
+    
+    body {
+        background-color: var(--ibew-bg-light) !important;
+        color: var(--ibew-text-dark) !important;
+    }
+
+    /* Apply Light Mode Card Background */
+    body:not(.dark) .ibew-card-surface,
+    body:not(.dark) .ibew-event-card,
+    body:not(.dark) .fc {
+        background-color: var(--ibew-card-bg) !important;
+    }
+
+    /* DARK MODE OVERRIDES */
+    html.dark {
+      --ibew-primary: {$dark_primary} !important;
+      --ibew-secondary: {$dark_secondary} !important;
+      --ibew-accent: {$dark_accent} !important;
+      --ibew-accent-hover: {$dark_accent} !important;
+      --ibew-bg-light: {$dark_bg} !important; /* Maps to body bg in dark mode */
+      --ibew-text-dark: {$dark_text} !important;
+      --ibew-card-bg: {$dark_card_bg} !important;
+    }
+
+    /* Ensure Dark Mode variables apply when class is present */
+    html.dark body {
+        background-color: var(--ibew-bg-light) !important;
+        color: var(--ibew-text-dark) !important;
+    }
+
+    html.dark .ibew-card-surface,
+    html.dark .ibew-event-card, 
+    html.dark .fc { 
+       background-color: var(--ibew-card-bg) !important;
+    }
+  ";
+
+  // Attach as an html_head element
+  $variables['page']['#attached']['html_head'][] = [
+    [
+      '#tag' => 'style',
+      '#value' => $custom_css,
+    ],
+    'ibew-theme-colors'
+  ];
 }
 
 /**
