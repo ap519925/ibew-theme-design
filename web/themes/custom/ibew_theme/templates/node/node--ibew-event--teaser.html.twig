@@ -5,47 +5,49 @@
 {% set is_training = 'Training' in label_text or 'Safety' in label_text %}
 {% set date_bg_class = is_training ? 'bg-ibew-raspberry' : 'bg-ibew-navy' %}
 
-<article{{ attributes.addClass('ibew-event-card group flex flex-col md:flex-row rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 h-full') }} style="background-color: #3e4c63; border: 1px solid #5c6b85;">
-  
-  {# Date Strip #}
-  <div class="ibew-event-date w-full md:w-32 {{ date_bg_class }} text-white flex flex-col items-center justify-center p-4 flex-shrink-0">
-    <span class="text-4xl fw-bold font-oswald leading-none">{{ date_day }}</span>
-    <span class="text-sm uppercase tracking-wider mt-1 fw-bold">{{ date_month }}</span>
-  </div>
+<article{{attributes.addClass('ibew-event-cardgroupflexflex-colmd:flex-rowrounded-lgshadow-lgoverflow-hiddenhover:shadow-2xltransition-allduration-300h-fullmb-4')}}
+	style="background-color: #3e4c63; border: 1px solid #5c6b85; margin-bottom: 1rem; border-radius: 0.5rem; overflow: hidden;">
 
-  {# Content #}
-  <div class="p-6 flex-grow flex flex-col justify-between">
-    <div>
-        <h3 class="font-oswald text-xl fw-bold text-white mb-2 group-hover:text-ibew-gold transition-colors">
-          <a href="{{ url }}" class="text-decoration-none text-reset">{{ label }}</a>
-        </h3>
-        
-        <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-300 mb-3">
-             <div class="flex items-center gap-2">
-                 {# Clock Icon #}
-                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
-                 <span>{{ date_time_start }}</span>
-             </div>
-             {% if content.field_location|render %}
-             <div class="flex items-center gap-2">
-                 {# Map Icon #}
-                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
-                 <span>{{ content.field_location }}</span>
-             </div>
-             {% endif %}
-        </div>
+	{# Date Strip #}
+	<div class="ibew-event-date w-full md:w-32 {{ date_bg_class }} text-white flex flex-col items-center justify-center p-4 flex-shrink-0">
+		<span class="text-4xl fw-bold font-oswald leading-none">{{ date_day }}</span>
+		<span class="text-sm uppercase tracking-wider mt-1 fw-bold">{{ date_month }}</span>
+	</div>
 
-        <div class="text-sm text-gray-300 line-clamp-2 mb-4">
-             {{ content.body }}
-        </div>
-    </div>
-    
-    <div class="flex justify-between items-center border-top pt-3 mt-auto">
-        <div class="text-xs font-bold text-uppercase tracking-wider {{ is_training ? 'text-ibew-raspberry' : 'text-ibew-gold' }}">
-            {{ is_training ? 'Training' : 'Meeting' }}
-        </div>
-        <a href="{{ url }}" class="text-sm fw-bold text-ibew-gold hover:text-white text-decoration-none group-hover:translate-x-1 transition-transform inline-block">Register &rarr;</a>
-    </div>
+	{# Content #}
+	<div class="p-6 flex-grow flex flex-col justify-between">
+		<div>
+			<h3 class="font-oswald text-xl fw-bold text-white mb-2 group-hover:text-ibew-gold transition-colors">
+				<a href="{{ url }}" class="text-decoration-none text-reset">Lorem Ipsum Event</a>
+			</h3>
 
-  </div>
+			<div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-300 mb-3">
+				<div
+					class="flex items-center gap-2">
+					{# Clock Icon #}
+					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewbox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+					<span>12:00 PM</span>
+				</div>
+
+				<div
+					class="flex items-center gap-2">
+					{# Map Icon #}
+					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewbox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+					<span>Lorem Location</span>
+				</div>
+			</div>
+
+			<div class="text-sm text-gray-300 line-clamp-2 mb-4">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+			</div>
+		</div>
+
+		<div class="flex justify-between items-center border-top pt-3 mt-auto">
+			<div class="text-xs font-bold text-uppercase tracking-wider {{ is_training ? 'text-ibew-raspberry' : 'text-ibew-gold' }}">
+				{{ is_training ? 'Training' : 'Meeting' }}
+			</div>
+			<a href="{{ url }}" class="text-sm fw-bold text-ibew-gold hover:text-white text-decoration-none group-hover:translate-x-1 transition-transform inline-block">Register &rarr;</a>
+		</div>
+
+	</div>
 </article>

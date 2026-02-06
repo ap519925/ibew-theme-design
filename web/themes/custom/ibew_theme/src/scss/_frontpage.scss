@@ -228,27 +228,6 @@ html.dark .ibew-hero__content,
   }
 }
 
-/* --- Buttons --- */
-.ibew-btn-lg {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.8rem 1.75rem;
-  font-size: 1.1rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  text-decoration: none;
-  border-radius: 0.5rem;
-  transition: all 0.3s ease;
-  letter-spacing: 0.05em;
-  font-family: 'Oswald', sans-serif;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-}
-
 .ibew-btn--gold {
   background-color: var(--ibew-accent);
   color: #000;
@@ -506,6 +485,27 @@ html:not(.dark) .ibew-stat-item {
       background: $ibew-gold;
     }
   }
+}
+
+// Ensure body/html do not clip sticky elements
+body,
+html {
+  overflow-x: clip;
+  /* Modern alternative to hidden that preserves sticky */
+  overflow-y: visible;
+}
+
+// Main Navigation Styling - Located in src/scss/_frontpage.scss due to file consolidation
+.ibew-nav {
+  position: -webkit-sticky;
+  /* Safari */
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  background-color: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+  width: 100%;
 }
 
 // News Grid Layout
@@ -1022,12 +1022,8 @@ $ibew-homepage-regions: (
 }
 
 // Navigation Redesign
-.ibew-header-wrapper {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  width: 100%;
-}
+// Navigation Redesign
+// .ibew-header-wrapper removed to allow independent sticky nav behavior
 
 .ibew-top-bar {
   background: #1f2937;

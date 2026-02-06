@@ -129,3 +129,24 @@ a {
         color: $ibew-gold;
     }
 }
+
+// STRICT STICKY FIX
+// Force all potential parent containers to allow overflow so sticky works
+html,
+body,
+.dialog-off-canvas-main-canvas,
+.layout-container,
+.ibew-page {
+    overflow-x: clip !important;
+    overflow-y: visible !important;
+    height: auto !important;
+}
+
+// Enforce sticky nav with high specificity
+.ibew-nav {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1020 !important;
+    width: 100% !important;
+}

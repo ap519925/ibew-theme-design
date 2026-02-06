@@ -63,6 +63,20 @@ function ibew_theme_preprocess_page(&$variables) {
     $variables['logo'] = $logo_url;
   }
 
+  // Pass Theme Settings to Template with Defaults
+  $variables['top_bar_show'] = theme_get_setting('top_bar_show') ?? TRUE;
+  $variables['top_bar_address'] = theme_get_setting('top_bar_address') ?: '2 N Plains Industrial Rd, Wallingford, CT 06492';
+  $variables['top_bar_phone'] = theme_get_setting('top_bar_phone') ?: '1-800-562-2590';
+  $variables['top_bar_email'] = theme_get_setting('top_bar_email') ?: 'info@ibewlocal90.org';
+  $variables['top_bar_join_link'] = theme_get_setting('top_bar_join_link') ?: 'https://JoinIBEWCT.org';
+  $variables['top_bar_join_text'] = theme_get_setting('top_bar_join_text') ?: 'JoinIBEWCT.org';
+  
+  // Default social links to '#' so icons render by default (mimicking hardcoded behavior)
+  $variables['social_facebook'] = theme_get_setting('social_facebook') ?: '#';
+  $variables['social_twitter'] = theme_get_setting('social_twitter') ?: '#';
+  $variables['social_linkedin'] = theme_get_setting('social_linkedin') ?: '#';
+  $variables['social_instagram'] = theme_get_setting('social_instagram') ?: '#';
+
   // LOAD MAIN MENU PROGRAMMATICALLY (Global Navigation)
   // This ensures the menu is available on EVERY page, regardless of block layout.
   $menu_tree = \Drupal::menuTree();

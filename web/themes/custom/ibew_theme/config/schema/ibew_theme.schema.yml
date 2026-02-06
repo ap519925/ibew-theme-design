@@ -16,3 +16,33 @@ ibew_theme.settings:
           sequence:
             type: boolean
             label: 'Region Status'
+    top_bar_show:
+      type: boolean
+      label: 'Show Top Bar'
+    top_bar_address:
+      type: string
+      label: 'Address Text'
+    top_bar_phone:
+      type: string
+      label: 'Phone Number'
+    top_bar_email:
+      type: string
+      label: 'Email Address'
+    top_bar_join_link:
+      type: string
+      label: 'Join URL'
+    top_bar_join_text:
+      type: string
+      label: 'Join Link Text'
+    social_facebook:
+      type: string
+      label: 'Facebook URL'
+    social_twitter:
+      type: string
+      label: 'Twitter / X URL'
+    social_linkedin:
+      type: string
+      label: 'LinkedIn URL'
+    social_instagram:
+      type: string
+      label: 'Instagram URL'
